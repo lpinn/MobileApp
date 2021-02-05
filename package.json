@@ -1,0 +1,23 @@
+{
+  "name": "bnhapp",
+  "version": "0.0.1",
+  "description": "An app for Building New Hope under the PittServes program",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"cross-env NODE_ENV=test jest --verbose --runInBand --detectOpenHandles\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexWang18/BuildingNewHope.git"
+  },
+  "author": "alexw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexWang18/BuildingNewHope/issues"
+  },
+  "homepage": "https://github.com/AlexWang18/BuildingNewHope#readme",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-native": "^0.63.4"
+  }
+}
