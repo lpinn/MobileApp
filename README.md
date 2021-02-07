@@ -1,4 +1,4 @@
-# MobileApp
+# Building New Hope
 
 ### To Get The Code On Your Device:  
 Clone the repo 
@@ -29,4 +29,7 @@ npm install --global expo-cli
 ```
 expo start
 ```
-4. Set your connection to tunnel if you are having trouble with scanning the QR code. You will likely need to do this if you are on the Pitt website, if possible avoid doing this as the hot reloads will be slower. 
+4. Set your connection to tunnel if you are having trouble with scanning the QR code.   
+You will likely need to do this if you are on the Pitt website, if possible avoid doing this as the hot reloads will be slower. 
+
+5. Hit Ctrl-C to close the server
