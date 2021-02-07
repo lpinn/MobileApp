@@ -33,3 +33,6 @@ expo start
 You will likely need to do this if you are on the Pitt website, if possible avoid doing this as the hot reloads will be slower. 
 
 5. Hit Ctrl-C to close the server
+
+### Read More 
+https://docs.expo.io/introduction/walkthrough/
