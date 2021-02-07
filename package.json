@@ -1,27 +1,22 @@
 {
-  "name": "buildingnewhope",
-  "version": "0.0.1",
-  "description": "An app for Building New Hope under the PittServes program",
-  "main": "index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "test": "\"cross-env NODE_ENV=test jest --verbose --runInBand --detectOpenHandles\""
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlexWang18/BuildingNewHope.git"
-  },
-  "author": "alexw",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/AlexWang18/BuildingNewHope/issues"
-  },
-  "homepage": "https://github.com/AlexWang18/BuildingNewHope#readme",
   "dependencies": {
-    "react": "^17.0.1",
-    "react-native": "^0.63.4"
+    "expo": "~40.0.0",
+    "expo-status-bar": "~1.0.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-web": "~0.13.12"
   },
-  "devDependencies": {},
-  "keywords": [
-    "app"
-  ]
+  "devDependencies": {
+    "@babel/core": "~7.9.0"
+  },
+  "private": true
 }
