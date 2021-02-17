@@ -14,7 +14,7 @@ const theme = {
     textStyle: { fontSize: 30 },
   },
 };
-const HomeScreen = () => {
+const HomeScreen = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <View style={styles.container}>
