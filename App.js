@@ -1,34 +1,30 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import beans from "./assets/beans.jpg";
+import "react-native-gesture-handler";
 
-export default function App() {
+
+import * as React from "react";
+
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Home from "./src/screens/Home";
+
+
+const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
+
+function DetailsScreen() {
   return (
-    <View style={styles.container}>
-      <Image source={beans} style={styles.logo} />
-      <Text style={styles.header}>Building New Hope</Text>
-      <TouchableOpacity />
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  header: {
-    fontSize: 25,
-    padding: 20,
-    color: "#fff",
-  },
-  logo: {
-    width: 256,
-    height: 256,
-    marginBottom: 20,
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Purchase" component = {DetailsScreen} />
+    </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
