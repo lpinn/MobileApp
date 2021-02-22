@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "Dark Roast",
+        "description": "savory"
+    },
+    {
+        "id": 2,
+        "title": "House Roast",
+        "description": "Our special blend"
+    },
+    {
+        "id": 3,
+        "title": "Light Roast",
+        "description": "nice"
+    }
+
+]
