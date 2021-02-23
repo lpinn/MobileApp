@@ -27,7 +27,8 @@ const Products = (props) => {
     })
 
     return (
-        <Card className = "products">
+        <Card className = "products"> 
+        {/* do i want to nest cards here, kinda fugly TODO */}
             {productsData}
         </Card>
     )
