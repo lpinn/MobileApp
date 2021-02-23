@@ -5,13 +5,13 @@ Clone the repo
 ```
 git clone https://github.com/Building-New-Hope/MobileApp.git
 ```
-Checkout the development branch  
+Create your own local branch
 ```
-git checkout development
+git checkout -b <your-name>
 ```
-Create a local tracking branch  
+Push your branch to the remote repo
 ```
-git checkout -b <local-branch-name> --track origin/development
+git push -u origin <your-name>
 ```
 
 Once you have your local branch created, make sure you have downloaded the dependencies
