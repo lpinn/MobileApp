@@ -1,18 +1,43 @@
 [
     {
         "id": 1,
-        "title": "Dark Roast",
-        "description": "savory"
+        "name": "Dark Roast",
+        "description": "savory",
+        "size": "",
+        "price": 12,
+        "grind": "whole"
     },
     {
         "id": 2,
-        "title": "House Roast",
-        "description": "Our special blend"
+        "name": "Expresso",
+        "description": "For that extra punch",
+        "size": "",
+        "price": 12,
+        "grind": "drip"  
     },
     {
         "id": 3,
-        "title": "Light Roast",
-        "description": "nice"
+        "name": "Light Roast",
+        "description": "Caramel and vanilla flavoring",
+        "size": "",
+        "price": 12,
+        "grind": "course for French Press"
+    },
+    {
+        "id": 4,
+        "name": "Medium Roast",
+        "description": "A happy medium between light and dark",
+        "size": "",
+        "price": 12,
+        "grind": "whole"
+    },
+    {
+        "decaf": 5,
+        "name": "Light Roast",
+        "description": "Our ",
+        "size": "",
+        "price": 12,
+        "grind": "course for French Press"
     }
 
 ]

@@ -16,6 +16,7 @@ const theme = {
     textStyle: { fontSize: 30 },
   },
 };
+
 const HomeScreen = (props) => {
   const navigation = props.navigation;
   return (

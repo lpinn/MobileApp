@@ -1,21 +1,11 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import { Card, ListItem, Icon } from "react-native-elements";
+import { Card, Divider, Icon } from "react-native-elements";
 
 import Button from "../components/Button";
-import Products from '../components/Products'
+import Products from "../components/Products";
 
-const roasts = {
-    dark: {
-
-    },
-    light: {
-
-    },
-    house: {
-        
-    }
-}
+import items from "./ProductList.json";
 
 const Catalog = (props) => {
   const navigation = props.navigation;
@@ -24,8 +14,11 @@ const Catalog = (props) => {
     <Card>
       <Card.Title>Buy a coffee</Card.Title>
       <Card.Divider />
-    {/* <Products /> */}
-      <Text>Dark Roast</Text>
+      <Products list={items} search="" />
+      {/* <Text>Dark Roast</Text> */}
+      {/* <Text>Light</Text> */}
+      {/* <Text>Med</Text> */}
+      {/* <Text>Decaf</Text> */}
       <Button text="Go back" onPress={() => navigation.goBack()} />
     </Card>
   );
