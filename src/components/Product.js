@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 const Product = (props) => {
-  console.log(props)
+ 
   const id = props.id;
   const image = props.image;
   const name = props.name;
@@ -16,11 +18,11 @@ const Product = (props) => {
   const [price, setPrice] = useState(initialPrice);
   const [quantity, setQuantity] = useState(0);
 
-  const addToCart = (event) => {
+  const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true)
-    localStorage.setItem("product", props)
-    console.log("hi", localStorage)
+    const jsonProduct = JSON.stringify(props)
+    await AsyncStorage.setItem("product", jsonProduct)
   }
   
   return (

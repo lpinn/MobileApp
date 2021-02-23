@@ -8,17 +8,20 @@ import { ThemeProvider, Text, Image } from "react-native-elements";
 import Button from "../components/Button";
 import Anchor from "../components/Anchor";
 
-const theme = {
+// TODO Social icons
+
+const theme = {  // change this later
   Avatar: {
     rounded: true,
   },
   Badge: {
     textStyle: { fontSize: 30 },
   },
+  
 };
 
 const HomeScreen = (props) => {
-  const navigation = props.navigation;
+  const navigation = props.navigation; //https://reactnavigation.org/docs/1.x/navigation-prop
   return (
     <ThemeProvider theme={theme}>
       <View style={styles.container}>
@@ -31,7 +34,7 @@ const HomeScreen = (props) => {
         <Anchor href="https://www.buildingnewhope.org/about">About Us</Anchor>
         <Button
           text="Go to Catalog"
-          onPress={() => navigation.navigate("Catalog")}
+          onPress={() => navigation.navigate("Catalog")} 
         />
       </View>
     </ThemeProvider>

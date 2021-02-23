@@ -9,17 +9,15 @@ import items from "./ProductList.json";
 
 const Catalog = (props) => {
   const navigation = props.navigation;
+  console.log(navigation.state)
 
   return (
     <Card>
       <Card.Title>Buy a coffee</Card.Title>
       <Card.Divider />
       <Products list={items} search="" />
-      {/* <Text>Dark Roast</Text> */}
-      {/* <Text>Light</Text> */}
-      {/* <Text>Med</Text> */}
-      {/* <Text>Decaf</Text> */}
       <Button text="Go back" onPress={() => navigation.goBack()} />
+      <Button text="Cart" onPress={() => navigation.navigate("Cart")} />
     </Card>
   );
 };
