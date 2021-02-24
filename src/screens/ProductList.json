@@ -32,12 +32,12 @@
         "grind": "whole"
     },
     {
-        "decaf": 5,
-        "name": "Light Roast",
-        "description": "Our ",
+        "id": 5,
+        "name": "Decaf",
+        "description": "No caffiene ",
         "size": "",
         "price": 12,
-        "grind": "course for French Press"
+        "grind": "squeeze"
     }
 
 ]

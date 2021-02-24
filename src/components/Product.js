@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 
+//import { withNavigation } from 'react-navigation';
+
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Product = (props) => {
@@ -13,16 +15,24 @@ const Product = (props) => {
   const size = props.size;
   const grind = props.grind; // should this be state so its interactive .. and where or be further up the chain so cart can see
   const description = props.description;
-
+  const navigation = props.navigation
+  
   const [isAdded, setAdded] = useState(false);
   const [price, setPrice] = useState(initialPrice);
   const [quantity, setQuantity] = useState(0);
+  const [selected, setSelected] = useState(null);
 
   const addToCart = async (event) => {
+
     event.preventDefault();
     setAdded(true)
     const jsonProduct = JSON.stringify(props)
     await AsyncStorage.setItem("product", jsonProduct)
+    navigation.navigate('Cart', {
+      name: name,
+      price: price,
+      size: size
+    }) 
   }
   
   return (

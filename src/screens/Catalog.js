@@ -15,7 +15,7 @@ const Catalog = (props) => {
     <Card>
       <Card.Title>Buy a coffee</Card.Title>
       <Card.Divider />
-      <Products list={items} search="" />
+      <Products list={items} search="" navigation = {navigation} />
       <Button text="Go back" onPress={() => navigation.goBack()} />
       <Button text="Cart" onPress={() => navigation.navigate("Cart")} />
     </Card>

@@ -16,17 +16,21 @@ const EmptyCart = (props) => {
 const Cart = (props) => {
   const [items, setItems] = useState([]);
 
+  console.log(props.route.params)
+  let product = props.route.params
   useEffect(() => {
     const fetchData = async () => {
       const stringData = await AsyncStorage.getItem("product")
       // not mutating state correctly
-      console.log("hi", stringData)
       setItems(items => items.concat(JSON.parse(stringData)));
     };
-
     fetchData();
   }, []);
-  console.log(items)
+
+  const handleAddToCart = (selected) => {
+
+  }
+  //console.log(items)
 
 
 
@@ -40,7 +44,7 @@ const Cart = (props) => {
     return (
       <Card>
         <Card.Title>CART</Card.Title>
-        <Text>Hey</Text>
+        <Text>{product.name}</Text>
       </Card>
     );
   }
