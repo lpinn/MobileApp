@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Card } from "react-native-elements";
+import { StyleSheet } from 'react-native'
+import { Card, Button, Icon } from "react-native-elements";
 
 import Product from "./Product";
 
@@ -27,11 +28,20 @@ const Products = (props) => {
   });
 
   return (
-    <Card className="products">
+    <Card conatainerStyle = {styles.container} className="products">
       {/* do i want to nest cards here, kinda fugly TODO */}
       {productsData}
     </Card>
+    
   );
 };
 
 export default Products;
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+  }
+});
