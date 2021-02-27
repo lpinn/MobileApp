@@ -3,25 +3,39 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native"; // switch over to elements
 import beans from "../../assets/beans.jpg";
-import { ThemeProvider, Text, Image } from "react-native-elements";
+import { ThemeProvider, Text, Image, Icon } from "react-native-elements";
 
 import Button from "../components/Button";
 import Anchor from "../components/Anchor";
 
 // TODO Social icons
 
-const theme = {  // change this later
+const theme = {
+  // change this later
   Avatar: {
     rounded: true,
   },
   Badge: {
     textStyle: { fontSize: 30 },
   },
-  
 };
 
 const HomeScreen = (props) => {
   const navigation = props.navigation; //https://reactnavigation.org/docs/1.x/navigation-prop
+  const options = {
+    headerTitle: "Building New Hope",
+    headerRight: () => (
+      <Button
+        icon={<Icon name="cart" type="evilicon" size={30} />}
+        onPress={() => navigation.navigate("Items in Cart")} // chicken and the egg prob
+        color="red"
+        title=""
+      />
+    ),
+  };
+  React.useLayoutEffect(() => {
+    navigation.setOptions(options);
+  }, [navigation]);
   return (
     <ThemeProvider theme={theme}>
       <View style={styles.container}>
@@ -34,7 +48,7 @@ const HomeScreen = (props) => {
         <Anchor href="https://www.buildingnewhope.org/about">About Us</Anchor>
         <Button
           text="Go to Catalog"
-          onPress={() => navigation.navigate("Catalog")} 
+          onPress={() => navigation.navigate("Catalog")}
         />
       </View>
     </ThemeProvider>

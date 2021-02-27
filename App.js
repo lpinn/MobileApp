@@ -9,7 +9,6 @@ import Home from "./src/screens/Home";
 import Catalog from "./src/screens/Catalog";
 import Cart from "./src/screens/Cart";
 
-import { Button, Icon } from "react-native-elements";
 
 const defaultOptionsForStack = {
   defaultNavigationOptions: {
@@ -27,19 +26,6 @@ const defaultOptionsForStack = {
   },
 };
 
-// https://reactnativeelements.com/docs/icon/
-
-const options = {
-  headerTitle: "Building New Hope",
-  headerRight: () => (
-    <Button
-      icon={<Icon name="cart" type="evilicon" size={30} />}
-      onPress={() => navigation.navigate("Items in Cart")}
-      color="red"
-      title="Cart"
-    />
-  )
-}
 
 const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
 
@@ -49,7 +35,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} options={options} />
+          <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Catalog" component={Catalog} />
           <Stack.Screen name="Items in Cart" component={Cart} />
         </Stack.Navigator>
