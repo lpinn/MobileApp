@@ -28,7 +28,7 @@ const Products = (props) => {
   });
 
   return (
-    <Card containerStyle = {styles.container} className="products">
+    <Card className="products">
       {/* do i want to nest cards here, kinda fugly TODO */}
       {productsData}
     </Card>
@@ -38,10 +38,10 @@ const Products = (props) => {
 
 export default Products;
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'
   }
-});
+}); */

@@ -26,7 +26,8 @@ const Product = (props) => {
   const [size, setSize] = useState(12);
   const [sizeVisible, setVisible] = useState(false);
   const [sizeSelected, setSelected] = useState(false);
-  c;
+  
+  const [price, setPrice] = useState(initialPrice)
 
   const sizes = [
     {
@@ -64,12 +65,16 @@ const Product = (props) => {
   const changeSize = (event) => {
     event.preventDefault();
     setVisible(true);
+    calcPrice();
   };
 
   const calcPrice = () => {
-    if (size == 12) return 12.75;
-    else if (size == 16) return 15.6;
-    else if (size == 80) return 70.0;
+    let temp ;
+    if (size == 12) temp = 12
+    else if (size == 16) temp = 16
+    else if (size == 80) temp = 80
+
+    setPrice(temp)
   };
 
   const addToCart = async (event) => {
@@ -88,14 +93,14 @@ const Product = (props) => {
   return (
     <ListItem className="product">
       <Text>{name}</Text>
-      <Text>${sizeSelected ? calcPrice() : 12.00}</Text>
+      <Text>${price}</Text>
 
       {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
       {/* <Text>Learn More</Text> */}
       {/* </Tooltip> */}
 
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
-      <Button onPress={changeSize} text={sizeSelected ? size : "Choose size"} />
+      <Button onPress={changeSize} text={sizeSelected ? size+ " oz" : "Choose size"} />
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
