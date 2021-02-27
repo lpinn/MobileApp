@@ -1,26 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import * as React from "react";
+import Native from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
+import Home from "./src/screens/Home";
+import Catalog from "./src/screens/Catalog";
+import Cart from "./src/screens/Cart";
+
+
+const defaultOptionsForStack = {
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: "#FF543C",
+      elevation: 0,
+      shadowOpacity: 0,
+    },
+    headerTintColor: "#FFFFFF",
+    headerTitleStyle: {
+      fontWeight: "bold",
+      color: "#FFFFFF",
+      fontSize: 18,
+    },
+  },
+};
+
+
+const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
+
+// https://reactnavigation.org/docs/navigating/ READ
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text styles = {styles.header}>Building New Hope</Text>
-      <StatusBar style="auto" />
-      <Text>Hello World</Text>
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Catalog" component={Catalog} />
+          <Stack.Screen name="Items in Cart" component={Cart} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    fontSize: 80,
-    color: '#fff',
-  }
-});

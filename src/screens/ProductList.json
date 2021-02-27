@@ -1,0 +1,43 @@
+[
+    {
+        "id": 1,
+        "name": "Dark Roast",
+        "description": "savory",
+        "size": "",
+        "price": 12,
+        "grind": "whole"
+    },
+    {
+        "id": 2,
+        "name": "Expresso",
+        "description": "For that extra punch",
+        "size": "",
+        "price": 12,
+        "grind": "drip"  
+    },
+    {
+        "id": 3,
+        "name": "Light Roast",
+        "description": "Caramel and vanilla flavoring",
+        "size": "",
+        "price": 12,
+        "grind": "course for French Press"
+    },
+    {
+        "id": 4,
+        "name": "Medium Roast",
+        "description": "A happy medium between light and dark",
+        "size": "",
+        "price": 12,
+        "grind": "whole"
+    },
+    {
+        "id": 5,
+        "name": "Decaf",
+        "description": "No caffiene ",
+        "size": "",
+        "price": 12,
+        "grind": "squeeze"
+    }
+
+]
