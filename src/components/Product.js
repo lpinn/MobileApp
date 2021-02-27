@@ -2,13 +2,14 @@
 This code is pretty ugly and verbose...
 Will refactor after everything is fully working.
 Too many hooks.
+
+Add bean option
 */
 
 import React, { useState } from "react";
 import Button from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
-
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -25,6 +26,7 @@ const Product = (props) => {
   const [size, setSize] = useState(12);
   const [sizeVisible, setVisible] = useState(false);
   const [sizeSelected, setSelected] = useState(false);
+  c;
 
   const sizes = [
     {
@@ -52,12 +54,23 @@ const Product = (props) => {
       },
     },
     {
-      oz: 'Cancel',
-      style: { backgroundColor: 'red' },
+      oz: "Cancel",
+      style: { backgroundColor: "red" },
       //titleStyle: { color: 'white' },
       onPress: () => setVisible(false),
-    }
+    },
   ];
+
+  const changeSize = (event) => {
+    event.preventDefault();
+    setVisible(true);
+  };
+
+  const calcPrice = () => {
+    if (size == 12) return 12.75;
+    else if (size == 16) return 15.6;
+    else if (size == 80) return 70.0;
+  };
 
   const addToCart = async (event) => {
     event.preventDefault();
@@ -66,32 +79,26 @@ const Product = (props) => {
     await AsyncStorage.setItem("product", jsonProduct);
     navigation.navigate("Items in Cart", {
       name: name,
-      price: initialPrice,
+      price: price,
       size: size,
     });
     setTimeout(() => setAdded(false), 5000);
   };
 
-  const changeSize = async (event) => {
-    event.preventDefault();
-    setVisible(true);
-  };
-
   return (
     <ListItem className="product">
       <Text>{name}</Text>
-      <Text>${initialPrice}</Text>
-      
-      {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}    
-        {/* <Text>Learn More</Text> */}
+      <Text>${sizeSelected ? calcPrice() : 12.00}</Text>
+
+      {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
+      {/* <Text>Learn More</Text> */}
       {/* </Tooltip> */}
-      {/* pop up menu for size */}
-      {/* +1 button for quantity */}
+
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
       <Button onPress={changeSize} text={sizeSelected ? size : "Choose size"} />
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
-          <ListItem key={i} onPress={l.onPress} containerStyle = {l.style}>
+          <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
             <ListItem.Content>
               <ListItem.Title>{l.oz}</ListItem.Title>
             </ListItem.Content>
