@@ -8,7 +8,7 @@ const EmptyCart = (props) => {
   return (
     <>
       <Text h1>Nothing Here Yet</Text>
-      <Button text="Continue Shopping" onPress={() => navigation.goBack()} />
+      <Button text="Continue Shopping" onPress={() => props.navigation.goBack()} />
     </>
   );
 };
@@ -16,8 +16,7 @@ const EmptyCart = (props) => {
 const Cart = (props) => {
   const [items, setItems] = useState([]);
 
-  //console.log(props.route.params)
-  let product = props.route.params
+  let product = props.route.params // using react navigation
   
   useEffect(() => {                 // im using both react navigation parameters and local storage for sending data
                                     // still have not found one that can have multiple products added. might be dumb
@@ -32,8 +31,6 @@ const Cart = (props) => {
   const handleAddToCart = (selected) => {
 
   }
-  //console.log(items)
-
 
 
   
@@ -47,6 +44,8 @@ const Cart = (props) => {
       <Card>
         <Card.Title>CART</Card.Title>
         <Text>{product.name}</Text>
+        <Text>${product.price}</Text>
+        <Text>{product.size} oz</Text>
       </Card>
     );
   }
