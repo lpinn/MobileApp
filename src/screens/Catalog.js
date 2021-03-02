@@ -5,7 +5,7 @@ import { Card, Divider, Icon } from "react-native-elements";
 import Button from "../components/Button";
 import Products from "../components/Products";
 
-import items from "./ProductList.json";
+import items from "../utils/ProductList.json";
 
 const Catalog = (props) => {
   const navigation = props.navigation;

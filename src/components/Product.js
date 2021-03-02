@@ -100,7 +100,7 @@ const Product = (props) => {
       {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
       {/* <Text>Learn More</Text> */}
       {/* </Tooltip> */}
-{/* bug is with the onPress not timing correctly */}
+
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
       <Button onPress={changeSize} text={sizeSelected ? size + " oz" : "Choose size"} /> 
       <BottomSheet visible={sizeVisible}>

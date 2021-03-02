@@ -5,7 +5,7 @@
         "description": "savory",
         "size": "",
         "price": 12.75,
-        "grind": "whole"
+        "grind": ""
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "description": "For that extra punch",
         "size": "",
         "price": 12.75,
-        "grind": "drip"  
+        "grind": ""  
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@
         "description": "Caramel and vanilla flavoring",
         "size": "",
         "price": 12.75,
-        "grind": "course for French Press"
+        "grind": ""
     },
     {
         "id": 4,
@@ -29,7 +29,7 @@
         "description": "A happy medium between light and dark",
         "size": "",
         "price": 12.75,
-        "grind": "whole"
+        "grind": ""
     },
     {
         "id": 5,
@@ -37,7 +37,7 @@
         "description": "No caffiene ",
         "size": "",
         "price": 12.75,
-        "grind": "squeeze"
+        "grind": ""
     }
 
 ]
