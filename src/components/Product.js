@@ -76,7 +76,6 @@ const Product = (props) => {
     if (size == 12) temp = 12.75
     else if (size == 16) temp = 15.75
     else if (size == 80) temp = 70.00
-
     setPrice(temp)
   };
 
