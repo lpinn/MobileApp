@@ -8,7 +8,7 @@ const EmptyCart = (props) => {
   return (
     <>
       <Text h1>Nothing Here Yet</Text>
-      <Button text="Continue Shopping" onPress={() => props.navigation.goBack()} />
+      <Button text="Continue Shopping" onPress={() => props.navigation.navigate("Catalog")} />
     </>
   );
 };
@@ -46,6 +46,7 @@ const Cart = (props) => {
         <Text>{product.name}</Text>
         <Text>${product.price}</Text>
         <Text>{product.size} oz</Text>
+        {/* button for quantity */}
       </Card>
     );
   }

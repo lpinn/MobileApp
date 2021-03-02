@@ -30,13 +30,15 @@ const defaultOptionsForStack = {
 
 const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
 
+import Home3 from './src/screens/Home3'
+
 // https://reactnavigation.org/docs/navigating/ READ
 export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" component={Home3} />
           <Stack.Screen name="Catalog" component={Catalog} />
           <Stack.Screen name="Items in Cart" component={Cart} />
         </Stack.Navigator>
