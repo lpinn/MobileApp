@@ -2,31 +2,38 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image, ImageBackground, Text } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
+import Button from '../components/Button'
+
 function Home2(props) {
+
+  const navigation = props.navigation;
+  
   return (
     <View style={styles.container}>
       <View style={styles.iconStackRow}>
         <View style={styles.iconStack}>
           <Icon name="menu" style={styles.icon}></Icon>
           <ImageBackground
-            source={require("../assets/images/patryk-gauza-vs0tzSHVcac-unsplash.jpg")}
+            source={require("../../assets/images/patryk-gauza-vs0tzSHVcac-unsplash.jpg")}
             resizeMode="contain"
             style={styles.image}
             imageStyle={styles.image_imageStyle}
           >
-            <View style={styles.rect}>
+            <Button 
+            style={styles.rect} 
+            onPress={() => navigation.navigate("Catalog")}>
               <Text style={styles.orderNow}>Order Now</Text>
-            </View>
+            </Button>
           </ImageBackground>
           <Image
-            source={require("../assets/images/logo.jpg")}
+            source={require("../../assets/images/logo.jpg")}
             resizeMode="contain"
             style={styles.image2}
           ></Image>
           <Text style={styles.loremIpsum}>More than Just Coffee</Text>
         </View>
         <Image
-          source={require("../assets/images/coffee.jpg")}
+          source={require("../../assets/images/coffee.jpg")}
           resizeMode="contain"
           style={styles.image3}
         ></Image>

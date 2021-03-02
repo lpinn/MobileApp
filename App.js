@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import Home from "./src/screens/Home";
+import Home2 from './src/screens/Home2'
 import Catalog from "./src/screens/Catalog";
 import Cart from "./src/screens/Cart";
 

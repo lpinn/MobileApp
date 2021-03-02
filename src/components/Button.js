@@ -8,6 +8,7 @@ const SolidButton = (props) => {
       containerStyle={styles.button}
       title={props.text}
       onPress={props.onPress}
+      containerStyle={props.style}
     />
   );
 };

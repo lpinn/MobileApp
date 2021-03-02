@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Card, Button, Icon } from "react-native-elements";
 
 import Product from "./Product";
@@ -28,10 +28,9 @@ const Products = (props) => {
   });
 
   return (
-    <Card className="products">
-      {/* do i want to nest cards here, kinda fugly TODO */}
+   <View>
       {productsData}
-    </Card>
+    </View>
     
   );
 };

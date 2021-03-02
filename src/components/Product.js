@@ -6,7 +6,7 @@ Too many hooks.
 Add bean option
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
@@ -29,29 +29,33 @@ const Product = (props) => {
   
   const [price, setPrice] = useState(initialPrice)
 
+  useEffect(() => {
+    calcPrice();
+  }, [size, setSize])
+
   const sizes = [
     {
-      oz: 12,
+      oz: "12 oz" ,
       onPress: () => {
+        setSelected(true);
         setSize(12);
         setVisible(false);
-        setSelected(true);
       },
     },
     {
-      oz: 16,
+      oz: "16 oz",
       onPress: () => {
+        setSelected(true);
         setSize(16);
         setVisible(false);
-        setSelected(true);
       },
     },
     {
-      oz: 80, // this is not working in the button sheet
-      setPress: () => {
+      lbs: "5 lbs", // this is not working in the button sheet
+      onPress: () => {
+        setSelected(true);
         setSize(80);
         setVisible(false);
-        setSelected(true);
       },
     },
     {
@@ -62,17 +66,16 @@ const Product = (props) => {
     },
   ];
 
-  const changeSize = (event) => {
+  const changeSize =  (event) => {
     event.preventDefault();
     setVisible(true);
-    calcPrice();
   };
 
   const calcPrice = () => {
     let temp ;
-    if (size == 12) temp = 12
-    else if (size == 16) temp = 16
-    else if (size == 80) temp = 80
+    if (size == 12) temp = 12.75
+    else if (size == 16) temp = 15.75
+    else if (size == 80) temp = 70.00
 
     setPrice(temp)
   };
@@ -98,14 +101,14 @@ const Product = (props) => {
       {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
       {/* <Text>Learn More</Text> */}
       {/* </Tooltip> */}
-
+{/* bug is with the onPress not timing correctly */}
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
-      <Button onPress={changeSize} text={sizeSelected ? size+ " oz" : "Choose size"} />
+      <Button onPress={changeSize} text={sizeSelected ? size + " oz" : "Choose size"} /> 
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
             <ListItem.Content>
-              <ListItem.Title>{l.oz}</ListItem.Title>
+              <ListItem.Title>{l.oz || l.lbs}</ListItem.Title>
             </ListItem.Content>
           </ListItem>
         ))}
