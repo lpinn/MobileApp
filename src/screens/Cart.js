@@ -23,7 +23,7 @@ const Cart = (props) => {
     const fetchData = async () => {
       const stringData = await AsyncStorage.getItem("products")
       // not mutating state correctly
-      setItems(items => (JSON.parse(stringData)));
+      setItems(items => items.concat((JSON.parse(stringData))));
     };
     fetchData();
   }, []);

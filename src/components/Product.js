@@ -82,15 +82,21 @@ const Product = (props) => {
   const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
+
     const jsonProduct = JSON.stringify(props);
     props.addProduct(props.products.concat(jsonProduct))
-    await AsyncStorage.setItem("products", props.products);
-   /* navigation.navigate("Items in Cart", {
-      
+    
+    try {
+      await AsyncStorage.setItem("products", props.products);
+    }
+    catch(e) {
+      console.log(e)
+    }
+    /* navigation.navigate("Items in Cart", {  
       name: name,
       price: price, // router parameters
       size: size, 
-    }); */
+    }); */ 
     setTimeout(() => setAdded(false), 5000);
   };
   
