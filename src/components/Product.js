@@ -85,6 +85,7 @@ const Product = (props) => {
 
     const jsonProduct = JSON.stringify(props);
     props.addProduct(props.products.concat(jsonProduct))
+    console.log("products " + props.products)
     
     try {
       await AsyncStorage.setItem("products", props.products);

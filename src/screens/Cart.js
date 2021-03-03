@@ -21,10 +21,14 @@ const Cart = (props) => {
   useEffect(() => {                 // im using both react navigation parameters and local storage for sending data
                                     // still have not found one that can have multiple products added. might be dumb
     const fetchData = async () => {
+
       const stringData = await AsyncStorage.getItem("products")
+      
+      console.log("fetched results", stringData)
       // not mutating state correctly
-      setItems(items => items.concat((JSON.parse(stringData))));
+      setItems(JSON.parse(stringData));
     };
+
     fetchData();
   }, []);
 
@@ -38,7 +42,7 @@ const Cart = (props) => {
   // ++ increment
   // -- quantitiy
 
-  if (items.length == 0 || !product)  {
+  if (!items || items.length == 0 )  {
     return <EmptyCart navigation={props.navigation} />;
   } else {
     return (
