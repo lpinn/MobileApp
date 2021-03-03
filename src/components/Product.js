@@ -14,7 +14,7 @@ import { BottomSheet } from "react-native-btr";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Product = (props) => {
-  const id = props.id;
+
   const image = props.image;
   const name = props.name;
   const initialPrice = props.price;
@@ -78,19 +78,22 @@ const Product = (props) => {
     else if (size == 80) temp = 70.00
     setPrice(temp)
   };
-
+  
   const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
     const jsonProduct = JSON.stringify(props);
-    await AsyncStorage.setItem("product", jsonProduct);
-    navigation.navigate("Items in Cart", {
+    props.addProduct(props.products.concat(jsonProduct))
+    await AsyncStorage.setItem("products", props.products);
+   /* navigation.navigate("Items in Cart", {
+      
       name: name,
-      price: price,
-      size: size,
-    });
+      price: price, // router parameters
+      size: size, 
+    }); */
     setTimeout(() => setAdded(false), 5000);
   };
+  
 
   return (
     <ListItem className="product">

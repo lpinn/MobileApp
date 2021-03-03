@@ -9,8 +9,8 @@ const Products = (props) => {
   
   // put state in cart component
   
-
-
+  const [totalProducts, addProduct] = useState([]); // this component holds the state of the products added to cart
+  console.log(totalProducts)
 
   productsData = props.list.map((product) => {
     return (
@@ -22,7 +22,8 @@ const Products = (props) => {
         size={product.size}
         grind={product.grind}
         navigation={props.navigation}
-        
+        addProduct={addProduct}
+        products={totalProducts}
       />
     );
   });
