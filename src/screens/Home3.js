@@ -7,9 +7,28 @@ import {
   Text,
   TouchableOpacity
 } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
+import Button from '../components/Button'
+import { Icon } from 'react-native-elements'
+
+//import Icon from "react-native-vector-icons/Feather";
 
 function Home(props) {
+  const navigation = props.navigation;
+
+  const options = {
+    headerTitle: "Building New Hope",
+    headerRight: () => (
+      <Button
+        icon={<Icon name="cart" type="evilicon" size={30} />}
+        onPress={() => navigation.navigate("Items in Cart")} // chicken and the egg prob
+        color="red"
+        title=""
+      />
+    ),
+  };
+  React.useLayoutEffect(() => {
+    navigation.setOptions(options);
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View style={styles.iconStackRow}>
@@ -29,7 +48,7 @@ function Home(props) {
           </ImageBackground>
           <Text style={styles.loremIpsum}>More than Just Coffee</Text>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate("Catalog")}
+            onPress={() => navigation.navigate("Catalog")}
             style={styles.button}
           >
             <Text style={styles.orderNow1}>Order Now</Text>
