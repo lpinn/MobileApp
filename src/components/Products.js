@@ -9,21 +9,27 @@ const Products = (props) => {
   
   // put state in cart component
   
-  const [totalProducts, addProduct] = useState(""); // this component holds the state of the products added to cart
+
+  const handleAddToCart = (added) => {
+    //   if total products was an array, do totalProducts.some( (item) => item.id))
+    // if thats true increment the quantity
+    // else add the parameter to totalProducts
+  }
 
   productsData = props.list.map((product) => {
     return (
+      <>
       <Product
         key={product.id}
         name={product.name}
         description={product.description}
         price={product.price}
         size={product.size}
-        grind={product.grind}
         navigation={props.navigation}
-        addProduct={addProduct}
-        products={totalProducts}
+        addProduct={props.addProduct}
+        products={props.totalProducts}
       />
+      </>
     );
   });
 

@@ -23,7 +23,8 @@ const Cart = (props) => {
     const fetchData = async () => {
 
       const stringData = await AsyncStorage.getItem("products")
-      
+      const arr = stringData.split("\"}");
+      console.log(arr)
       console.log("fetched results", stringData)
       // not mutating state correctly
       setItems(JSON.parse(stringData));

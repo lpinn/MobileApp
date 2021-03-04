@@ -83,17 +83,18 @@ const Product = (props) => {
     event.preventDefault();
     setAdded(true);
 
-    const jsonProduct = JSON.stringify(props);
-    props.addProduct(props.products.concat(jsonProduct))
+    //const jsonProduct = JSON.stringify(props);
+    props.addProduct(props.products.concat({name: name, price: price, size: size}))
     console.log("products " + props.products)
     
     try {
-      await AsyncStorage.setItem("products", props.products);
+      await AsyncStorage.setItem("products", props.products); // i need this to be on the go to cart button in catalog fuck
     }
     catch(e) {
       console.log(e)
     }
     /* navigation.navigate("Items in Cart", {  
+      // put the props.products instead
       name: name,
       price: price, // router parameters
       size: size, 

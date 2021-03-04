@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 //import { View, Text, Image } from "react-native";
 import { Card, Divider, Icon } from "react-native-elements";
 
@@ -9,7 +9,7 @@ import items from "../utils/ProductList.json";
 
 const Catalog = (props) => {
   const navigation = props.navigation;
-
+  const [totalProducts, addProduct] = useState(""); // this component holds the state of the products added to cart
   const options = {
     headerTitle: "Catalog",
     headerRight: () => (
@@ -29,9 +29,10 @@ const Catalog = (props) => {
     <Card>
       <Card.Title>Buy a coffee</Card.Title>
       <Card.Divider />
-      <Products list={items} search="" navigation = {navigation} />
+      <Products list={items} search="" navigation = {navigation} addProduct={addProduct} products={totalProducts} />
       <Button text="Go back" onPress={() => navigation.goBack()} />
       <Button text="Cart" onPress={() => navigation.navigate("Items in Cart")} />
+      <Button text = "Reset Cart" onPress={() => addProduct("")} />
     </Card>
   );
 };
