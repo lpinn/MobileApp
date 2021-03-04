@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
 import Button from "../components/Button";
+import Product from '../components/Product'
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EmptyCart = (props) => {
   return (
@@ -15,19 +15,18 @@ const EmptyCart = (props) => {
 
 const Cart = (props) => {
   const [items, setItems] = useState([]);
-
-  let product = props.route.params // using react navigation
   
-  useEffect(() => {                 // im using both react navigation parameters and local storage for sending data
-                                    // still have not found one that can have multiple products added. might be dumb
+  useEffect(() => {             
     const fetchData = async () => {
 
-      const stringData = await AsyncStorage.getItem("products")
-      const arr = stringData.split("\"}");
-      console.log(arr)
-      console.log("fetched results", stringData)
-      // not mutating state correctly
-      setItems(JSON.parse(stringData));
+      let { products } = props.route.params 
+      setItems(products)
+      //const stringData = await AsyncStorage.getItem("products")
+      //const arr = stringData.split("\"}");
+      
+      //console.log("fetched results", stringData)
+      
+      //setItems(JSON.parse(stringData));
     };
 
     fetchData();

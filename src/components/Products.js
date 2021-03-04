@@ -8,13 +8,6 @@ const Products = (props) => {
   let productsData;
   
   // put state in cart component
-  
-
-  const handleAddToCart = (added) => {
-    //   if total products was an array, do totalProducts.some( (item) => item.id))
-    // if thats true increment the quantity
-    // else add the parameter to totalProducts
-  }
 
   productsData = props.list.map((product) => {
     return (
@@ -27,7 +20,7 @@ const Products = (props) => {
         size={product.size}
         navigation={props.navigation}
         addProduct={props.addProduct}
-        products={props.totalProducts}
+        products={props.products}
       />
       </>
     );

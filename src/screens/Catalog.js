@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 //import { View, Text, Image } from "react-native";
 import { Card, Divider, Icon } from "react-native-elements";
 
@@ -9,18 +9,30 @@ import items from "../utils/ProductList.json";
 
 const Catalog = (props) => {
   const navigation = props.navigation;
-  const [totalProducts, addProduct] = useState(""); // this component holds the state of the products added to cart
+
+  const [totalProducts, addProduct] = useState([]); // this component holds the state of the products added to cart
+  totalProducts.forEach((p) => console.log(p.name, p.price));
+
+  const handleGoToCart = () => {
+      navigation.navigate("Items in Cart",
+        {
+          products: totalProducts, // send the current states products
+          test: 123,
+        });
+  };
+
   const options = {
     headerTitle: "Catalog",
     headerRight: () => (
       <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={() => navigation.navigate("Items in Cart")} // chicken and the egg prob
+        onPress={handleGoToCart} // chicken and the egg prob
         color="red"
         title=""
       />
     ),
   };
+
   React.useLayoutEffect(() => {
     navigation.setOptions(options);
   }, [navigation]);
@@ -29,10 +41,16 @@ const Catalog = (props) => {
     <Card>
       <Card.Title>Buy a coffee</Card.Title>
       <Card.Divider />
-      <Products list={items} search="" navigation = {navigation} addProduct={addProduct} products={totalProducts} />
+      <Products
+        list={items}
+        search=""
+        navigation={navigation}
+        addProduct={addProduct}
+        products={totalProducts}
+      />
       <Button text="Go back" onPress={() => navigation.goBack()} />
-      <Button text="Cart" onPress={() => navigation.navigate("Items in Cart")} />
-      <Button text = "Reset Cart" onPress={() => addProduct("")} />
+      <Button text="Cart" onPress={handleGoToCart} />
+      <Button text="Reset Cart" onPress={() => addProduct([])} />
     </Card>
   );
 };
