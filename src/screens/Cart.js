@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
-import Button from "../components/Button";
-import Product from "../components/Product";
+import Button from "../components/Button"
+import Counter from 'react-native-counters'
 
-const EmptyCart = (props) => {
+const EmptyCart = ({ navigation }) => {
   return (
     <>
       <Text h1>Nothing Here Yet</Text>
       <Button
         text="Continue Shopping"
-        onPress={() => props.navigation.navigate("Catalog")}
+        onPress={() => navigation.navigate("Catalog")}
       />
     </>
   );
@@ -32,14 +32,15 @@ const Cart = (props) => {
 
   console.log(items);
 
-  // ++ increment for multiples of a product .
+  // ++ increment buttons for product .
   // -- quantitiy
   let cartItems = items.map((i) => {
     return (
       <>
-        <Text key={i.id}>           {/* ISSUE all the ids are the same "1114" */}
-          {i.name} ${i.price} {i.size} oz
+        <Text key={i.id}>           
+          {i.name} ${i.price} {i.size} oz {i.quantity}
         </Text>
+        <Counter start = {i.quantity} onChange={() => i.quantity++} />
       </>
     );
   });

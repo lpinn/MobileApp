@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //import { View, Text, Image } from "react-native";
-import { Card, Divider, Icon } from "react-native-elements";
+import { Card, Icon } from "react-native-elements";
 
 import Button from "../components/Button";
 import Products from "../components/Products";
@@ -11,6 +11,7 @@ const Catalog = (props) => {
   const navigation = props.navigation;
 
   const [totalProducts, addProduct] = useState([]); 
+  const [cartTotal, setTotal] = useState(0);
 
   const handleGoToCart = () => {
       navigation.navigate("Items in Cart",
@@ -24,13 +25,22 @@ const Catalog = (props) => {
       console.log("same id")
       let index = totalProducts.findIndex(i => i.id === selected.id)
       totalProducts[index].quantity++;
-      // do nothing for now
+      // recalc total
     }
     else {
       addProduct(totalProducts.concat(selected))
     }
+    calcTotal()
     
+  }
 
+  const calcTotal = () => {
+    let sum = totalProducts.reduce((total, e) => {
+      console.log(`total: ${total}, current val: ${e}`)
+      return total + (e.price * e.quantity)}      // the price is incorrectly calculated bc if they change size, the items price is the same no matter size.
+      , 0)
+    setTotal(sum)
+    console.log(sum)
   }
 
   const options = {
