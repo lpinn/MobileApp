@@ -15,7 +15,7 @@ const Products = (props) => {
       <>
       <Product
         key={i}
-        id={product.id}
+        id={product.name+product.size} // initial ids
         name={product.name}
         description={product.description}
         price={product.price}

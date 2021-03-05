@@ -1,3 +1,5 @@
+// enum constants
+
 export default {
     WHOLE: "Whole bean",
     DRIP: "Drip",

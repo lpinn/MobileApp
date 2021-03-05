@@ -80,14 +80,14 @@ const Product = (props) => {
     setAdded(true);
 
     props.addProduct({
-      id: id,
+      id: name+size,
       name: name,
       price: price,
       size: size,
       grind: "whole placeholder",
       quantity: 1,
     });
-
+    console.log(name+size)
     setTimeout(() => setAdded(false), 5000);
   };
 

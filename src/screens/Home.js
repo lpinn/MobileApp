@@ -5,10 +5,10 @@ import {
   Image,
   ImageBackground,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
-import Button from '../components/Button'
-import { Icon } from 'react-native-elements'
+import Button from "../components/Button";
+import { Icon } from "react-native-elements";
 
 //import Icon from "react-native-vector-icons/Feather";
 
@@ -20,9 +20,15 @@ function Home(props) {
     headerRight: () => (
       <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={() => navigation.navigate("Items in Cart", {
-          products: props.route.params.products
-        })} // chicken and the egg prob
+        onPress={
+          props.route.params
+            ? () =>
+                navigation.navigate("Items in Cart", {
+                  products: props.route.params.products,
+                })
+            : () =>
+                console.log("no params yet, state should be lifted to home?")
+        } 
         color="red"
         title=""
       />
@@ -31,7 +37,7 @@ function Home(props) {
   React.useLayoutEffect(() => {
     navigation.setOptions(options);
   }, [navigation]);
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.iconStackRow}>
@@ -70,30 +76,30 @@ function Home(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   icon: {
     top: 212,
     left: 398,
     position: "absolute",
     color: "rgba(128,128,128,1)",
-    fontSize: 40
+    fontSize: 40,
   },
   image: {
     top: 0,
     left: 0,
     width: 583,
     height: 1096,
-    position: "absolute"
+    position: "absolute",
   },
   image_imageStyle: {
-    opacity: 0.82
+    opacity: 0.82,
   },
   image4: {
     width: 200,
     height: 200,
     marginTop: 357,
-    marginLeft: 170
+    marginLeft: 170,
   },
   loremIpsum: {
     top: 575,
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
     color: "rgba(255,255,255,1)",
     height: 46,
     width: 274,
-    fontSize: 30
+    fontSize: 30,
   },
   button: {
     top: 697,
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
     height: 63,
     position: "absolute",
     backgroundColor: "rgba(237,167,47,1)",
-    left: 172
+    left: 172,
   },
   orderNow1: {
     fontFamily: "calibri-light",
@@ -120,17 +126,17 @@ const styles = StyleSheet.create({
     width: 110,
     fontSize: 24,
     marginTop: 18,
-    marginLeft: 37
+    marginLeft: 37,
   },
   iconStack: {
     width: 583,
-    height: 1096
+    height: 1096,
   },
   image3: {
     width: 200,
     height: 200,
     marginLeft: 12,
-    marginTop: 297
+    marginTop: 297,
   },
   iconStackRow: {
     height: 1096,
@@ -138,8 +144,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: -343,
     marginLeft: -77,
-    marginTop: -151
-  }
+    marginTop: -151,
+  },
 });
 
 export default Home;

@@ -20,13 +20,15 @@ const Cart = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!props.route.params) return;
-
       let { products } = props.route.params;
       setItems(products);
     };
 
-    fetchData();
+    console.log(props.route.params)
+    if(props.route.params) {
+      fetchData();
+    }
+    
   }, []);
   
 

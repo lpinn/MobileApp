@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "name": "Dark Roast",
         "description": "savory",
         "size": "",
@@ -8,7 +7,6 @@
         "grind": ""
     },
     {
-        "id": 2,
         "name": "Expresso",
         "description": "For that extra punch",
         "size": "",
@@ -16,7 +14,7 @@
         "grind": ""  
     },
     {
-        "id": 3,
+        
         "name": "Light Roast",
         "description": "Caramel and vanilla flavoring",
         "size": "",
@@ -24,7 +22,6 @@
         "grind": ""
     },
     {
-        "id": 4,
         "name": "Medium Roast",
         "description": "A happy medium between light and dark",
         "size": "",
@@ -32,7 +29,6 @@
         "grind": ""
     },
     {
-        "id": 5,
         "name": "Decaf",
         "description": "No caffiene ",
         "size": "",
