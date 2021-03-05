@@ -16,11 +16,16 @@ const Catalog = (props) => {
   const handleGoToCart = () => {
     navigation.navigate("Items in Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
+      total: cartTotal,
     });
   };
 
   const handleAddProduct = (selected) => {
-    if (totalProducts.some((p) => p.id === selected.id & p.size === selected.size)) {
+    if (
+      totalProducts.some(
+        (p) => (p.id === selected.id) & (p.size === selected.size)
+      )
+    ) {
       console.log("same id");
       let index = totalProducts.findIndex((i) => i.id === selected.id);
       totalProducts[index].quantity++; // is this a valid way to update the property
@@ -31,16 +36,19 @@ const Catalog = (props) => {
   };
 
   const calcTotal = () => {
-    let sum = totalProducts.reduce(
-      (total, e) => {
+    setTotal(
+      totalProducts.reduce((total, e) => {
         console.log(`total: ${total}, current price: ${e.price}`);
         return total + e.price * e.quantity;
-      }, // the price is incorrectly calculated bc if they change size, the items price is the same no matter size.
-      0
+      }, 0)
     );
-    setTotal(sum);
-    console.log("current sum excluding the last one added", sum);
+
+    console.log("current sum excluding the last one added", cartTotal);
   };
+
+  const handleCounter = () => {
+    //so our total updates in cart with inc + dec
+  }
 
   const options = {
     headerTitle: "Catalog",
@@ -59,17 +67,19 @@ const Catalog = (props) => {
   }, [navigation, totalProducts]);
 
   return (
-    <Card>
-      <Card.Title>Buy a coffee</Card.Title>
-      <Card.Divider />
-      <Products
-        key={1} 
-        list={list}
-        search=""
-        navigation={navigation}
-        addProduct={handleAddProduct}
-        products={totalProducts}
-      />
+    <>
+      <Card>
+        <Card.Title>Buy a coffee</Card.Title>
+        <Card.Divider />
+        <Products
+          key={1}
+          list={list}
+          search=""
+          navigation={navigation}
+          addProduct={handleAddProduct}
+          products={totalProducts}
+        />
+      </Card>
       <Button
         text="Go back"
         onPress={() =>
@@ -78,12 +88,14 @@ const Catalog = (props) => {
           })
         }
       />
-      <Button text="Cart" onPress={handleGoToCart} /> 
+      <Button text="Cart" onPress={handleGoToCart} />
       <Button text="Reset Cart" onPress={() => addProduct([])} />
-    </Card>
+    </>
   );
 };
 
-{/* why is react whining on line 81 */}
+{
+  /* why is react whining on line 81 */
+}
 
 export default Catalog;
