@@ -10,11 +10,11 @@ import list from "../utils/ProductList.json";
 const Catalog = (props) => {
   const navigation = props.navigation;
 
-  const [totalProducts, addProduct] = useState([]); // this component holds the state of the products added to cart
-  //totalProducts.forEach((p) => console.log(p.name, p.price));
+  const [totalProducts, addProduct] = useState([]); 
 
   const handleGoToCart = () => {
       console.log("hi")
+      console.log(totalProducts)
       navigation.navigate("Items in Cart",
         {
           products: totalProducts, // send the current states products
@@ -26,7 +26,7 @@ const Catalog = (props) => {
     headerRight: () => (
       <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={handleGoToCart} /* this is sometimes glitchy */
+        onPress={handleGoToCart} 
         color="red"
         title=""
       />
@@ -35,7 +35,7 @@ const Catalog = (props) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions(options);
-  }, [navigation]);
+  }, [navigation, totalProducts]);
 
   return (
     <Card>

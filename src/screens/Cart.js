@@ -21,7 +21,7 @@ const Cart = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       if (!props.route.params) return;
-      
+
       let { products } = props.route.params;
       setItems(products);
     };
@@ -41,11 +41,12 @@ const Cart = (props) => {
     return (
       <>
         <Text key={i.id}>           {/* ISSUE all the ids are the same "1114" */}
-          {i.name} {i.price} {i.size}
+          {i.name} ${i.price} {i.size} oz
         </Text>
       </>
     );
   });
+  
   if (!items || items.length == 0) {
     return <EmptyCart navigation={props.navigation} />;
   } else {
