@@ -18,7 +18,6 @@ export default SolidButton;
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    //color: "red",
     alignItems: "center",
     justifyContent: "center",
   },

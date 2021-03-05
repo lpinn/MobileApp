@@ -28,16 +28,13 @@ const Cart = (props) => {
 
     fetchData();
   }, []);
-
-  const handleAddToCart = (selected) => {
-    // if exists in cart increment quantity, else push
-  };
+  
 
   console.log(items);
 
-  // ++ increment
+  // ++ increment for multiples of a product .
   // -- quantitiy
-  let stuffToRender = items.map((i) => {
+  let cartItems = items.map((i) => {
     return (
       <>
         <Text key={i.id}>           {/* ISSUE all the ids are the same "1114" */}
@@ -46,14 +43,14 @@ const Cart = (props) => {
       </>
     );
   });
-  
+
   if (!items || items.length == 0) {
     return <EmptyCart navigation={props.navigation} />;
   } else {
     return (
       <Card>
         <Card.Title>CART</Card.Title>
-        {stuffToRender}
+        {cartItems}
       </Card>
     );
   }

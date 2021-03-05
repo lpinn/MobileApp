@@ -78,16 +78,14 @@ const Product = (props) => {
   const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
-    
-    props.addProduct(         // we update the our carts state by concatting to the products array
-      props.products.concat({
-        id: id,
-        name: name,
-        price: price,
-        size: size,
-        grind: "whole placeholder",
-      })
-    );
+
+    props.addProduct({
+      id: id,
+      name: name,
+      price: price,
+      size: size,
+      grind: "whole placeholder",
+    });
 
     setTimeout(() => setAdded(false), 5000);
   };

@@ -9,12 +9,12 @@ const Products = (props) => {
   
   // put state in cart component
 
-  productsData = props.list.map((product) => {
+  productsData = props.list.map((product, i) => {
     
     return (
       <>
       <Product
-        key={product.id}
+        key={i}
         id={product.id}
         name={product.name}
         description={product.description}

@@ -19,6 +19,18 @@ const Catalog = (props) => {
         });
   };
 
+  const handleAddProduct = (selected) => {
+    if(totalProducts.some(p => p.id === selected.id)){
+      console.log("same id")
+      // do nothing for now
+    }
+    else {
+      addProduct(totalProducts.concat(selected))
+    }
+    
+
+  }
+
   const options = {
     headerTitle: "Catalog",
     headerRight: () => (
@@ -39,11 +51,11 @@ const Catalog = (props) => {
     <Card>
       <Card.Title>Buy a coffee</Card.Title>
       <Card.Divider />
-      <Products
+      <Products key = {1} /* why is react whining right here */
         list={list}
         search=""
         navigation={navigation}
-        addProduct={addProduct}
+        addProduct={handleAddProduct}
         products={totalProducts}
       />
       <Button text="Go back" onPress={() => navigation.navigate('Home', {
