@@ -11,10 +11,7 @@ import Button from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 const Product = (props) => {
-
   const image = props.image;
   const name = props.name;
   const initialPrice = props.price;
@@ -26,16 +23,16 @@ const Product = (props) => {
   const [size, setSize] = useState(12);
   const [sizeVisible, setVisible] = useState(false);
   const [sizeSelected, setSelected] = useState(false);
-  
-  const [price, setPrice] = useState(initialPrice)
+
+  const [price, setPrice] = useState(initialPrice);
 
   useEffect(() => {
     calcPrice();
-  }, [size, setSize])
+  }, [size, setSize]);
 
   const sizes = [
     {
-      oz: "12 oz" ,
+      oz: "12 oz",
       onPress: () => {
         setSelected(true);
         setSize(12);
@@ -66,35 +63,35 @@ const Product = (props) => {
     },
   ];
 
-  const changeSize =  (event) => {
+  const changeSize = (event) => {
     event.preventDefault();
     setVisible(true);
   };
 
   const calcPrice = () => {
-    let temp ;
-    if (size == 12) temp = 12.75
-    else if (size == 16) temp = 15.75
-    else if (size == 80) temp = 70.00
-    setPrice(temp)
+    let temp;
+    if (size == 12) temp = 12.75;
+    else if (size == 16) temp = 15.75;
+    else if (size == 80) temp = 70.0;
+    setPrice(temp);
   };
-  
+
   const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
-    //const jsonProduct = JSON.stringify(props);
-    props.addProduct(props.products.concat({name: name, price: price, size: size}))
     
-    
-    try {
-      await AsyncStorage.setItem("products", JSON.stringify(props.products)); // i need this to be on the go to cart button in catalog fuck
-    }
-    catch(e) {
-      console.log(e)
-    }
+    props.addProduct(
+      props.products.concat({
+        id: id,
+        name: name,
+        price: price,
+        size: size,
+        grind: "whole",
+      })
+    );
+
     setTimeout(() => setAdded(false), 5000);
   };
-  
 
   return (
     <ListItem className="product">
@@ -106,7 +103,10 @@ const Product = (props) => {
       {/* </Tooltip> */}
 
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
-      <Button onPress={changeSize} text={sizeSelected ? size + " oz" : "Choose size"} /> 
+      <Button
+        onPress={changeSize}
+        text={sizeSelected ? size + " oz" : "Choose size"}
+      />
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>

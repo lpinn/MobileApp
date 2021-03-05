@@ -5,19 +5,19 @@ import { Card, Divider, Icon } from "react-native-elements";
 import Button from "../components/Button";
 import Products from "../components/Products";
 
-import items from "../utils/ProductList.json";
+import list from "../utils/ProductList.json";
 
 const Catalog = (props) => {
   const navigation = props.navigation;
 
   const [totalProducts, addProduct] = useState([]); // this component holds the state of the products added to cart
-  totalProducts.forEach((p) => console.log(p.name, p.price));
+  //totalProducts.forEach((p) => console.log(p.name, p.price));
 
   const handleGoToCart = () => {
+      console.log("hi")
       navigation.navigate("Items in Cart",
         {
           products: totalProducts, // send the current states products
-          test: 123,
         });
   };
 
@@ -26,7 +26,7 @@ const Catalog = (props) => {
     headerRight: () => (
       <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={handleGoToCart} // chicken and the egg prob
+        onPress={handleGoToCart} /* this is sometimes glitchy */
         color="red"
         title=""
       />
@@ -42,7 +42,7 @@ const Catalog = (props) => {
       <Card.Title>Buy a coffee</Card.Title>
       <Card.Divider />
       <Products
-        list={items}
+        list={list}
         search=""
         navigation={navigation}
         addProduct={addProduct}
