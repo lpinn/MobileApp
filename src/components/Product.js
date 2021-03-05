@@ -12,12 +12,11 @@ import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 
 const Product = (props) => {
+  const id = props.id;
   const image = props.image;
   const name = props.name;
   const initialPrice = props.price;
-  const grind = props.grind; // should this be state so its interactive .. and where or be further up the chain so cart can see
   const description = props.description;
-  const navigation = props.navigation;
 
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
@@ -80,13 +79,13 @@ const Product = (props) => {
     event.preventDefault();
     setAdded(true);
     
-    props.addProduct(
+    props.addProduct(         // we update the our carts state by concatting to the products array
       props.products.concat({
         id: id,
         name: name,
         price: price,
         size: size,
-        grind: "whole",
+        grind: "whole placeholder",
       })
     );
 

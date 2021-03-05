@@ -31,6 +31,7 @@ function Home(props) {
   React.useLayoutEffect(() => {
     navigation.setOptions(options);
   }, [navigation]);
+  
   return (
     <View style={styles.container}>
       <View style={styles.iconStackRow}>
