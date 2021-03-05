@@ -20,7 +20,9 @@ function Home(props) {
     headerRight: () => (
       <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={() => navigation.navigate("Items in Cart")} // chicken and the egg prob
+        onPress={() => navigation.navigate("Items in Cart", {
+          products: props.route.params.products
+        })} // chicken and the egg prob
         color="red"
         title=""
       />

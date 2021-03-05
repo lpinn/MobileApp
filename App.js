@@ -4,9 +4,8 @@ import Native from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import Home3 from './src/screens/Home3'
 
-import Home from "./src/screens/Home";
-import Home2 from './src/screens/Home2'
 import Catalog from "./src/screens/Catalog";
 import Cart from "./src/screens/Cart";
 
@@ -30,7 +29,6 @@ const defaultOptionsForStack = {
 
 const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
 
-import Home3 from './src/screens/Home3'
 
 // https://reactnavigation.org/docs/navigating/ READ
 export default function App() {

@@ -13,8 +13,6 @@ const Catalog = (props) => {
   const [totalProducts, addProduct] = useState([]); 
 
   const handleGoToCart = () => {
-      console.log("hi")
-      console.log(totalProducts)
       navigation.navigate("Items in Cart",
         {
           products: totalProducts, // send the current states products
@@ -48,7 +46,9 @@ const Catalog = (props) => {
         addProduct={addProduct}
         products={totalProducts}
       />
-      <Button text="Go back" onPress={() => navigation.goBack()} />
+      <Button text="Go back" onPress={() => navigation.navigate('Home', {
+        products: totalProducts
+      })} />
       <Button text="Cart" onPress={handleGoToCart} />
       <Button text="Reset Cart" onPress={() => addProduct([])} />
     </Card>
