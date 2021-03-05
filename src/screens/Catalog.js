@@ -22,6 +22,8 @@ const Catalog = (props) => {
   const handleAddProduct = (selected) => {
     if(totalProducts.some(p => p.id === selected.id)){
       console.log("same id")
+      let index = totalProducts.findIndex(i => i.id === selected.id)
+      totalProducts[index].quantity++;
       // do nothing for now
     }
     else {

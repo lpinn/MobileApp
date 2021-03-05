@@ -85,6 +85,7 @@ const Product = (props) => {
       price: price,
       size: size,
       grind: "whole placeholder",
+      quantity: 1,
     });
 
     setTimeout(() => setAdded(false), 5000);
