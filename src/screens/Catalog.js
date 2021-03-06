@@ -10,12 +10,20 @@ import list from "../utils/ProductList.json";
 const Catalog = (props) => {
   const navigation = props.navigation;
 
-  const [totalProducts, addProduct] = useState([]);
+  const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
   useEffect(() => {
-    calcTotal();
-  }, [totalProducts])
+    // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later
+    setTotal(
+      totalProducts.reduce((total, e) => {
+        console.log(`total: ${total}, current price: ${e.price}`);
+        return total + e.price * e.quantity;
+      }, 0)
+    );
+
+    console.log("current sum excluding the last one added", cartTotal);
+  }, [totalProducts, handleAddProduct, handleGoToCart]);
 
   const handleGoToCart = () => {
     navigation.navigate("Items in Cart", {
@@ -31,27 +39,19 @@ const Catalog = (props) => {
       )
     ) {
       console.log("same id");
-      let index = totalProducts.findIndex((i) => i.id === selected.id);
-      totalProducts[index].quantity++; // is this a valid way to update the property
+      handleIcrement(selected);
     } else {
-      addProduct(totalProducts.concat(selected));
+      console.log("new");
+      updateProducts(totalProducts.concat(selected));
     }
     //calcTotal();
   };
 
-  const calcTotal = () => {
-    setTotal(
-      totalProducts.reduce((total, e) => {
-        console.log(`total: ${total}, current price: ${e.price}`);
-        return total + (e.price * e.quantity);
-      }, 0)
-    );
-
-    console.log("current sum excluding the last one added", cartTotal);
-  };
-
-  const handleCounter = () => {
-    //so our total updates in cart with inc + dec
+  const handleIcrement = (selected) => {
+    let index = totalProducts.findIndex((i) => i.id === selected.id);
+    let newProducts = [...totalProducts];
+    newProducts[index].quantity++;
+    updateProducts(newProducts);
   };
 
   const options = {
@@ -59,7 +59,7 @@ const Catalog = (props) => {
     headerRight: () => (
       <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={handleGoToCart}    
+        onPress={handleGoToCart} // not updating with total
         color="red"
         title="Cart"
       />
@@ -93,7 +93,7 @@ const Catalog = (props) => {
         }
       />
       <Button text="Cart" onPress={handleGoToCart} />
-      <Button text="Reset Cart" onPress={() => addProduct([])} />
+      <Button text="Reset Cart" onPress={() => updateProducts([])} />
     </>
   );
 };

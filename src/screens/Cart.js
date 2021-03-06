@@ -42,8 +42,6 @@ const Cart = (props) => {
       ;
   }
   
-
-  console.log(items);
   console.log(props.route.params.total)
   
   let cartItems = items.map((i) => {
