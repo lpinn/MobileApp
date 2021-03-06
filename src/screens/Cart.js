@@ -16,26 +16,23 @@ const EmptyCart = ({ navigation }) => {
   );
 };
 
-const Cart = (props) => {
+const Cart = ({ navigation, route }) => {
   const [items, setItems] = useState([]);
+  const [total, updateTotal] = useState(route.params.total);
 
   useEffect(() => {
     const fetchData = async () => {
-      let { products } = props.route.params;
-      console.log(props.route.params);
+      let { products } = route.params;
       setItems(products);
     };
 
-    console.log(props.route.params);
-    if (props.route.params) {
+    console.log(route.params);
+    if (route.params) {
       fetchData();
     }
   }, []);
 
-
-
-
-  console.log(props.route.params.total);
+  console.log(route.params.total);
 
   let cartItems = items.map((i) => {
     return (
@@ -43,22 +40,24 @@ const Cart = (props) => {
         <Text style={{ fontWeight: "bold" }} key={i.id}>
           {i.name} ${i.price} {i.size} oz
         </Text>
-        <Counter item = {i} increment = {props.route.params.increment} />
+        <Counter
+          item={i}
+          increment={route.params.increment}
+          decrement={route.params.decrement}
+        />
       </>
     );
   });
 
   if (!items || items.length == 0) {
-    return <EmptyCart navigation={props.navigation} />;
+    return <EmptyCart navigation={navigation} />;
   } else {
     return (
       <Card>
         <Card.Title>CART</Card.Title>
         {cartItems}
         <Divider />
-        <Text style={{ fontWeight: "bold" }}>
-          TOTAL ${props.route.params.total}
-        </Text>
+        <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
       </Card>
     );
   }

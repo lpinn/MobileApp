@@ -39,8 +39,9 @@ const Catalog = (props) => {
   const handleGoToCart = () => {
     navigation.navigate("Items in Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
-      total: cartTotal,
+      total: cartTotal,  // need to update the total somehow
       increment: handleIcrement,
+      decrement: handleDecrement,
     });
   };
 
@@ -56,7 +57,6 @@ const Catalog = (props) => {
       console.log("new");
       updateProducts(totalProducts.concat(selected));
     }
-    //calcTotal();
   };
 
   const handleIcrement = (selected) => {
@@ -65,6 +65,13 @@ const Catalog = (props) => {
     newProducts[index].quantity++;
     updateProducts(newProducts);
   };
+
+  const handleDecrement = (selected) => {
+    let index = totalProducts.findIndex((i) => i.id === selected.id);
+    let newProducts = [...totalProducts];
+    newProducts[index].quantity--; // its incrementing
+    updateProducts(newProducts);
+  }
 
   const options = {
     headerTitle: "Catalog",
