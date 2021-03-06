@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
 import Button from "../components/Button"
 import Counter from 'react-native-counters'
+import Divider from "react-native-btr/src/Components/Separator";
 
 const EmptyCart = ({ navigation }) => {
   return (
@@ -21,6 +22,7 @@ const Cart = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       let { products } = props.route.params;
+      console.log(props.route.params)
       setItems(products);
     };
 
@@ -30,19 +32,27 @@ const Cart = (props) => {
     }
     
   }, []);
+
+  const handleCounter = (number, type) => {
+    console.log(`${number}, ${type}`)
+    if(type === 'minus') {
+      --number;
+    }
+    else
+      ;
+  }
   
 
   console.log(items);
-
-  // ++ increment buttons for product .
-  // -- quantitiy
+  console.log(props.route.params.total)
+  
   let cartItems = items.map((i) => {
     return (
       <>
-        <Text key={i.id}>           
-          {i.name} ${i.price} {i.size} oz {i.quantity}
+        <Text style={{ fontWeight: "bold" }} key={i.id}>           
+          {i.name} ${i.price} {i.size} oz 
         </Text>
-        <Counter start = {i.quantity} onChange={() => i.quantity++} />
+        <Counter start = {i.quantity} onChange={handleCounter} />  
       </>
     );
   });
@@ -54,6 +64,8 @@ const Cart = (props) => {
       <Card>
         <Card.Title>CART</Card.Title>
         {cartItems}
+        <Divider/>
+        <Text style={{ fontWeight: "bold" }}>TOTAL ${props.route.params.total}</Text>
       </Card>
     );
   }

@@ -12,7 +12,7 @@ import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 
 const Product = (props) => {
-  const id = props.id;
+  const id = props.id; // not in use currentlu
   const image = props.image;
   const name = props.name;
   const initialPrice = props.price;
@@ -47,7 +47,7 @@ const Product = (props) => {
       },
     },
     {
-      lbs: "5 lbs", // this is not working in the button sheet
+      lbs: "5 lbs",
       onPress: () => {
         setSelected(true);
         setSize(80);
@@ -80,20 +80,19 @@ const Product = (props) => {
     setAdded(true);
 
     props.addProduct({
-      id: name+size,
+      id: name + size, // size dictates the price so we identify our keys based on that
       name: name,
       price: price,
       size: size,
       grind: "whole placeholder",
       quantity: 1,
     });
-    console.log(name+size)
     setTimeout(() => setAdded(false), 5000);
   };
 
   return (
     <ListItem className="product">
-      <Text>{name}</Text>
+      <Text style={{ fontWeight: "bold" }}>{name}</Text>
       <Text>${price}</Text>
 
       {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
@@ -103,7 +102,7 @@ const Product = (props) => {
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
       <Button
         onPress={changeSize}
-        text={sizeSelected ? size + " oz" : "Choose size"}
+        text={sizeSelected ? size + " oz" : "size"}
       />
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import { View, Text, Image } from "react-native";
 import { Card, Icon } from "react-native-elements";
 
@@ -13,6 +13,10 @@ const Catalog = (props) => {
   const [totalProducts, addProduct] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
+  useEffect(() => {
+    calcTotal();
+  }, [totalProducts])
+
   const handleGoToCart = () => {
     navigation.navigate("Items in Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
@@ -23,7 +27,7 @@ const Catalog = (props) => {
   const handleAddProduct = (selected) => {
     if (
       totalProducts.some(
-        (p) => (p.id === selected.id) & (p.size === selected.size)
+        (p) => p.id === selected.id && p.size === selected.size
       )
     ) {
       console.log("same id");
@@ -32,14 +36,14 @@ const Catalog = (props) => {
     } else {
       addProduct(totalProducts.concat(selected));
     }
-    calcTotal();
+    //calcTotal();
   };
 
   const calcTotal = () => {
     setTotal(
       totalProducts.reduce((total, e) => {
         console.log(`total: ${total}, current price: ${e.price}`);
-        return total + e.price * e.quantity;
+        return total + (e.price * e.quantity);
       }, 0)
     );
 
@@ -48,16 +52,16 @@ const Catalog = (props) => {
 
   const handleCounter = () => {
     //so our total updates in cart with inc + dec
-  }
+  };
 
   const options = {
     headerTitle: "Catalog",
     headerRight: () => (
       <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={handleGoToCart}
+        onPress={handleGoToCart}    
         color="red"
-        title=""
+        title="Cart"
       />
     ),
   };
