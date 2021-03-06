@@ -7,6 +7,17 @@ import Products from "../components/Products";
 
 import list from "../utils/ProductList.json";
 
+const CartButton = ({ onPress }) => {
+  return (
+  <Button
+        icon={<Icon name="cart" type="evilicon" size={30} />}
+        onPress={onPress} // not working with react navigation, rendering updates issues
+        color="red"
+        title="Cart"
+  />
+  )
+}
+
 const Catalog = (props) => {
   const navigation = props.navigation;
 
@@ -29,6 +40,7 @@ const Catalog = (props) => {
     navigation.navigate("Items in Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
       total: cartTotal,
+      increment: handleIcrement,
     });
   };
 
@@ -57,12 +69,13 @@ const Catalog = (props) => {
   const options = {
     headerTitle: "Catalog",
     headerRight: () => (
-      <Button
+      <CartButton onPress = {handleGoToCart} />
+   /*   <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
         onPress={handleGoToCart} // not updating with total
         color="red"
         title="Cart"
-      />
+      /> */
     ),
   };
 
@@ -92,7 +105,7 @@ const Catalog = (props) => {
           })
         }
       />
-      <Button text="Cart" onPress={handleGoToCart} />
+      <CartButton onPress = {handleGoToCart} />
       <Button text="Reset Cart" onPress={() => updateProducts([])} />
     </>
   );
