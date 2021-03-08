@@ -1,51 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
 import Button from "../components/Button";
+import Counter from "../state/Counter";
+import Divider from "react-native-btr/src/Components/Separator";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const EmptyCart = (props) => {
+const EmptyCart = ({ navigation }) => {
   return (
     <>
       <Text h1>Nothing Here Yet</Text>
-      <Button text="Continue Shopping" onPress={() => props.navigation.goBack()} />
+      <Button
+        text="Continue Shopping"
+        onPress={() => navigation.navigate("Catalog")}
+      />
     </>
   );
 };
 
-const Cart = (props) => {
+const Cart = ({ navigation, route }) => {
   const [items, setItems] = useState([]);
+  const [total, updateTotal] = useState(route.params.total);
 
-  let product = props.route.params // using react navigation
-  
-  useEffect(() => {                 // im using both react navigation parameters and local storage for sending data
-                                    // still have not found one that can have multiple products added. might be dumb
+  useEffect(() => {
     const fetchData = async () => {
-      const stringData = await AsyncStorage.getItem("product")
-      // not mutating state correctly
-      setItems(items => items.concat(JSON.parse(stringData)));
+      let { products } = route.params;
+      setItems(products);
     };
-    fetchData();
+
+    console.log(route.params);
+    if (route.params) {
+      fetchData();
+    }
   }, []);
 
-  const handleAddToCart = (selected) => {
+  console.log(route.params.total);
 
-  }
+  let cartItems = items.map((i) => {
+    return (
+      <>
+        <Text style={{ fontWeight: "bold" }} key={i.id}>
+          {i.name} ${i.price} {i.size} oz
+        </Text>
+        <Counter
+          item={i}
+          increment={route.params.increment}
+          decrement={route.params.decrement}
+        />
+      </>
+    );
+  });
 
-
-  
-  // ++ increment
-  // -- quantitiy
-
-  if (items.length == 0 || !product)  {
-    return <EmptyCart navigation={props.navigation} />;
+  if (!items || items.length == 0) {
+    return <EmptyCart navigation={navigation} />;
   } else {
     return (
       <Card>
         <Card.Title>CART</Card.Title>
-        <Text>{product.name}</Text>
-        <Text>${product.price}</Text>
-        <Text>{product.size} oz</Text>
+        {cartItems}
+        <Divider />
+        <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
       </Card>
     );
   }

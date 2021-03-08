@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Card, Button, Icon } from "react-native-elements";
 
 import Product from "./Product";
@@ -8,40 +8,40 @@ const Products = (props) => {
   let productsData;
   
   // put state in cart component
-  
 
-
-
-  productsData = props.list.map((product) => {
+  productsData = props.list.map((product, i) => {
+    
     return (
+      <>
       <Product
-        key={product.id}
+        key={i}
+        id={product.name+product.size} // initial ids
         name={product.name}
         description={product.description}
         price={product.price}
         size={product.size}
-        grind={product.grind}
         navigation={props.navigation}
-        // add={addToCart}
+        addProduct={props.addProduct}
+        products={props.products}
       />
+      </>
     );
   });
 
   return (
-    <Card conatainerStyle = {styles.container} className="products">
-      {/* do i want to nest cards here, kinda fugly TODO */}
+   <View>
       {productsData}
-    </Card>
+    </View>
     
   );
 };
 
 export default Products;
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'
   }
-});
+}); */

@@ -8,6 +8,7 @@ const SolidButton = (props) => {
       containerStyle={styles.button}
       title={props.text}
       onPress={props.onPress}
+      containerStyle={props.style}
     />
   );
 };
@@ -17,7 +18,6 @@ export default SolidButton;
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    //color: "red",
     alignItems: "center",
     justifyContent: "center",
   },
