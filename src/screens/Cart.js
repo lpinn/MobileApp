@@ -32,6 +32,9 @@ const Cart = ({ navigation, route }) => {
     }
   }, []);
 
+  const onQuantityChange = () => {
+    // recalc total, pass to counter?
+  }
   console.log(route.params.total);
 
   let cartItems = items.map((i) => {

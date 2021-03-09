@@ -40,7 +40,7 @@ const Catalog = (props) => {
     navigation.navigate("Items in Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
       total: cartTotal,  // need to update the total somehow
-      increment: handleIcrement,
+      increment: handleIncrement,
       decrement: handleDecrement,
     });
   };
@@ -59,7 +59,7 @@ const Catalog = (props) => {
     }
   };
 
-  const handleIcrement = (selected) => {
+  const handleIncrement = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
     let newProducts = [...totalProducts];
     newProducts[index].quantity++;
