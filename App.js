@@ -21,7 +21,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Catalog" component={Catalog} />
-          <Stack.Screen name="Items in Cart" component={Cart} />
+          <Stack.Screen name="Cart" component={Cart} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

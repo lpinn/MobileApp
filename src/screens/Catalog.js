@@ -26,6 +26,7 @@ const Catalog = (props) => {
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
+  
   useEffect(() => {
     // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later.. only for react navigation
     setTotal(
@@ -38,24 +39,15 @@ const Catalog = (props) => {
     console.log("current sum excluding the last one added", cartTotal);
   }, [totalProducts, handleAddProduct, handleGoToCart]);
 
-  const handleGoToCart = () => {  //https://reactnavigation.org/docs/navigation-prop/
-    navigation.dispatch(  
-      CommonActions.navigate({
-        name: "Items in Cart",
-        params: {
-          products: totalProducts, // should i send a map of all the items in totalProducts with a key
-          total: cartTotal, // need to update the total somehow
-          increment: handleIncrement,
-          decrement: handleDecrement,
-        },
-      })
-    );
-  /*    navigation.navigate("Items in Cart", {
+  const handleGoToCart = () => {
+    //https://reactnavigation.org/docs/navigation-prop/
+
+    navigation.navigate("Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
       total: cartTotal, // need to update the total somehow
       increment: handleIncrement,
-      decrement: handleDecrement, 
-    }); */
+      decrement: handleDecrement,
+    });
   };
 
   const handleAddProduct = (selected) => {
@@ -65,7 +57,7 @@ const Catalog = (props) => {
       )
     ) {
       console.log("same id");
-      handleIcrement(selected);
+      handleIncrement(selected);
     } else {
       console.log("new");
       updateProducts(totalProducts.concat(selected));
@@ -78,6 +70,7 @@ const Catalog = (props) => {
     newProducts[index].quantity++;
     updateProducts(newProducts);
     navigation.setParams({
+      // "not handled by any navigator"
       total: cartTotal,
     });
   };

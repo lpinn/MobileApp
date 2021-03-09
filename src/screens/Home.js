@@ -23,7 +23,7 @@ function Home(props) {
         onPress={
           props.route.params
             ? () =>
-                navigation.navigate("Items in Cart", {
+                navigation.navigate("Cart", {
                   products: props.route.params.products,
                 })
             : () =>
