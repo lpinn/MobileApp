@@ -70,7 +70,6 @@ const Catalog = (props) => {
     newProducts[index].quantity++;
     updateProducts(newProducts);
     navigation.setParams({
-      // "not handled by any navigator"
       total: cartTotal,
     });
   };

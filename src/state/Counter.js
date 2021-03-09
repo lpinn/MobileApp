@@ -10,11 +10,11 @@ function ItemCounter({ item, increment, decrement, updateTotal, total }) {
     if (type === "-") {
       decrement(item);
       setCounter(counter - 1);
-     // updateTotal(total - item.price);     // do this for now ig
+      updateTotal(total - item.price);     // do this for now ig
     } else {
       increment(item);
       setCounter(counter + 1);
-    //  updateTotal(total + item.price);
+      updateTotal(total + item.price);
     }
   };
   return (

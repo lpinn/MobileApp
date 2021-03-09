@@ -7,6 +7,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from './src/screens/Home'
 
 import Catalog from "./src/screens/Catalog";
+import ProductsPage from './src/screens/ProductsPage'
+
 import Cart from "./src/screens/Cart";
 
 
@@ -20,7 +22,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Catalog" component={Catalog} />
+          <Stack.Screen name="Catalog" component={ProductsPage} />
           <Stack.Screen name="Cart" component={Cart} />
         </Stack.Navigator>
       </NavigationContainer>

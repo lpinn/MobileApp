@@ -52,8 +52,8 @@ const Cart = ({ navigation, route }) => {
           item={i}
           increment={route.params.increment}
           decrement={route.params.decrement}
-          //updateTotal={updateTotal}
-          //total={route.params.total}
+          updateTotal={updateTotal}
+          total={route.params.total}
         />
       </>
     );
