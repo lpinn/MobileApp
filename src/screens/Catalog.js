@@ -5,18 +5,20 @@ import { Card, Icon } from "react-native-elements";
 import Button from "../components/Button";
 import Products from "../components/Products";
 
+import { CommonActions } from "@react-navigation/native";
+
 import list from "../utils/ProductList.json";
 
 const CartButton = ({ onPress }) => {
   return (
-  <Button
-        icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={onPress} // not working with react navigation, rendering updates issues
-        color="red"
-        title="Cart"
-  />
-  )
-}
+    <Button
+      icon={<Icon name="cart" type="evilicon" size={30} />}
+      onPress={onPress} // not working with react navigation, rendering updates issues
+      color="red"
+      title="Cart"
+    />
+  );
+};
 
 const Catalog = (props) => {
   const navigation = props.navigation;
@@ -25,10 +27,10 @@ const Catalog = (props) => {
   const [cartTotal, setTotal] = useState(0);
 
   useEffect(() => {
-    // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later
+    // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later.. only for react navigation
     setTotal(
       totalProducts.reduce((total, e) => {
-        console.log(`total: ${total}, current price: ${e.price}`);
+        //console.log(`total: ${total}, current price: ${e.price}`);
         return total + e.price * e.quantity;
       }, 0)
     );
@@ -36,13 +38,24 @@ const Catalog = (props) => {
     console.log("current sum excluding the last one added", cartTotal);
   }, [totalProducts, handleAddProduct, handleGoToCart]);
 
-  const handleGoToCart = () => {
-    navigation.navigate("Items in Cart", {
+  const handleGoToCart = () => {  //https://reactnavigation.org/docs/navigation-prop/
+    navigation.dispatch(  
+      CommonActions.navigate({
+        name: "Items in Cart",
+        params: {
+          products: totalProducts, // should i send a map of all the items in totalProducts with a key
+          total: cartTotal, // need to update the total somehow
+          increment: handleIncrement,
+          decrement: handleDecrement,
+        },
+      })
+    );
+  /*    navigation.navigate("Items in Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
-      total: cartTotal,  // need to update the total somehow
+      total: cartTotal, // need to update the total somehow
       increment: handleIncrement,
-      decrement: handleDecrement,
-    });
+      decrement: handleDecrement, 
+    }); */
   };
 
   const handleAddProduct = (selected) => {
@@ -64,6 +77,9 @@ const Catalog = (props) => {
     let newProducts = [...totalProducts];
     newProducts[index].quantity++;
     updateProducts(newProducts);
+    navigation.setParams({
+      total: cartTotal,
+    });
   };
 
   const handleDecrement = (selected) => {
@@ -71,13 +87,16 @@ const Catalog = (props) => {
     let newProducts = [...totalProducts];
     newProducts[index].quantity--; // its incrementing
     updateProducts(newProducts);
-  }
+    navigation.setParams({
+      total: cartTotal, // sad
+    });
+  };
 
   const options = {
     headerTitle: "Catalog",
     headerRight: () => (
-      <CartButton onPress = {handleGoToCart} />
-   /*   <Button
+      <CartButton onPress={handleGoToCart} />
+      /*   <Button
         icon={<Icon name="cart" type="evilicon" size={30} />}
         onPress={handleGoToCart} // not updating with total
         color="red"
@@ -112,7 +131,7 @@ const Catalog = (props) => {
           })
         }
       />
-      <CartButton onPress = {handleGoToCart} />
+      <CartButton onPress={handleGoToCart} />
       <Button text="Reset Cart" onPress={() => updateProducts([])} />
     </>
   );

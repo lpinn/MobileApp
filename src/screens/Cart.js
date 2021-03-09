@@ -20,6 +20,12 @@ const Cart = ({ navigation, route }) => {
   const [items, setItems] = useState([]);
   const [total, updateTotal] = useState(route.params.total);
 
+  console.log(route.params.total)
+
+  useEffect(() => {
+    updateTotal(route.params.total)     // not working
+  }, [route.params.total, route.params])
+
   useEffect(() => {
     const fetchData = async () => {
       let { products } = route.params;
@@ -33,9 +39,8 @@ const Cart = ({ navigation, route }) => {
   }, []);
 
   const onQuantityChange = () => {
-    // recalc total, pass to counter?
+    updateTotal(route.params.total);
   }
-  console.log(route.params.total);
 
   let cartItems = items.map((i) => {
     return (
@@ -47,6 +52,8 @@ const Cart = ({ navigation, route }) => {
           item={i}
           increment={route.params.increment}
           decrement={route.params.decrement}
+          updateTotal={updateTotal}
+          total={route.params.total}
         />
       </>
     );
