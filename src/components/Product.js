@@ -100,10 +100,6 @@ const Product = (props) => {
       <Text style={{ fontWeight: "bold" }}>{name}</Text>
       <Text>${price}</Text>
 
-      {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
-      {/* <Text>Learn More</Text> */}
-      {/* </Tooltip> */}
-
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
       <Button
         onPress={changeSize}
@@ -121,6 +117,15 @@ const Product = (props) => {
           </ListItem>
         ))}
       </BottomSheet>
+   {/*     <ButtomSheet visible={sizeVisible}>
+        {grinds.map((g, i) => (
+          <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
+          <ListItem.Content>
+            <ListItem.Title>{l.oz || l.lbs}</ListItem.Title>
+          </ListItem.Content>
+        </ListItem>
+        ))}
+      </ButtomSheet> */}
     </ListItem>
   );
 };

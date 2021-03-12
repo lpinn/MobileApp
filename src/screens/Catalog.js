@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 //import { View, Text, Image } from "react-native";
-import { Card, Icon } from "react-native-elements";
+import { Card, Icon, Text } from "react-native-elements";
 
 import Button from "../components/Button";
 import Products from "../components/Products";
@@ -9,7 +9,7 @@ const CartButton = ({ onPress }) => {
   return (
     <Button
       icon={<Icon name="cart" type="evilicon" size={30} />}
-      onPress={onPress} 
+      onPress={onPress}
       color="red"
       title="Cart"
     />
@@ -21,13 +21,12 @@ TODO
 https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 */
 
-const Catalog = (props) => {   
+const Catalog = (props) => {
   const navigation = props.navigation;
 
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
-  
   useEffect(() => {
     // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later.. only for react navigation
     setTotal(
@@ -57,7 +56,7 @@ const Catalog = (props) => {
         (p) => p.id === selected.id && p.size === selected.size
       )
     ) {
-     // console.log("same id");
+      // console.log("same id");
       handleIncrement(selected);
     } else {
       //console.log("new");
@@ -78,25 +77,24 @@ const Catalog = (props) => {
   const handleDecrement = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
     let tempProducts = [...totalProducts];
-    tempProducts[index].quantity--; 
+    tempProducts[index].quantity--;
 
-    if(tempProducts[index].quantity === 0) {    // when we put counter to 0, remove that product from the products list
-      const id = tempProducts[index].id                 
-      tempProducts = tempProducts.filter(p => p.id !== id)
-    }    // the removed product will only be removed on the next cart open
+    if (tempProducts[index].quantity === 0) {
+      // when we put counter to 0, remove that product from the products list
+      const id = tempProducts[index].id;
+      tempProducts = tempProducts.filter((p) => p.id !== id);
+    } // the removed product will only be removed on the next cart open
 
     updateProducts(tempProducts);
     navigation.setParams({
-      total: cartTotal, 
-      products: totalProducts
+      total: cartTotal,
+      products: totalProducts,
     });
   };
 
   const options = {
     headerTitle: "Catalog",
-    headerRight: () => (
-      <CartButton onPress={handleGoToCart} />
-    ),
+    headerRight: () => <CartButton onPress={handleGoToCart} />,
   };
 
   React.useLayoutEffect(() => {
@@ -115,6 +113,14 @@ const Catalog = (props) => {
           products={totalProducts}
         />
       </Card>
+      <Text>
+        Building New Hope coffee is socially responsible and environmentally
+        friendly. Our coffee is certified organic, shade-grown and certified
+        bird- friendly by Smithsonian Migratory Bird Center, fair and direct
+        trade coffee. Our dark roasted beans are single-source and come from El
+        Porvenir in Nicaragua, a worker-owned farming cooperative we’ve
+        partnered with since 2002.
+      </Text>
       <Button
         text="Go back"
         onPress={() =>
@@ -123,6 +129,7 @@ const Catalog = (props) => {
           })
         }
       />
+
       <CartButton onPress={handleGoToCart} />
       <Button text="Reset Cart" onPress={() => updateProducts([])} />
     </>

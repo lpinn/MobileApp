@@ -4,7 +4,7 @@
         "description": "savory",
         "size": "",
         "price": 12.75,
-        "grind": "Whole bean",
+        "grind": "WholeBean",
         "image": ""
     },
     {
@@ -12,7 +12,7 @@
         "description": "For that extra punch",
         "size": "",
         "price": 12.75,
-        "grind": "Whole bean",  
+        "grind": "WholeBean",  
         "image": ""
     },
     {
@@ -21,7 +21,7 @@
         "description": "Caramel and vanilla flavoring",
         "size": "",
         "price": 12.75,
-        "grind": "Whole bean",
+        "grind": "WholeBean",
         "image": ""
     },
     {
@@ -29,7 +29,7 @@
         "description": "A happy medium between light and dark",
         "size": "",
         "price": 12.75,
-        "grind": "Whole bean",
+        "grind": "WholeBean",
         "image": ""
     },
     {
@@ -37,7 +37,7 @@
         "description": "No caffiene ",
         "size": "",
         "price": 12.75,
-        "grind": "Whole bean",
+        "grind": "WholeBean",
         "image": ""
     }
 
