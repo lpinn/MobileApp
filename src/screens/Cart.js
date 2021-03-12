@@ -53,7 +53,7 @@ const Cart = ({ navigation, route }) => {
           increment={route.params.increment}
           decrement={route.params.decrement}
           updateTotal={updateTotal}
-          total={route.params.total}
+          total={total}
         />
       </>
     );
