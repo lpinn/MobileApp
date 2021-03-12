@@ -107,7 +107,7 @@ const Catalog = (props) => {
         <Card.Title>Buy a coffee</Card.Title>
         <Card.Divider />
         <Products
-          key={1}
+          key={1} // actually still whining here
           navigation={navigation}
           addProduct={handleAddProduct}
           products={totalProducts}

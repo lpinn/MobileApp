@@ -22,7 +22,7 @@ const Product = (props) => {
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState(props.grind);
   const [sizeVisible, setVisible] = useState(false);
-  const [sizeSelected, setSelected] = useState(false); // should merge these states
+  const [sizeSelected, setSelected] = useState(false); // should i merge some of these states into an Object
 
   const [price, setPrice] = useState(initialPrice);
 

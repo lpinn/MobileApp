@@ -8,7 +8,8 @@ export default function Anchor(props) {
     Linking.openURL(props.href);
     props.onPress && props.onPress();
   };
-  const styles = props.styles;
+  console.log(props)
+  const styles = props.style;
   return (
     <Text style = {styles} h3 {...props} onPress={handlePress}>
       {props.children}

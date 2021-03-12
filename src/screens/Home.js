@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Button from "../components/Button";
+import Anchor from "../components/Anchor";
 import { Icon } from "react-native-elements";
 
 //import Icon from "react-native-vector-icons/Feather";
@@ -30,7 +31,7 @@ function Home(props) {
                 console.log("no params yet, state should be lifted to home?")
         }
         color="red"
-        title=""
+        title="NA"
       />
     ),
   };
@@ -43,6 +44,7 @@ function Home(props) {
       <View style={styles.iconStackRow}>
         <View style={styles.iconStack}>
           <Icon name="menu" style={styles.icon}></Icon>
+         
           <ImageBackground
             source={require("../../assets/images/patryk-gauza-vs0tzSHVcac-unsplash.jpg")}
             resizeMode="contain"
@@ -56,6 +58,7 @@ function Home(props) {
             ></Image>
           </ImageBackground>
           <Text style={styles.loremIpsum}>More than Just Coffee</Text>
+          <Anchor style={styles.aboutUs} href="https://www.buildingnewhope.org/about">About Us</Anchor> 
           <TouchableOpacity
             onPress={() => navigation.navigate("Catalog")}
             style={styles.button}
@@ -103,6 +106,16 @@ const styles = StyleSheet.create({
   },
   loremIpsum: {
     top: 575,
+    left: 145,
+    position: "absolute",
+    fontFamily: "calibri-regular",
+    color: "rgba(255,255,255,1)",
+    height: 46,
+    width: 274,
+    fontSize: 30,
+  },
+  aboutUs: {
+    top: 600,
     left: 145,
     position: "absolute",
     fontFamily: "calibri-regular",
