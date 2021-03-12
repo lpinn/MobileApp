@@ -1,5 +1,11 @@
 # Building New Hope
 
+
+# What is this?
+A project for the nonprofit Building New Hope, see there website [here](https://www.buildingnewhope.org/). This is a React Native app using Expo to allow for customers to order coffee on their phones in a streamlined manner!
+
+# Contributing
+
 ### To Get The Code On Your Device:  
 Clone the repo 
 ```
