@@ -20,11 +20,9 @@ const Cart = ({ navigation, route }) => {
   const [items, setItems] = useState([]);
   const [total, updateTotal] = useState(route.params.total);
 
-  console.log(route.params.total)
-
   useEffect(() => {
     updateTotal(route.params.total)     // not working
-  }, [route.params.total, route.params])
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {

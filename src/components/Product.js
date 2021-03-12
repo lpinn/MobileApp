@@ -11,7 +11,7 @@ import Button from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 
-import grinds from "../utils/Grinds" 
+import grinds from "../utils/Grinds";
 
 const Product = (props) => {
   const id = props.id; // not in use currentlu
@@ -24,7 +24,7 @@ const Product = (props) => {
   const [size, setSize] = useState(12);
   const [uGrind, setGrind] = useState(grind);
   const [sizeVisible, setVisible] = useState(false);
-  const [sizeSelected, setSelected] = useState(false);   // should merge these states
+  const [sizeSelected, setSelected] = useState(false); // should merge these states
 
   const [price, setPrice] = useState(initialPrice);
 
@@ -72,8 +72,7 @@ const Product = (props) => {
 
   const changeGrind = (event) => {
     event.preventDefault();
-
-  }
+  };
 
   const calcPrice = () => {
     let temp;
@@ -100,7 +99,7 @@ const Product = (props) => {
 
   return (
     <ListItem className="product">
-      {/*  <Text style={{ fontWeight: "bold" }}>{name}</Text> */}
+      <Text style={{ fontWeight: "bold" }}>{name}</Text>
       <Text>${price}</Text>
 
       {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
@@ -112,9 +111,9 @@ const Product = (props) => {
         onPress={changeSize}
         text={sizeSelected ? size + " oz" : "size"}
       />
-      <Button
+      {/*   <Button
         onPress={changeGrind}
-        text={uGrind} />
+        text={uGrind} /> */}
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>

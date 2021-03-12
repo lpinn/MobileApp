@@ -64,9 +64,9 @@ const Catalog = (props) => {
 
   const handleIncrement = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
-    let newProducts = [...totalProducts];
-    newProducts[index].quantity++;
-    updateProducts(newProducts);
+    let tempProducts = [...totalProducts];
+    tempProducts[index].quantity++;
+    updateProducts(tempProducts);
     navigation.setParams({
       total: cartTotal,
     });
@@ -74,11 +74,18 @@ const Catalog = (props) => {
 
   const handleDecrement = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
-    let newProducts = [...totalProducts];
-    newProducts[index].quantity--; // its incrementing
-    updateProducts(newProducts);
+    let tempProducts = [...totalProducts];
+    tempProducts[index].quantity--; 
+
+    if(tempProducts[index].quantity === 0) {    // when we put counter to 0, remove that product from the products list
+      const id = tempProducts[index].id                 
+      tempProducts = tempProducts.filter(p => p.id !== id)
+    }    // the removed product will only be removed on the next cart open
+
+    updateProducts(tempProducts);
     navigation.setParams({
-      total: cartTotal, // sad
+      total: cartTotal, 
+      products: totalProducts
     });
   };
 
@@ -101,7 +108,6 @@ const Catalog = (props) => {
         <Products
           key={1}
           list={list}
-          search=""
           navigation={navigation}
           addProduct={handleAddProduct}
           products={totalProducts}
