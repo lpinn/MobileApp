@@ -28,7 +28,7 @@ function Home(props) {
                 })
             : () =>
                 console.log("no params yet, state should be lifted to home?")
-        } 
+        }
         color="red"
         title=""
       />

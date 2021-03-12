@@ -14,15 +14,13 @@ import { BottomSheet } from "react-native-btr";
 import grinds from "../utils/Grinds";
 
 const Product = (props) => {
-  const id = props.id; // not in use currentlu
   const image = props.image;
   const name = props.name;
   const initialPrice = props.price;
-  const grind = props.grind;
 
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
-  const [uGrind, setGrind] = useState(grind);
+  const [grind, setGrind] = useState(props.grind);
   const [sizeVisible, setVisible] = useState(false);
   const [sizeSelected, setSelected] = useState(false); // should merge these states
 
@@ -87,18 +85,18 @@ const Product = (props) => {
     setAdded(true);
 
     props.addProduct({
-      id: name + size, // size dictates the price so we identify our keys based on that
+      id: name + size + grind, // size dictates the price so we identify our keys based on that
       name: name,
       price: price,
       size: size,
-      grind: "whole placeholder",
+      grind: grind,
       quantity: 1,
     });
     setTimeout(() => setAdded(false), 5000);
   };
 
   return (
-    <ListItem className="product">
+    <ListItem className="product" key = {name+size+grind}>
       <Text style={{ fontWeight: "bold" }}>{name}</Text>
       <Text>${price}</Text>
 
@@ -113,7 +111,7 @@ const Product = (props) => {
       />
       {/*   <Button
         onPress={changeGrind}
-        text={uGrind} /> */}
+        text={grind} /> */}
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>

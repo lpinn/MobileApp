@@ -16,7 +16,12 @@ const CartButton = ({ onPress }) => {
   );
 };
 
-const Catalog = (props) => {
+/* 
+TODO 
+https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
+*/
+
+const Catalog = (props) => {   
   const navigation = props.navigation;
 
   const [totalProducts, updateProducts] = useState([]);
