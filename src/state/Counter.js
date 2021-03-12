@@ -2,18 +2,18 @@ import React, { useState } from "react";
 
 import Counter from "react-native-counters";
 
-function ItemCounter({ item, increment, decrement }) {
+function ItemCounter({ item, increment, decrement, updateTotal, total }) {
   const [counter, setCounter] = useState(item.quantity);
 
   const handleCounter = (number, type) => {
-    console.log(`${number}, ${type}`);
     if (type === "-") {
-        console.log("yo");
       decrement(item);
       setCounter(counter - 1);
+      updateTotal(total - item.price); // do this for now ig
     } else {
       increment(item);
       setCounter(counter + 1);
+      updateTotal(total + item.price);
     }
   };
   return (

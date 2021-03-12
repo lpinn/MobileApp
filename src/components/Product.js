@@ -11,17 +11,18 @@ import Button from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 
+import grinds from "../utils/Grinds";
+
 const Product = (props) => {
-  const id = props.id; // not in use currentlu
   const image = props.image;
   const name = props.name;
   const initialPrice = props.price;
-  const description = props.description;
 
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
+  const [grind, setGrind] = useState(props.grind);
   const [sizeVisible, setVisible] = useState(false);
-  const [sizeSelected, setSelected] = useState(false);
+  const [sizeSelected, setSelected] = useState(false); // should i merge some of these states into an Object
 
   const [price, setPrice] = useState(initialPrice);
 
@@ -67,6 +68,10 @@ const Product = (props) => {
     setVisible(true);
   };
 
+  const changeGrind = (event) => {
+    event.preventDefault();
+  };
+
   const calcPrice = () => {
     let temp;
     if (size == 12) temp = 12.75;
@@ -80,30 +85,29 @@ const Product = (props) => {
     setAdded(true);
 
     props.addProduct({
-      id: name + size, // size dictates the price so we identify our keys based on that
+      id: name + size + grind, // size dictates the price so we identify our keys based on that
       name: name,
       price: price,
       size: size,
-      grind: "whole placeholder",
+      grind: grind,
       quantity: 1,
     });
     setTimeout(() => setAdded(false), 5000);
   };
 
   return (
-    <ListItem className="product">
+    <ListItem className="product" key = {name+size+grind}>
       <Text style={{ fontWeight: "bold" }}>{name}</Text>
       <Text>${price}</Text>
-
-      {/* <Tooltip popover={<Text>{description}</Text>}> // hovering descriptions can be put here*/}
-      {/* <Text>Learn More</Text> */}
-      {/* </Tooltip> */}
 
       <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
       <Button
         onPress={changeSize}
         text={sizeSelected ? size + " oz" : "size"}
       />
+      {/*   <Button
+        onPress={changeGrind}
+        text={grind} /> */}
       <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
@@ -113,6 +117,15 @@ const Product = (props) => {
           </ListItem>
         ))}
       </BottomSheet>
+   {/*     <ButtomSheet visible={sizeVisible}>
+        {grinds.map((g, i) => (
+          <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
+          <ListItem.Content>
+            <ListItem.Title>{l.oz || l.lbs}</ListItem.Title>
+          </ListItem.Content>
+        </ListItem>
+        ))}
+      </ButtomSheet> */}
     </ListItem>
   );
 };

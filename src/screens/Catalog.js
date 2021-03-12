@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from "react";
 //import { View, Text, Image } from "react-native";
-import { Card, Icon } from "react-native-elements";
+import { Card, Icon, Text } from "react-native-elements";
 
 import Button from "../components/Button";
 import Products from "../components/Products";
 
-import list from "../utils/ProductList.json";
-
 const CartButton = ({ onPress }) => {
   return (
-  <Button
-        icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={onPress} // not working with react navigation, rendering updates issues
-        color="red"
-        title="Cart"
-  />
-  )
-}
+    <Button
+      icon={<Icon name="cart" type="evilicon" size={30} />}
+      onPress={onPress}
+      color="red"
+      title="Cart"
+    />
+  );
+};
+
+/* 
+TODO 
+https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
+*/
 
 const Catalog = (props) => {
   const navigation = props.navigation;
@@ -25,10 +28,10 @@ const Catalog = (props) => {
   const [cartTotal, setTotal] = useState(0);
 
   useEffect(() => {
-    // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later
+    // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later.. only for react navigation
     setTotal(
       totalProducts.reduce((total, e) => {
-        console.log(`total: ${total}, current price: ${e.price}`);
+        //console.log(`total: ${total}, current price: ${e.price}`);
         return total + e.price * e.quantity;
       }, 0)
     );
@@ -37,10 +40,12 @@ const Catalog = (props) => {
   }, [totalProducts, handleAddProduct, handleGoToCart]);
 
   const handleGoToCart = () => {
-    navigation.navigate("Items in Cart", {
+    //https://reactnavigation.org/docs/navigation-prop/
+
+    navigation.navigate("Cart", {
       products: totalProducts, // should i send a map of all the items in totalProducts with a key
-      total: cartTotal,  // need to update the total somehow
-      increment: handleIcrement,
+      total: cartTotal, // need to update the total somehow
+      increment: handleIncrement,
       decrement: handleDecrement,
     });
   };
@@ -51,39 +56,45 @@ const Catalog = (props) => {
         (p) => p.id === selected.id && p.size === selected.size
       )
     ) {
-      console.log("same id");
-      handleIcrement(selected);
+      // console.log("same id");
+      handleIncrement(selected);
     } else {
-      console.log("new");
+      //console.log("new");
       updateProducts(totalProducts.concat(selected));
     }
   };
 
-  const handleIcrement = (selected) => {
+  const handleIncrement = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
-    let newProducts = [...totalProducts];
-    newProducts[index].quantity++;
-    updateProducts(newProducts);
+    let tempProducts = [...totalProducts];
+    tempProducts[index].quantity++;
+    updateProducts(tempProducts);
+    navigation.setParams({
+      total: cartTotal,
+    });
   };
 
   const handleDecrement = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
-    let newProducts = [...totalProducts];
-    newProducts[index].quantity--; // its incrementing
-    updateProducts(newProducts);
-  }
+    let tempProducts = [...totalProducts];
+    tempProducts[index].quantity--;
+
+    if (tempProducts[index].quantity === 0) {
+      // when we put counter to 0, remove that product from the products list
+      const id = tempProducts[index].id;
+      tempProducts = tempProducts.filter((p) => p.id !== id);
+    } // the removed product will only be removed on the next cart open
+
+    updateProducts(tempProducts);
+    navigation.setParams({
+      total: cartTotal,
+      products: totalProducts,
+    });
+  };
 
   const options = {
     headerTitle: "Catalog",
-    headerRight: () => (
-      <CartButton onPress = {handleGoToCart} />
-   /*   <Button
-        icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={handleGoToCart} // not updating with total
-        color="red"
-        title="Cart"
-      /> */
-    ),
+    headerRight: () => <CartButton onPress={handleGoToCart} />,
   };
 
   React.useLayoutEffect(() => {
@@ -96,14 +107,20 @@ const Catalog = (props) => {
         <Card.Title>Buy a coffee</Card.Title>
         <Card.Divider />
         <Products
-          key={1}
-          list={list}
-          search=""
+          key={1} // actually still whining here
           navigation={navigation}
           addProduct={handleAddProduct}
           products={totalProducts}
         />
       </Card>
+      <Text>
+        Building New Hope coffee is socially responsible and environmentally
+        friendly. Our coffee is certified organic, shade-grown and certified
+        bird- friendly by Smithsonian Migratory Bird Center, fair and direct
+        trade coffee. Our dark roasted beans are single-source and come from El
+        Porvenir in Nicaragua, a worker-owned farming cooperative we’ve
+        partnered with since 2002.
+      </Text>
       <Button
         text="Go back"
         onPress={() =>
@@ -112,7 +129,8 @@ const Catalog = (props) => {
           })
         }
       />
-      <CartButton onPress = {handleGoToCart} />
+
+      <CartButton onPress={handleGoToCart} />
       <Button text="Reset Cart" onPress={() => updateProducts([])} />
     </>
   );
