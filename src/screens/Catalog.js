@@ -5,8 +5,6 @@ import { Card, Icon } from "react-native-elements";
 import Button from "../components/Button";
 import Products from "../components/Products";
 
-import list from "../utils/ProductList.json";
-
 const CartButton = ({ onPress }) => {
   return (
     <Button
@@ -107,7 +105,6 @@ const Catalog = (props) => {
         <Card.Divider />
         <Products
           key={1}
-          list={list}
           navigation={navigation}
           addProduct={handleAddProduct}
           products={totalProducts}
