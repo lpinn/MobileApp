@@ -11,7 +11,7 @@ const CartButton = ({ onPress }) => {
   return (
     <Button
       icon={<Icon name="cart" type="evilicon" size={30} />}
-      onPress={onPress} // not working with react navigation, rendering updates issues
+      onPress={onPress} 
       color="red"
       title="Cart"
     />

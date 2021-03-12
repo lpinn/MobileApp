@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from 'react-native'
-import { Card, Button, Icon } from "react-native-elements";
 
 import Product from "./Product";
 
@@ -30,7 +29,7 @@ const Products = (props) => {
   });
 
   return (
-   <View>
+   <View style = {styles.container}>
       {productsData}
     </View>
     
@@ -39,10 +38,10 @@ const Products = (props) => {
 
 export default Products;
 
-/* const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-      flex: 1,
+      
       alignItems: 'center',
       justifyContent: 'center'
   }
-}); */
+}); 

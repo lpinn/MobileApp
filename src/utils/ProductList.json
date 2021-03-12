@@ -4,14 +4,16 @@
         "description": "savory",
         "size": "",
         "price": 12.75,
-        "grind": ""
+        "grind": "Whole bean",
+        "image": ""
     },
     {
         "name": "Expresso",
         "description": "For that extra punch",
         "size": "",
         "price": 12.75,
-        "grind": ""  
+        "grind": "Whole bean",  
+        "image": ""
     },
     {
         
@@ -19,21 +21,24 @@
         "description": "Caramel and vanilla flavoring",
         "size": "",
         "price": 12.75,
-        "grind": ""
+        "grind": "Whole bean",
+        "image": ""
     },
     {
         "name": "Medium Roast",
         "description": "A happy medium between light and dark",
         "size": "",
         "price": 12.75,
-        "grind": ""
+        "grind": "Whole bean",
+        "image": ""
     },
     {
         "name": "Decaf",
         "description": "No caffiene ",
         "size": "",
         "price": 12.75,
-        "grind": ""
+        "grind": "Whole bean",
+        "image": ""
     }
 
 ]
