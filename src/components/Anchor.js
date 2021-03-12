@@ -10,7 +10,7 @@ export default function Anchor(props) {
   };
   const styles = props.styles;
   return (
-    <Text h3 {...props} onPress={handlePress}>
+    <Text style = {styles} h3 {...props} onPress={handlePress}>
       {props.children}
     </Text>
   );

@@ -20,6 +20,7 @@ const Products = (props) => {
         description={product.description}
         price={product.price}
         size={product.size}
+        grind={product.grind}
         navigation={props.navigation}
         addProduct={props.addProduct}
         products={props.products}

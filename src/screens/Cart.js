@@ -38,9 +38,6 @@ const Cart = ({ navigation, route }) => {
     }
   }, []);
 
-  const onQuantityChange = () => {
-    updateTotal(route.params.total);
-  }
 
   let cartItems = items.map((i) => {
     return (

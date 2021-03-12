@@ -5,8 +5,6 @@ import { Card, Icon } from "react-native-elements";
 import Button from "../components/Button";
 import Products from "../components/Products";
 
-import { CommonActions } from "@react-navigation/native";
-
 import list from "../utils/ProductList.json";
 
 const CartButton = ({ onPress }) => {
@@ -56,10 +54,10 @@ const Catalog = (props) => {
         (p) => p.id === selected.id && p.size === selected.size
       )
     ) {
-      console.log("same id");
+     // console.log("same id");
       handleIncrement(selected);
     } else {
-      console.log("new");
+      //console.log("new");
       updateProducts(totalProducts.concat(selected));
     }
   };
@@ -88,12 +86,6 @@ const Catalog = (props) => {
     headerTitle: "Catalog",
     headerRight: () => (
       <CartButton onPress={handleGoToCart} />
-      /*   <Button
-        icon={<Icon name="cart" type="evilicon" size={30} />}
-        onPress={handleGoToCart} // not updating with total
-        color="red"
-        title="Cart"
-      /> */
     ),
   };
 
