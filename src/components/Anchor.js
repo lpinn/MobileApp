@@ -3,6 +3,11 @@ import * as Linking from "expo-linking";
 
 import React from "react";
 
+/* 
+Component for when we want to link to something outside our app
+Pass in a href 
+*/
+
 export default function Anchor(props) {
   const handlePress = () => {
     Linking.openURL(props.href);

@@ -13,6 +13,10 @@ import { Icon } from "react-native-elements";
 
 //import Icon from "react-native-vector-icons/Feather";
 
+/* 
+Home Page for our app, has an about us link that goes to the website and a button signaling to order now
+*/
+
 function Home(props) {
   const navigation = props.navigation;
 

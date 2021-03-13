@@ -1,6 +1,10 @@
 /*
+We will render a Product component for each object in the ProductsList.json manifest. 
+Holds a lot of state for the different options for each item i.e grind/size.
+
+
 This code is pretty ugly and verbose...
-Will refactor after everything is fully working.
+TODO refactor state
 Too many hooks.
 
 Add bean option
@@ -30,13 +34,13 @@ const Product = (props) => {
     calcPrice();
   }, [size, setSize]);
 
-  const sizes = [
+  const sizes = [  // this for the Buttom Sheet component, we provide a onPress method for each option in the Sheet
     {
       oz: "12 oz",
       onPress: () => {
         setSelected(true);
         setSize(12);
-        setVisible(false);
+        setVisible(false);   // stop displaying the Buttom Sheet
       },
     },
     {

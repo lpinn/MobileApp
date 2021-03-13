@@ -2,6 +2,11 @@ import React from "react";
 import { Button, Text } from "react-native-elements";
 import { StyleSheet } from "react-native";
 
+/* 
+Component for the buttons in our app. We could have multiple kinds of buttons or just one
+Still need to style it further
+ */
+
 const SolidButton = (props) => {
   return (
     <Button

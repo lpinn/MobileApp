@@ -5,6 +5,11 @@ import { Card, Icon, Text } from "react-native-elements";
 import Button from "../components/Button";
 import Products from "../components/Products";
 
+/* 
+This module renders all the items available and lets the user navigate to the Cart.
+We will hold a lot of the app's state here. Every single add to Cart causes a rerender in the Catalog.
+*/
+
 const CartButton = ({ onPress }) => {
   return (
     <Button
@@ -28,7 +33,6 @@ const Catalog = (props) => {
   const [cartTotal, setTotal] = useState(0);
 
   useEffect(() => {
-    // sometimes doesnt recalc for duplicates... calcTotal is called later.. so its updating later.. only for react navigation
     setTotal(
       totalProducts.reduce((total, e) => {
         //console.log(`total: ${total}, current price: ${e.price}`);
@@ -43,10 +47,10 @@ const Catalog = (props) => {
     //https://reactnavigation.org/docs/navigation-prop/
 
     navigation.navigate("Cart", {
-      products: totalProducts, // should i send a map of all the items in totalProducts with a key
-      total: cartTotal, // need to update the total somehow
-      increment: handleIncrement,
-      decrement: handleDecrement,
+      products: totalProducts, // 
+      total: cartTotal, 
+      increment: incrementProduct,  // 
+      decrement: decrementProduct,
     });
   };
 
@@ -56,25 +60,24 @@ const Catalog = (props) => {
         (p) => p.id === selected.id && p.size === selected.size
       )
     ) {
-      // console.log("same id");
-      handleIncrement(selected);
+      incrementProduct(selected);
     } else {
-      //console.log("new");
+      // the size, type, or grind is new
       updateProducts(totalProducts.concat(selected));
     }
   };
 
-  const handleIncrement = (selected) => {
+  const incrementProduct = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
     let tempProducts = [...totalProducts];
-    tempProducts[index].quantity++;
+    tempProcts[index].quantity++;
     updateProducts(tempProducts);
     navigation.setParams({
       total: cartTotal,
     });
   };
 
-  const handleDecrement = (selected) => {
+  const decrementProduct = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
     let tempProducts = [...totalProducts];
     tempProducts[index].quantity--;
