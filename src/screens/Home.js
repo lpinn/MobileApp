@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import Button from "../components/Button";
+import { SolidButton } from "../components/Button";
 import Anchor from "../components/Anchor";
 import { Icon } from "react-native-elements";
 
@@ -23,7 +23,7 @@ function Home(props) {
   const options = {
     headerTitle: "Building New Hope",
     headerRight: () => (
-      <Button
+      <SolidButton
         icon={<Icon name="cart" type="evilicon" size={30} />}
         onPress={
           props.route.params

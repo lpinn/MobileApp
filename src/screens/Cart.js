@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
-import Button from "../components/Button";
-import Counter from "../state/Counter";
+import { SolidButton } from "../components/Button";
+import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 
 /* 
@@ -13,7 +13,7 @@ const EmptyCart = ({ navigation }) => {
   return (
     <>
       <Text h1>Nothing Here Yet</Text>
-      <Button
+      <SolidButton
         text="Continue Shopping"
         onPress={() => navigation.navigate("Catalog")}
       />

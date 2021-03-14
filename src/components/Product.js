@@ -11,7 +11,7 @@ Add bean option
 */
 
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
+import { SolidButton } from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 
@@ -104,8 +104,8 @@ const Product = (props) => {
       <Text style={{ fontWeight: "bold" }}>{name}</Text>
       <Text>${price}</Text>
 
-      <Button onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
-      <Button
+      <SolidButton onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
+      <SolidButton
         onPress={changeSize}
         text={sizeSelected ? size + " oz" : "size"}
       />

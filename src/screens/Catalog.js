@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 //import { View, Text, Image } from "react-native";
-import { Card, Icon, Text } from "react-native-elements";
+import { Card, Text } from "react-native-elements";
 
-import Button from "../components/Button";
+import { SolidButton, CartButton } from "../components/Button";
+
+
 import Products from "../components/Products";
 
 /* 
 This module renders all the items available and lets the user navigate to the Cart.
-We will hold a lot of the app's state here. Every single add to Cart causes a rerender in the Catalog.
+
+We will hold a lot of the app's state here. Holds the items to be passed to the cart as well as the 
+calculated total.
+ Every single add to Cart causes a rerender in the Catalog.
 */
 
-const CartButton = ({ onPress }) => {
-  return (
-    <Button
-      icon={<Icon name="cart" type="evilicon" size={30} />}
-      onPress={onPress}
-      color="red"
-      title="Cart"
-    />
-  );
-};
 
 /* 
 TODO 
@@ -47,9 +42,9 @@ const Catalog = (props) => {
     //https://reactnavigation.org/docs/navigation-prop/
 
     navigation.navigate("Cart", {
-      products: totalProducts, // 
-      total: cartTotal, 
-      increment: incrementProduct,  // 
+      products: totalProducts, //
+      total: cartTotal,
+      increment: incrementProduct, //
       decrement: decrementProduct,
     });
   };
@@ -124,7 +119,7 @@ const Catalog = (props) => {
         Porvenir in Nicaragua, a worker-owned farming cooperative we’ve
         partnered with since 2002.
       </Text>
-      <Button
+      <SolidButton
         text="Go back"
         onPress={() =>
           navigation.navigate("Home", {
@@ -134,7 +129,7 @@ const Catalog = (props) => {
       />
 
       <CartButton onPress={handleGoToCart} />
-      <Button text="Reset Cart" onPress={() => updateProducts([])} />
+      <SolidButton text="Reset Cart" onPress={() => updateProducts([])} />
     </>
   );
 };
