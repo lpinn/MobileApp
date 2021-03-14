@@ -65,7 +65,7 @@ const Catalog = (props) => {
   const incrementProduct = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
     let tempProducts = [...totalProducts];
-    tempProcts[index].quantity++;
+    tempProducts[index].quantity++;
     updateProducts(tempProducts);
     navigation.setParams({
       total: cartTotal,
