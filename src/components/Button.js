@@ -32,10 +32,7 @@ const CartButton = ({ onPress }) => {
   );
 };
 
-export {
-  SolidButton,
-  CartButton
-}
+export { SolidButton, CartButton };
 
 const styles = StyleSheet.create({
   button: {
@@ -43,13 +40,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    backgroundColor: "#f01d71"
+    backgroundColor: "#f01d71",
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
+    color: "white",
+    fontWeight: "bold",
+    textTransform: "uppercase",
     fontSize: 16,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

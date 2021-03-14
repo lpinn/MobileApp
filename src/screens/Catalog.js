@@ -21,6 +21,8 @@ TODO
 https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 */
 
+const about = "New Hope Coffee is grown by the farmers of the El Porvenir Cooperative located in León, Nicaragua.  The certified organically grown, bird-friendly, arabica beans are harvested, patio-sun dried, and hand-selected by the farmers.  The green beans are roasted to order by 19 Coffee Company, a specialty micro-roaster in Pittsburgh, PA.  The coffee has a smooth body, bright acidity, with chocolate, tropical fruit, and earthy notes."
+
 const Catalog = (props) => {
   const navigation = props.navigation;
 
@@ -36,7 +38,7 @@ const Catalog = (props) => {
     );
 
     console.log("current sum excluding the last one added", cartTotal);
-  }, [totalProducts, handleAddProduct, handleGoToCart]);
+  }, [totalProducts]);
 
   const handleGoToCart = () => {
     //https://reactnavigation.org/docs/navigation-prop/
@@ -102,6 +104,9 @@ const Catalog = (props) => {
   return (
     <>
       <Card>
+      <Text style = {{color: "green", alignContent: "center", fontWeight: "200"}}>
+        {about}
+      </Text>
         <Card.Title>Buy a coffee</Card.Title>
         <Card.Divider />
         <Products
@@ -111,14 +116,7 @@ const Catalog = (props) => {
           products={totalProducts}
         />
       </Card>
-      <Text>
-        Building New Hope coffee is socially responsible and environmentally
-        friendly. Our coffee is certified organic, shade-grown and certified
-        bird- friendly by Smithsonian Migratory Bird Center, fair and direct
-        trade coffee. Our dark roasted beans are single-source and come from El
-        Porvenir in Nicaragua, a worker-owned farming cooperative we’ve
-        partnered with since 2002.
-      </Text>
+      
       <SolidButton
         text="Go back"
         onPress={() =>

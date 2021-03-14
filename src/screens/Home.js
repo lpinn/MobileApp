@@ -15,6 +15,12 @@ import { Icon } from "react-native-elements";
 
 /* 
 Home Page for our app, has an about us link that goes to the website and a button signaling to order now
+Building New Hope coffee is socially responsible and environmentally
+        friendly. Our coffee is certified organic, shade-grown and certified
+        bird- friendly by Smithsonian Migratory Bird Center, fair and direct
+        trade coffee. Our dark roasted beans are single-source and come from El
+        Porvenir in Nicaragua, a worker-owned farming cooperative we’ve
+        partnered with since 2002.
 */
 
 function Home(props) {
