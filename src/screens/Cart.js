@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
-import Button from "../components/Button";
-import Counter from "../state/Counter";
+import { SolidButton } from "../components/Button";
+import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
+
+/* 
+This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
+render the Empty Cart
+ */
 
 const EmptyCart = ({ navigation }) => {
   return (
     <>
       <Text h1>Nothing Here Yet</Text>
-      <Button
+      <SolidButton
         text="Continue Shopping"
         onPress={() => navigation.navigate("Catalog")}
       />
@@ -21,17 +26,13 @@ const Cart = ({ navigation, route }) => {
   const [total, updateTotal] = useState(route.params.total);
 
   useEffect(() => {
-    updateTotal(route.params.total)     // not working
-  }, [])
-
-  useEffect(() => {
     const fetchData = async () => {
       let { products } = route.params;
       setItems(products);
     };
 
     console.log(route.params);
-    if (route.params) {
+    if (route.params) {  // passed params w/ react navigation
       fetchData();
     }
   }, []);
@@ -43,7 +44,7 @@ const Cart = ({ navigation, route }) => {
         <Text style={{ fontWeight: "bold" }} key={i.id}>
           {i.name} ${i.price} {i.size} oz
         </Text>
-        <Counter
+        <Counter  // each item will have its seperate Counter for adding more / subtracting
           item={i}
           increment={route.params.increment}
           decrement={route.params.decrement}

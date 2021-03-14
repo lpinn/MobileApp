@@ -2,6 +2,13 @@ import React from "react";
 import { Button, Text } from "react-native-elements";
 import { StyleSheet } from "react-native";
 
+import { Icon } from "react-native-elements";
+
+/* 
+Component for the buttons in our app. We could have multiple kinds of buttons or just one
+Still need to style it further
+ */
+
 const SolidButton = (props) => {
   return (
     <Button
@@ -14,7 +21,18 @@ const SolidButton = (props) => {
   );
 };
 
-export default SolidButton;
+const CartButton = ({ onPress }) => {
+  return (
+    <Button
+      icon={<Icon name="cart" type="evilicon" size={30} />}
+      onPress={onPress}
+      color="red"
+      title="Cart"
+    />
+  );
+};
+
+export { SolidButton, CartButton };
 
 const styles = StyleSheet.create({
   button: {
@@ -22,13 +40,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    backgroundColor: "#f01d71"
+    backgroundColor: "#f01d71",
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
+    color: "white",
+    fontWeight: "bold",
+    textTransform: "uppercase",
     fontSize: 16,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
