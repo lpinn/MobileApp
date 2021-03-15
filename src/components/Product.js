@@ -106,7 +106,7 @@ const Product = (props) => {
     setModalVisible(!isModalVisible)
   }
   if (isModalVisible) {
-    return <QuickView setVisible={() => toggleModal}
+    return <QuickView setVisible={toggleModal}
     isVisible={isModalVisible} name={name}></QuickView>;
   }
   return (
