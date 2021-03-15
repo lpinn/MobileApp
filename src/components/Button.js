@@ -10,16 +10,16 @@ Still need to style it further
  */
 
 const SolidButton = (props) => {
-  //console.log(props.style)
+  console.log(props.style);
   return (
     <View>
     <Button
+      size={30}
       icon={props.icon}
-      containerStyle={styles.button}
+      buttonStyle={styles.button}
       title={<Text style={styles.buttonText}> {props.text} </Text>}
-      onPress={props.onPress}
-      
-     // containerStyle={props.style}
+      onPress={props.onPress} 
+     //containerStyle={props.style}
     />
     </View>
   );
@@ -40,8 +40,11 @@ export { SolidButton, CartButton };
 
 const styles = StyleSheet.create({
   button: {
-    flex: 1,
-    backgroundColor: "powderblue",
+    height: 40,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 2,
+    backgroundColor: "rgb(255,128,0)",
   },
   buttonText: {
     color: "white",
