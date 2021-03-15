@@ -103,14 +103,20 @@ const Product = (props) => {
   };
 
   const toggleModal = () => {
-    setModalVisible(!isModalVisible)
-  }
-  if (isModalVisible) {
+    setModalVisible(!isModalVisible);
+  };
+
+  /*if (isModalVisible) {
     return <QuickView setVisible={toggleModal}
     isVisible={isModalVisible} name={name}></QuickView>;
-  }
+  }*/
   return (
     <ListItem className="product" key={name + size + grind}>
+      <QuickView
+        setVisible={toggleModal}
+        isVisible={isModalVisible}
+        name={name}
+      ></QuickView>
       <Text style={{ fontWeight: "bold" }}>{name}</Text>
       <SolidButton onPress={() => setModalVisible(true)} text={"See more"} />
       {/* open / close modal */}

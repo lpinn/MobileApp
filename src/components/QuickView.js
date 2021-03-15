@@ -17,14 +17,16 @@ function QuickView(props) {
   // hide
   // data
   return (
-    <View>
-      <Modal isVisible={props.isVisible}>
-        <View style={{ alignContent: "center" }}>
-          <Text>{name}</Text>
-          <SolidButton text={"Toggle"} onPress={props.setVisible}></SolidButton>
-        </View>
-      </Modal>
-    </View>
+    <Modal
+      isVisible={props.isVisible}
+      animationIn="zoomInDown"
+      animationOut="slideOutRight"
+      backdropColor="#B4B3DB"
+      backdropOpacity={0.8}
+      onBackdropPress={props.setVisible}
+    >
+      <Text h3>{name}</Text>
+    </Modal>
   );
 }
 
