@@ -29,7 +29,7 @@ const Catalog = (props) => {
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
-  useEffect(() => {
+  useEffect(() => {  // recalculate the total every time we mutate the products in cart
     setTotal(
       totalProducts.reduce((total, e) => {
         //console.log(`total: ${total}, current price: ${e.price}`);
@@ -132,8 +132,5 @@ const Catalog = (props) => {
   );
 };
 
-{
-  /* why is react whining on line 81 */
-}
 
 export default Catalog;

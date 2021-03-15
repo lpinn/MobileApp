@@ -14,6 +14,7 @@ import React, { useState, useEffect } from "react";
 import { SolidButton } from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
+import QuickView from "./QuickView";
 
 import grinds from "../utils/Grinds";
 
@@ -27,6 +28,7 @@ const Product = (props) => {
   const [grind, setGrind] = useState(props.grind);
   const [sizeVisible, setVisible] = useState(false);
   const [sizeSelected, setSelected] = useState(false); // should i merge some of these states into an Object
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const [price, setPrice] = useState(initialPrice);
 
@@ -34,13 +36,14 @@ const Product = (props) => {
     calcPrice();
   }, [size, setSize]);
 
-  const sizes = [  // this for the Buttom Sheet component, we provide a onPress method for each option in the Sheet
+  const sizes = [
+    // this for the Buttom Sheet component, we provide a onPress method for each option in the Sheet
     {
       oz: "12 oz",
       onPress: () => {
         setSelected(true);
         setSize(12);
-        setVisible(false);   // stop displaying the Buttom Sheet
+        setVisible(false); // stop displaying the Buttom Sheet
       },
     },
     {
@@ -96,15 +99,27 @@ const Product = (props) => {
       grind: grind,
       quantity: 1,
     });
-    setTimeout(() => setAdded(false), 5000);
+    setTimeout(() => setAdded(false), 5000); // not sure whats the best way to indicate it is alr added
   };
 
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible)
+  }
+  if (isModalVisible) {
+    return <QuickView setVisible={() => toggleModal}
+    isVisible={isModalVisible} name={name}></QuickView>;
+  }
   return (
-    <ListItem className="product" key = {name+size+grind}>
+    <ListItem className="product" key={name + size + grind}>
       <Text style={{ fontWeight: "bold" }}>{name}</Text>
+      <SolidButton onPress={() => setModalVisible(true)} text={"See more"} />
+      {/* open / close modal */}
       <Text>${price}</Text>
 
-      <SolidButton onPress={addToCart} text={isAdded ? "ADDED" : "ADD TO CART"} />
+      <SolidButton
+        onPress={addToCart}
+        text={isAdded ? "ADDED" : "ADD TO CART"}
+      />
       <SolidButton
         onPress={changeSize}
         text={sizeSelected ? size + " oz" : "size"}
@@ -121,7 +136,7 @@ const Product = (props) => {
           </ListItem>
         ))}
       </BottomSheet>
-   {/*     <ButtomSheet visible={sizeVisible}>
+      {/*     <ButtomSheet visible={sizeVisible}>
         {grinds.map((g, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
           <ListItem.Content>
