@@ -27,7 +27,7 @@ function QuickView(props) {
     {
       oz: "12 oz",
       onPress: () => {
-        setSizeVisible(false);
+        setSizeVisible(false); // why does the onPress for the sizes close the Modal
         setSize(12);
       },
     },
@@ -57,7 +57,6 @@ function QuickView(props) {
     event.preventDefault();
     setSizeVisible(true);
   };
-  console.log("hi")
 
   return (
     <Modal
