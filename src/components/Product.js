@@ -75,9 +75,7 @@ const Product = (props) => {
     setVisible(true);
   };
 
-  const changeGrind = (event) => {
-    event.preventDefault();
-  };
+
 
   const calcPrice = () => {
     let temp;
@@ -94,7 +92,7 @@ const Product = (props) => {
     props.addProduct({
       id: name + size + grind, // size dictates the price so we identify our keys based on that
       name: name,
-      price: price,
+      price: price,  // could i have just have this Object as state of a product with these keys
       size: size,
       grind: grind,
       quantity: 1,
@@ -116,10 +114,13 @@ const Product = (props) => {
         setVisible={toggleModal}
         isVisible={isModalVisible}
         name={name}
+        size={size}
+        setSize={setSize}
+        addToCart={addToCart}
       ></QuickView>
-      <Text style={{ fontWeight: "bold" }}>{name}</Text>
-      <SolidButton onPress={() => setModalVisible(true)} text={"See more"} />
-      {/* open / close modal */}
+      {/*   <Text style={{ fontWeight: "bold" }}>{name}</Text> */}
+      <SolidButton onPress={() => setModalVisible(true)} text={name} />
+      {/* this is really lazy rn, will change different styles for texts later */}
       <Text>${price}</Text>
 
       <SolidButton
@@ -142,15 +143,6 @@ const Product = (props) => {
           </ListItem>
         ))}
       </BottomSheet>
-      {/*     <ButtomSheet visible={sizeVisible}>
-        {grinds.map((g, i) => (
-          <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
-          <ListItem.Content>
-            <ListItem.Title>{l.oz || l.lbs}</ListItem.Title>
-          </ListItem.Content>
-        </ListItem>
-        ))}
-      </ButtomSheet> */}
     </ListItem>
   );
 };

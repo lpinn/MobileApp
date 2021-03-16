@@ -1,33 +1,89 @@
 import React, { useState } from "react";
-import { Text } from "react-native-elements";
+import { Text, ListItem } from "react-native-elements";
+import { BottomSheet } from "react-native-btr";
 import { View } from "react-native";
 import Modal from "react-native-modal";
 
 import { SolidButton } from "./Button";
 /* 
-This has yet to be implemented,
-a quick view for each product when clicked on
+
+ A quick view for each product when clicked on
+ We use the react native modal package, examples here
+ https://github.com/react-native-modal/react-native-modal/tree/master/example/src
  */
 
 function QuickView(props) {
   const name = props.name;
   const image = props.image;
 
-  // show
-  // hide
-  // data
+  const { isSizeVisible, setSizeVisible } = useState(false); // visible and selected
+  
+  // Add functionality in the quickview
+  // to add to cart, change size, change
+  const setSize = props.setSize;
+
+  const sizes = [
+    // this for the Buttom Sheet component, we provide a onPress method for each option in the Sheet
+    {
+      oz: "12 oz",
+      onPress: () => {
+        setSizeVisible(false)
+        setSize(12);
+      },
+    },
+    {
+      oz: "16 oz",
+      onPress: () => {
+        setSizeVisible(false)
+        setSize(16);
+      },
+    },
+    {
+      lbs: "5 lbs",
+      onPress: () => {
+        setSizeVisible(false)
+        setSize(80);
+      },
+    },
+    {
+      oz: "Cancel",
+      style: { backgroundColor: "red" },
+      //titleStyle: { color: 'white' },
+
+      onPress: () => setSizeVisible(false),
+    },
+  ];
+
   return (
     <Modal
       isVisible={props.isVisible}
-      animationIn="zoomInDown"
+      animationIn="zoomInUp"
       animationOut="slideOutRight"
       backdropColor="#B4B3DB"
-      backdropOpacity={0.8}
+      backdropOpacity={0.9}
       onBackdropPress={props.setVisible}
     >
-      <Text h3>{name}</Text>
+      <Text h3>
+        {name} {props.size}
+      </Text>
+      <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
+      <SolidButton
+        onPress={(event) => {
+          event.preventDefault(); 
+          setSizeVisible(true)}}
+        text={props.size}
+      />
+      <BottomSheet visible={isSizeVisible}>
+        {sizes.map((l, i) => (
+          <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
+            <ListItem.Content>
+              <ListItem.Title>{l.oz || l.lbs}</ListItem.Title>
+            </ListItem.Content>
+          </ListItem>
+        ))}
+      </BottomSheet>
     </Modal>
   );
 }
-
+// choose grind
 export default QuickView;
