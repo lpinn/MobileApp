@@ -3,6 +3,7 @@ import { Text, ListItem } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 import { View } from "react-native";
 import Modal from "react-native-modal";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
 /* 
@@ -12,6 +13,8 @@ import { SolidButton } from "./Button";
  https://github.com/react-native-modal/react-native-modal/tree/master/example/src
  */
 
+/* 
+ https://www.npmjs.com/package/react-native-dropdown-picker */
 function QuickView(props) {
   const name = props.name;
   const image = props.image;
@@ -22,41 +25,11 @@ function QuickView(props) {
   // to add to cart, change size, change
   const setSize = props.setSize;
 
-  const sizes = [
-    // this for the Buttom Sheet component, we provide a onPress method for each option in the Sheet
-    {
-      oz: "12 oz",
-      onPress: () => {
-        setSizeVisible(false); // why does the onPress for the sizes close the Modal
-        setSize(12);
-      },
-    },
-    {
-      oz: "16 oz",
-      onPress: () => {
-        setSizeVisible(false);
-        setSize(16);
-      },
-    },
-    {
-      lbs: "5 lbs",
-      onPress: () => {
-        setSizeVisible(false);
-        setSize(80);
-      },
-    },
-    {
-      oz: "Cancel",
-      style: { backgroundColor: "red" },
-      //titleStyle: { color: 'white' },
-
-      onPress: () => setSizeVisible(false),
-    },
+  sizes = [
+    { label: "12 oz", value: 12 },
+    { label: "16 oz", value: 16 },
+    { label: "5 lbs", value: 80 },
   ];
-  const changeSize = (event) => {
-    event.preventDefault();
-    setSizeVisible(true);
-  };
 
   return (
     <Modal
@@ -67,20 +40,22 @@ function QuickView(props) {
       backdropOpacity={0.9}
       onBackdropPress={props.setVisible}
     >
+      <DropDownPicker
+        items={sizes}
+        defaultValue={props.size}
+        containerStyle={{ height: 40 }}
+        style={{ backgroundColor: "#fafafa" }}
+        itemStyle={{
+          justifyContent: "flex-start",
+        }}
+        onChangeItem={(item) => setSize(item.value)}
+      />
       <Text h3>
         {name} {props.size}
       </Text>
       <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
-      <SolidButton onPress={changeSize} text={props.size} />
-      <BottomSheet visible={isSizeVisible}>
-        {sizes.map((l, i) => (
-          <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
-            <ListItem.Content>
-              <ListItem.Title>{l.oz || l.lbs}</ListItem.Title>
-            </ListItem.Content>
-          </ListItem>
-        ))}
-      </BottomSheet>
+      <SolidButton onPress={props.setVisible} text={"exit"} />
+
     </Modal>
   );
 }

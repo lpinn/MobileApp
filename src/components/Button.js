@@ -9,20 +9,18 @@ Component for the buttons in our app. We could have multiple kinds of buttons or
 Still need to style it further
  */
 
-
 // https://reactnativeelements.com/docs/button/#props
 const SolidButton = (props) => {
-  console.log(props.style);
   return (
     <View>
-    <Button
-      size={30}
-      icon={props.icon}
-      buttonStyle={styles.button}
-      title={<Text style={styles.buttonText}> {props.text} </Text>}
-      onPress={props.onPress} 
-     //containerStyle={props.style}
-    />
+      <Button
+        size={30}
+        icon={props.icon}
+        buttonStyle={styles.button}
+        title={<Text style={styles.buttonText}> {props.text} </Text>}
+        onPress={props.onPress}
+        //containerStyle={props.style}
+      />
     </View>
   );
 };
