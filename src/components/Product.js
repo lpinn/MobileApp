@@ -25,9 +25,8 @@ const Product = (props) => {
 
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
-  const [grind, setGrind] = useState(props.grind);
+  const [grind, setGrind] = useState("WHOLE");
   const [sizeVisible, setVisible] = useState(false);
-  const [sizeSelected, setSelected] = useState(false); // should i merge some of these states into an Object
   const [isModalVisible, setModalVisible] = useState(false);
 
   const [price, setPrice] = useState(initialPrice);
@@ -41,7 +40,6 @@ const Product = (props) => {
     {
       oz: "12 oz",
       onPress: () => {
-        setSelected(true);
         setSize(12);
         setVisible(false); // stop displaying the Buttom Sheet
       },
@@ -49,7 +47,6 @@ const Product = (props) => {
     {
       oz: "16 oz",
       onPress: () => {
-        setSelected(true);
         setSize(16);
         setVisible(false);
       },
@@ -57,7 +54,6 @@ const Product = (props) => {
     {
       lbs: "5 lbs",
       onPress: () => {
-        setSelected(true);
         setSize(80);
         setVisible(false);
       },
@@ -75,8 +71,6 @@ const Product = (props) => {
     setVisible(true);
   };
 
-
-
   const calcPrice = () => {
     let temp;
     if (size == 12) temp = 12.75;
@@ -92,7 +86,7 @@ const Product = (props) => {
     props.addProduct({
       id: name + size + grind, // size dictates the price so we identify our keys based on that
       name: name,
-      price: price,  // could i have just have this Object as state of a product with these keys
+      price: price, // could i have just have this Object as state of a product with these keys
       size: size,
       grind: grind,
       quantity: 1,
@@ -116,6 +110,8 @@ const Product = (props) => {
         name={name}
         size={size}
         setSize={setSize}
+        initGrind={grind}
+        setGrind={setGrind}
         addToCart={addToCart}
       ></QuickView>
       <SolidButton onPress={toggleModal} text={name} />
@@ -126,10 +122,7 @@ const Product = (props) => {
         onPress={addToCart}
         text={isAdded ? "ADDED" : "ADD TO CART"}
       />
-      <SolidButton
-        onPress={changeSize}
-        text={sizeSelected ? size + " oz" : "size"}
-      />
+      <SolidButton onPress={changeSize} text={size + " oz"} />
       {/*   <Button
         onPress={changeGrind}
         text={grind} /> */}

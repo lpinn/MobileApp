@@ -17,47 +17,67 @@ import { SolidButton } from "./Button";
  https://www.npmjs.com/package/react-native-dropdown-picker */
 function QuickView(props) {
   const name = props.name;
-  const image = props.image;
-
-  const [isSizeVisible, setSizeVisible] = useState(false);
+  const image = require("../../assets/images/coffee.jpg");
 
   // Add functionality in the quickview
-  // to add to cart, change size, change
+
   const setSize = props.setSize;
 
-  sizes = [
+  const sizes = [
     { label: "12 oz", value: 12 },
     { label: "16 oz", value: 16 },
     { label: "5 lbs", value: 80 },
   ];
 
-  return (
-    <Modal
-      isVisible={props.isVisible}
-      animationIn="zoomInUp"
-      animationOut="slideOutRight"
-      backdropColor="#B4B3DB"
-      backdropOpacity={0.9}
-      onBackdropPress={props.setVisible}
-    >
-      <DropDownPicker
-        items={sizes}
-        defaultValue={props.size}
-        containerStyle={{ height: 40 }}
-        style={{ backgroundColor: "#fafafa" }}
-        itemStyle={{
-          justifyContent: "flex-start",
-        }}
-        onChangeItem={(item) => setSize(item.value)}
-      />
-      <Text h3>
-        {name} {props.size}
-      </Text>
-      <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
-      <SolidButton onPress={props.setVisible} text={"exit"} />
+  const grinds = [
+    { label: "Whole bean", value: "WHOLE" },
+    { label: "Drip", value: "Drip" },
+    { label: "Coarse for French Press", value: "FRENCHPRESS" },
+    { label: "Coarse for Cold Brew", value: "COLDBREW" },
+    { label: "Espresso Grind", value: "ESPRESSO" },
+  ];
 
-    </Modal>
+  return (
+    // the issue is with the Modal element.. where it goes away and is slow to repop up 
+
+    <View style={{ flex: 1 }}>
+      <Modal
+        isVisible={props.isVisible}
+        animationIn="zoomInUp"
+        animationOut="slideOutRight"
+        backdropColor="#B4B3DB"
+        backdropOpacity={0.9}
+        onBackdropPress={props.setVisible}
+      >
+        <Text h3>
+          {name} {props.size}
+        </Text>
+        <DropDownPicker
+          items={sizes}
+          defaultValue={props.size}
+          containerStyle={{ height: 40 }}
+          style={{ backgroundColor: "#fafafa" }}
+          itemStyle={{
+            justifyContent: "flex-start",
+          }}
+          onChangeItem={(item) => setSize(item.value)}
+        />
+        <DropDownPicker
+          items={grinds}
+          defaultValue={props.initGrind}
+          containerStyle={{ height: 40 }}
+          style={{ backgroundColor: "#fafafa" }}
+          itemStyle={{
+            justifyContent: "flex-start",
+          }}
+          onChangeItem={(item) => props.setGrind(item.value)}
+        />
+
+        <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
+        <SolidButton onPress={props.setVisible} text={"exit"} />
+      </Modal>
+    </View>
   );
 }
-// choose grind
+
 export default QuickView;
