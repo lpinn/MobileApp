@@ -118,8 +118,7 @@ const Product = (props) => {
         setSize={setSize}
         addToCart={addToCart}
       ></QuickView>
-      {/*   <Text style={{ fontWeight: "bold" }}>{name}</Text> */}
-      <SolidButton onPress={() => setModalVisible(true)} text={name} />
+      <SolidButton onPress={toggleModal} text={name} />
       {/* this is really lazy rn, will change different styles for texts later */}
       <Text>${price}</Text>
 
