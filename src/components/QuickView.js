@@ -16,8 +16,8 @@ function QuickView(props) {
   const name = props.name;
   const image = props.image;
 
-  const { isSizeVisible, setSizeVisible } = useState(false); // visible and selected
-  
+  const [isSizeVisible, setSizeVisible] = useState(false);
+
   // Add functionality in the quickview
   // to add to cart, change size, change
   const setSize = props.setSize;
@@ -27,21 +27,21 @@ function QuickView(props) {
     {
       oz: "12 oz",
       onPress: () => {
-        setSizeVisible(false)
+        setSizeVisible(false);
         setSize(12);
       },
     },
     {
       oz: "16 oz",
       onPress: () => {
-        setSizeVisible(false)
+        setSizeVisible(false);
         setSize(16);
       },
     },
     {
       lbs: "5 lbs",
       onPress: () => {
-        setSizeVisible(false)
+        setSizeVisible(false);
         setSize(80);
       },
     },
@@ -53,6 +53,11 @@ function QuickView(props) {
       onPress: () => setSizeVisible(false),
     },
   ];
+  const changeSize = (event) => {
+    event.preventDefault();
+    setSizeVisible(true);
+  };
+  console.log("hi")
 
   return (
     <Modal
@@ -67,12 +72,7 @@ function QuickView(props) {
         {name} {props.size}
       </Text>
       <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
-      <SolidButton
-        onPress={(event) => {
-          event.preventDefault(); 
-          setSizeVisible(true)}}
-        text={props.size}
-      />
+      <SolidButton onPress={changeSize} text={props.size} />
       <BottomSheet visible={isSizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
