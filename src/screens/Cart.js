@@ -42,7 +42,7 @@ const Cart = ({ navigation, route }) => {
     return (
       <>
         <Text style={{ fontWeight: "bold" }} key={i.id}>
-          {i.name} ${i.price} {i.size} oz
+          {i.name} ${i.price} {i.size} oz  {i.grind}
         </Text>
         <Counter  // each item will have its seperate Counter for adding more / subtracting
           item={i}

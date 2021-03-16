@@ -29,7 +29,7 @@ const Catalog = (props) => {
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
-  useEffect(() => {
+  useEffect(() => {  // recalculate the total every time we mutate the products in cart
     setTotal(
       totalProducts.reduce((total, e) => {
         //console.log(`total: ${total}, current price: ${e.price}`);
@@ -92,7 +92,7 @@ const Catalog = (props) => {
     });
   };
 
-  const options = {
+  const options = {  // the upper right corner cart button has some bugs with total updating
     headerTitle: "Catalog",
     headerRight: () => <CartButton onPress={handleGoToCart} />,
   };
@@ -110,7 +110,7 @@ const Catalog = (props) => {
         <Card.Title>Buy a coffee</Card.Title>
         <Card.Divider />
         <Products
-          key={1} // actually still whining here
+          key={1} // actually still whining here "need unique key"
           navigation={navigation}
           addProduct={handleAddProduct}
           products={totalProducts}
@@ -132,8 +132,5 @@ const Catalog = (props) => {
   );
 };
 
-{
-  /* why is react whining on line 81 */
-}
 
 export default Catalog;
