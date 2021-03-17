@@ -16,9 +16,10 @@ import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 import QuickView from "./QuickView";
 
-import grinds from "../utils/Grinds";
+import ProductModel from '../utils/ProductModel'
 
 const Product = (props) => {
+
   const image = props.image;
   const name = props.name;
   const initialPrice = props.price;
@@ -82,15 +83,7 @@ const Product = (props) => {
   const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
-
-    props.addProduct({
-      id: name + size + grind, // size dictates the price so we identify our keys based on that
-      name: name,
-      price: price, // could i have just have this Object as state of a product with these keys
-      size: size,
-      grind: grind,
-      quantity: 1,
-    });
+    props.addProduct(new ProductModel(name, size, grind, price))
     setTimeout(() => setAdded(false), 5000); // not sure whats the best way to indicate it is alr added
   };
 
@@ -98,10 +91,6 @@ const Product = (props) => {
     setModalVisible(!isModalVisible);
   };
 
-  /*if (isModalVisible) {
-    return <QuickView setVisible={toggleModal}
-    isVisible={isModalVisible} name={name}></QuickView>;
-  }*/
   return (
     <ListItem className="product" key={name + size + grind}>
       <QuickView
