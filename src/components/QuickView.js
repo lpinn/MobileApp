@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { Text, ListItem } from "react-native-elements";
-import { BottomSheet } from "react-native-btr";
-import { View } from "react-native";
+import React from "react";
+import { Text, Image } from "react-native-elements";
+import { View, ActivityIndicator } from "react-native";
 import Modal from "react-native-modal";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -38,7 +37,7 @@ function QuickView(props) {
   ];
 
   return (
-    // the issue is with the Modal element.. where it goes away and is slow to repop up 
+    // the issue is with the Modal element.. where it goes away and is slow to repop up
 
     <View style={{ flex: 1 }}>
       <Modal
@@ -49,6 +48,11 @@ function QuickView(props) {
         backdropOpacity={0.9}
         onBackdropPress={props.setVisible}
       >
+        <Image
+          source={require("../../assets/images/coffee.jpg")}
+          style={{ width: 200, height: 200 }}
+          PlaceholderContent={<ActivityIndicator />}
+        />
         <Text h3>
           {name} {props.size}
         </Text>
