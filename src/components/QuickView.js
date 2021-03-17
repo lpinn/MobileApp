@@ -70,7 +70,7 @@ function QuickView(props) {
           itemStyle={{
             justifyContent: "flex-start",
           }}
-          onChangeItem={(item) => props.setGrind(item.value)}
+          onChangeItem={(item) => props.setGrind(item.value)} // error when using label
         />
 
         <SolidButton text={"Add to Cart"} onPress={props.addToCart} />

@@ -4,6 +4,7 @@ import { SolidButton } from "../components/Button";
 import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 
+import findGrindDesc from "../utils/findGrindDesc"
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
 render the Empty Cart
@@ -37,12 +38,11 @@ const Cart = ({ navigation, route }) => {
     }
   }, []);
 
-
   let cartItems = items.map((i) => {
     return (
       <>
         <Text style={{ fontWeight: "bold" }} key={i.id}>
-          {i.name} ${i.price} {i.size} oz  {i.grind}
+          {i.name} ${i.price} {i.size} oz  {findGrindDesc(i.grind)}
         </Text>
         <Counter  // each item will have its seperate Counter for adding more / subtracting
           item={i}

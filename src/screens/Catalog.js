@@ -46,7 +46,7 @@ const Catalog = (props) => {
     navigation.navigate("Cart", {
       products: totalProducts, //
       total: cartTotal,
-      increment: incrementProduct, //
+      increment: incrementProduct, // to change the totalProducts state when on a different screen
       decrement: decrementProduct,
     });
   };
