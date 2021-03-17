@@ -16,15 +16,14 @@ import { ListItem, Text, Tooltip } from "react-native-elements";
 import { BottomSheet } from "react-native-btr";
 import QuickView from "./QuickView";
 
-import ProductModel from '../utils/ProductModel'
+import ProductModel from "../utils/ProductModel";
 
 const Product = (props) => {
-
   const image = require("../../assets/images/coffee.jpg");
   const name = props.name;
   const initialPrice = props.price;
 
-  const [isAdded, setAdded] = useState(false);
+  const [isAdded, setAdded] = useState(false); // if the product has been added to cart
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
   const [isModalVisible, setModalVisible] = useState(false);
@@ -51,8 +50,8 @@ const Product = (props) => {
   const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
-    props.addProduct(new ProductModel(name, size, grind, price))
-    setTimeout(() => setAdded(false), 5000); // not sure whats the best way to indicate it is alr added
+    props.addProduct(new ProductModel(name, size, grind, price));
+    setTimeout(() => setAdded(false), 1000000); // arbitrary number for now
   };
 
   const toggleModal = () => {
@@ -73,22 +72,14 @@ const Product = (props) => {
       ></QuickView>
       <SolidButton onPress={toggleModal} text={name} />
       {/* this is really lazy rn, will change different styles for texts later */}
-      <Text>${price}</Text>
+      <Text h3 style={{ color: "green", fontWeight: "bold", fontSize: 20 }}>
+        ${price}
+      </Text>
 
       <SolidButton
         onPress={addToCart}
         text={isAdded ? "ADDED" : "ADD TO CART"}
       />
-
-     {/* <BottomSheet visible={sizeVisible}>
-        {sizes.map((l, i) => (
-          <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
-            <ListItem.Content>
-              <ListItem.Title>{l.oz || l.lbs}</ListItem.Title>
-            </ListItem.Content>
-          </ListItem>
-        ))}
-        </BottomSheet> */}
     </ListItem>
   );
 };
