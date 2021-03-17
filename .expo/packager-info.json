@@ -1,10 +1,8 @@
 {
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "expoServerPort": null,
   "devToolsPort": 19002,
+  "expoServerPort": 19000,
   "packagerPort": 19000,
-  "packagerPid": null,
-  "webpackServerPort": null
+  "expoServerNgrokUrl": "https://ke-pmf.alexwang18.pittserves.exp.direct",
+  "packagerNgrokUrl": "https://packager.ke-pmf.alexwang18.pittserves.exp.direct",
+  "ngrokPid": 22644
 }
