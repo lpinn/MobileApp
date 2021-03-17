@@ -13,27 +13,28 @@ import { SolidButton } from "./Button";
  */
 
 /* 
+
  https://www.npmjs.com/package/react-native-dropdown-picker */
+const sizes = [
+  { label: "12 oz", value: 12 },
+  { label: "16 oz", value: 16 },
+  { label: "5 lbs", value: 80 },
+];
+
+const grinds = [
+  { label: "Whole bean", value: "WHOLE" },
+  { label: "Drip", value: "Drip" },
+  { label: "Coarse for French Press", value: "FRENCHPRESS" },
+  { label: "Coarse for Cold Brew", value: "COLDBREW" },
+  { label: "Espresso Grind", value: "ESPRESSO" },
+];
+
 function QuickView(props) {
   const name = props.name;
 
   // Add functionality in the quickview
 
   const setSize = props.setSize;
-
-  const sizes = [
-    { label: "12 oz", value: 12 },
-    { label: "16 oz", value: 16 },
-    { label: "5 lbs", value: 80 },
-  ];
-
-  const grinds = [
-    { label: "Whole bean", value: "WHOLE" },
-    { label: "Drip", value: "Drip" },
-    { label: "Coarse for French Press", value: "FRENCHPRESS" },
-    { label: "Coarse for Cold Brew", value: "COLDBREW" },
-    { label: "Espresso Grind", value: "ESPRESSO" },
-  ];
 
   return (
     // the issue is with the Modal element.. where it goes away and is slow to repop up

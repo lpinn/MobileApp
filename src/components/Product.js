@@ -2,18 +2,14 @@
 We will render a Product component for each object in the ProductsList.json manifest. 
 Holds a lot of state for the different options for each item i.e grind/size.
 
-
-This code is pretty ugly and verbose...
 TODO refactor state
 Too many hooks.
 
-Add bean option
 */
 
 import React, { useState, useEffect } from "react";
 import { SolidButton } from "./Button";
 import { ListItem, Text, Tooltip } from "react-native-elements";
-import { BottomSheet } from "react-native-btr";
 import QuickView from "./QuickView";
 
 import ProductModel from "../utils/ProductModel";
@@ -69,6 +65,7 @@ const Product = (props) => {
         initGrind={grind}
         setGrind={setGrind}
         addToCart={addToCart}
+        /* could have image here */
       ></QuickView>
       <SolidButton onPress={toggleModal} text={name} />
       {/* this is really lazy rn, will change different styles for texts later */}
