@@ -37,7 +37,7 @@ const Catalog = (props) => {
       }, 0)
     );
 
-    console.log("current sum excluding the last one added", cartTotal);
+   // console.log("current sum excluding the last one added", cartTotal);
   }, [totalProducts]);
 
   const handleGoToCart = () => {
@@ -46,7 +46,7 @@ const Catalog = (props) => {
     navigation.navigate("Cart", {
       products: totalProducts, //
       total: cartTotal,
-      increment: incrementProduct, //
+      increment: incrementProduct, // to change the totalProducts state when on a different screen
       decrement: decrementProduct,
     });
   };
@@ -117,6 +117,7 @@ const Catalog = (props) => {
         />
       </Card>
       
+      {/* need to pretty up these buttons below, add margins / spacing */}
       <SolidButton
         text="Go back"
         onPress={() =>

@@ -23,7 +23,7 @@ const Products = (props) => {
         grind={product.grind}
         navigation={props.navigation}
         addProduct={props.addProduct}
-        products={props.products}
+        products={props.products}  // products is the items so far added to cart
       />
       </>
     );

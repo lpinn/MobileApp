@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { Text, ListItem } from "react-native-elements";
-import { BottomSheet } from "react-native-btr";
-import { View } from "react-native";
+import React from "react";
+import { Text, Image } from "react-native-elements";
+import { View, ActivityIndicator } from "react-native";
 import Modal from "react-native-modal";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -14,31 +13,31 @@ import { SolidButton } from "./Button";
  */
 
 /* 
+
  https://www.npmjs.com/package/react-native-dropdown-picker */
+const sizes = [
+  { label: "12 oz", value: 12 },
+  { label: "16 oz", value: 16 },
+  { label: "5 lbs", value: 80 },
+];
+
+const grinds = [
+  { label: "Whole bean", value: "WHOLE" },
+  { label: "Drip", value: "Drip" },
+  { label: "Coarse for French Press", value: "FRENCHPRESS" },
+  { label: "Coarse for Cold Brew", value: "COLDBREW" },
+  { label: "Espresso Grind", value: "ESPRESSO" },
+];
+
 function QuickView(props) {
   const name = props.name;
-  const image = require("../../assets/images/coffee.jpg");
 
   // Add functionality in the quickview
 
   const setSize = props.setSize;
 
-  const sizes = [
-    { label: "12 oz", value: 12 },
-    { label: "16 oz", value: 16 },
-    { label: "5 lbs", value: 80 },
-  ];
-
-  const grinds = [
-    { label: "Whole bean", value: "WHOLE" },
-    { label: "Drip", value: "Drip" },
-    { label: "Coarse for French Press", value: "FRENCHPRESS" },
-    { label: "Coarse for Cold Brew", value: "COLDBREW" },
-    { label: "Espresso Grind", value: "ESPRESSO" },
-  ];
-
   return (
-    // the issue is with the Modal element.. where it goes away and is slow to repop up 
+    // the issue is with the Modal element.. where it goes away and is slow to repop up
 
     <View style={{ flex: 1 }}>
       <Modal
@@ -49,6 +48,11 @@ function QuickView(props) {
         backdropOpacity={0.9}
         onBackdropPress={props.setVisible}
       >
+        <Image
+          source={require("../../assets/images/coffee.jpg")}
+          style={{ width: 200, height: 200 }}
+          PlaceholderContent={<ActivityIndicator />}
+        />
         <Text h3>
           {name} {props.size}
         </Text>
@@ -70,7 +74,7 @@ function QuickView(props) {
           itemStyle={{
             justifyContent: "flex-start",
           }}
-          onChangeItem={(item) => props.setGrind(item.value)}
+          onChangeItem={(item) => props.setGrind(item.value)} // error when using label
         />
 
         <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
