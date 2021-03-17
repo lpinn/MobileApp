@@ -37,7 +37,7 @@ const Catalog = (props) => {
       }, 0)
     );
 
-    console.log("current sum excluding the last one added", cartTotal);
+   // console.log("current sum excluding the last one added", cartTotal);
   }, [totalProducts]);
 
   const handleGoToCart = () => {

@@ -16,7 +16,6 @@ import { SolidButton } from "./Button";
  https://www.npmjs.com/package/react-native-dropdown-picker */
 function QuickView(props) {
   const name = props.name;
-  const image = require("../../assets/images/coffee.jpg");
 
   // Add functionality in the quickview
 

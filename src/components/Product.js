@@ -20,14 +20,13 @@ import ProductModel from '../utils/ProductModel'
 
 const Product = (props) => {
 
-  const image = props.image;
+  const image = require("../../assets/images/coffee.jpg");
   const name = props.name;
   const initialPrice = props.price;
 
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
-  const [sizeVisible, setVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const [price, setPrice] = useState(initialPrice);
@@ -35,37 +34,6 @@ const Product = (props) => {
   useEffect(() => {
     calcPrice();
   }, [size, setSize]);
-
-  const sizes = [
-    // this for the Buttom Sheet component, we provide a onPress method for each option in the Sheet
-    {
-      oz: "12 oz",
-      onPress: () => {
-        setSize(12);
-        setVisible(false); // stop displaying the Buttom Sheet
-      },
-    },
-    {
-      oz: "16 oz",
-      onPress: () => {
-        setSize(16);
-        setVisible(false);
-      },
-    },
-    {
-      lbs: "5 lbs",
-      onPress: () => {
-        setSize(80);
-        setVisible(false);
-      },
-    },
-    {
-      oz: "Cancel",
-      style: { backgroundColor: "red" },
-      //titleStyle: { color: 'white' },
-      onPress: () => setVisible(false),
-    },
-  ];
 
   const changeSize = (event) => {
     event.preventDefault();
@@ -111,11 +79,8 @@ const Product = (props) => {
         onPress={addToCart}
         text={isAdded ? "ADDED" : "ADD TO CART"}
       />
-      <SolidButton onPress={changeSize} text={size + " oz"} />
-      {/*   <Button
-        onPress={changeGrind}
-        text={grind} /> */}
-      <BottomSheet visible={sizeVisible}>
+
+     {/* <BottomSheet visible={sizeVisible}>
         {sizes.map((l, i) => (
           <ListItem key={i} onPress={l.onPress} containerStyle={l.style}>
             <ListItem.Content>
@@ -123,7 +88,7 @@ const Product = (props) => {
             </ListItem.Content>
           </ListItem>
         ))}
-      </BottomSheet>
+        </BottomSheet> */}
     </ListItem>
   );
 };
