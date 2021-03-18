@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Text, Image, Divider } from "react-native-elements";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
-import Modal from "react-native-modal";
+import { View, ActivityIndicator, StyleSheet, Modal } from "react-native";
+//import Modal from "react-native-modal";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
@@ -35,23 +35,62 @@ function QuickView(props) {
   const setSize = props.setSize;
   const setPrice = props.setPrice;
 
-  const [qSize, setqSize] = useState(props.size);
-  const [qPrice, setqPrice] = useState(props.price);
-
-  useEffect( () => {
-    setqPrice(props.price);
-    setqSize(props.size)
-  }, [props.size, props.price])
+  const [isSizeVisible, setSizeVisible] = useState(false);
+  const [isGrindVisible, setGrindVisible] = useState(false);
   
-  /*
-  onBackdropPress={props.setVisible}
-  animationIn="zoomInUp"
-  animationOut="slideOutRight"
-  */
   return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+      }}
+    >
+      <Modal
+        animationType={"slide"}
+        transparent={false}
+        visible={props.isVisible}
+        onRequestClose={() => console.log("closed")}
+      >
+        <Text h3>
+          {name} {props.size} oz ${props.price}
+        </Text>
+        <DropDownPicker
+          style={{ paddingVertical: 10 }}
+          labelStyle={{
+            fontSize: 14,
+            textAlign: "left",
+            color: "red",
+          }}
+          selectedLabelStyle={{
+            color: "#39739d",
+          }}
+          items={sizes}
+          defaultValue={props.size}
+          containerStyle={{ height: 40 }}
+          style={{ backgroundColor: "#fafafa" }}
+          itemStyle={{
+            justifyContent: "flex-start",
+          }}
+          onChangeItem={(item) => {
+            console.log("changing,,, hmmmmmmm");
+            setSize(item.value);
+            setPrice(props.price);
+          }}
+          isVisible={isSizeVisible}
+          onOpen={() => setSizeVisible(true)}
+          onClose={() => setSizeVisible(false)}
+        />
+        <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
+        <SolidButton onPress={props.setVisible} text={"exit"} />
+      </Modal>
+    </View>
+  );
+  /*return (
     // the issue is with the Modal element.. where it goes away and is slow to repop up
-    // something with mutating the products state makes it close away
-
+    // something with mutating the products state makes it close away. but doesnt for add to cart which mutates catalog
+    //https://www.npmjs.com/package/react-native-dropdown-picker#available-item-properties
     <View style={{ flex: 1 }}>
       <View>
         <Modal
@@ -68,10 +107,19 @@ function QuickView(props) {
             PlaceholderContent={<ActivityIndicator />}
           />
           <Text h3>
-            {name} {qSize} oz ${qPrice}
+            {name} {props.size} oz ${props.price}
           </Text>
           <DropDownPicker
-            style = {styles.modalDrop}
+            style={{ paddingVertical: 10 }}
+            containerStyle={{ width: 150, height: 70 }}
+            labelStyle={{
+              fontSize: 14,
+              textAlign: "left",
+              color: "red",
+            }}
+            selectedLabelStyle={{
+              color: "#39739d",
+            }}
             items={sizes}
             defaultValue={props.size}
             containerStyle={{ height: 40 }}
@@ -80,14 +128,17 @@ function QuickView(props) {
               justifyContent: "flex-start",
             }}
             onChangeItem={(item) => {
-              console.log("changing,,, hmmmmmmm")
-              setSize(item.value)
-              setPrice(props.price)
+              console.log("changing,,, hmmmmmmm");
+              setSize(item.value);
+              setPrice(props.price);
             }}
+            isVisible={isSizeVisible}
+            onOpen={() => setSizeVisible(true)}
+            onClose={() => setSizeVisible(false)}
           />
           <Divider />
 
-      {/*    <DropDownPicker
+          {/*    <DropDownPicker
             items={grinds}
             defaultValue={props.initGrind}
             containerStyle={{ height: 40 }}
@@ -96,33 +147,27 @@ function QuickView(props) {
               justifyContent: "flex-start",
             }}
             onChangeItem={(item) => props.setGrind(item.value)} // 
-          /> */}  
+          /> }
 
           <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
           <SolidButton onPress={props.setVisible} text={"exit"} />
         </Modal>
-      </View>
+      </View> 
     </View>
-  );
+  ); */
 }
 
 export default QuickView;
 
 const styles = StyleSheet.create({
-  modalContent: {
-
-  },
-  modalText: {
-
-  },
+  modalContent: {},
+  modalText: {},
   modalDrop: {
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#f2f2f2',
+    borderColor: "#f2f2f2",
     padding: 10,
     borderRadius: 10,
-    alignSelf: 'center'
-  }
-
-
-})
+    alignSelf: "center",
+  },
+});
