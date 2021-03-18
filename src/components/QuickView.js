@@ -5,6 +5,7 @@ import Modal from "react-native-modal";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
+import ProductModel from "../utils/ProductModel";
 /* 
 
  A quick view for each product when clicked on
@@ -31,22 +32,38 @@ const grinds = [
 
 function QuickView(props) {
   const name = props.name;
-  const size = props.size;
-  const setSize = props.setSize;
-  const setPrice = props.setPrice;
+  // const size = props.size;
+  // const price = props.price;
+  // const setSize = props.setSize;
+  //const setPrice = props.setPrice;
+
+  const [size, setSize] = useState(12);
+  const [grind, setGrind] = useState("WHOLE");
+  const [price, setPrice] = useState(12.75);
 
   const [isSizeVisible, setSizeVisible] = useState(false);
   const [isGrindVisible, setGrindVisible] = useState(false);
 
-  useEffect(() => { // doesnt change anything, Modal still just crashes and takes 2 button clicks to retoggle
+  // so it takes two more clicks for the modal to become visible again after crashing bc it was never properly set to false
+  // its almost as if there are ghost modals as it the still console logs when clicking even though nothing renders at first
+  // bc we set to false on first click after crashing.
+
+  useEffect(() => {
+    // doesnt change anything, Modal still just crashes and takes 2 button clicks to retoggle
     let temp;
     if (size == 12) temp = 12.75;
     else if (size == 16) temp = 15.75;
     else if (size == 80) temp = 70.0;
     setPrice(temp);
   }, [size, setSize]);
+  console.log(props)
+  const addToCart = async (event) => {
+    event.preventDefault();
+    //setAdded(true);
+    props.addProduct(new ProductModel(name, size, grind, price));
+    //setTimeout(() => setAdded(false), 5000); // arbitrary number for now
+  };
 
-  
   return (
     // the issue is with the Modal element.. where it goes away and is slow to repop up
     // something with mutating the products state makes it close away. but doesnt for add to cart which mutates catalog
@@ -67,9 +84,9 @@ function QuickView(props) {
             PlaceholderContent={<ActivityIndicator />}
           />
           <Text h3>
-            {name} {props.size} oz ${props.price}
+            {name} {size} oz ${price}
           </Text>
-          <SolidButton onPress={() => props.setName(name+"hi")}></SolidButton> 
+
           <DropDownPicker
             style={{ paddingVertical: 10 }}
             containerStyle={{ width: 150, height: 70 }}
@@ -91,7 +108,6 @@ function QuickView(props) {
             onChangeItem={(item) => {
               console.log("changing,,, hmmmmmmm");
               setSize(item.value);
-              setPrice(props.price);
             }}
             isVisible={isSizeVisible}
             onOpen={() => setSizeVisible(true)}
@@ -101,19 +117,19 @@ function QuickView(props) {
 
           <DropDownPicker
             items={grinds}
-            defaultValue={props.initGrind}
+            defaultValue={grind}
             containerStyle={{ height: 40 }}
             style={{ backgroundColor: "#fafafa" }}
             itemStyle={{
               justifyContent: "flex-start",
             }}
-            onChangeItem={(item) => props.setGrind(item.value)} //
+            onChangeItem={(item) => setGrind(item.value)} //
             isVisible={isGrindVisible}
             onOpen={() => setGrindVisible(true)}
             onClose={() => setGrindVisible(false)}
           />
 
-          <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
+          <SolidButton text={"Add to Cart"} onPress={addToCart} />
           <SolidButton onPress={props.setVisible} text={"exit"} />
         </Modal>
       </View>

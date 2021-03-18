@@ -20,33 +20,20 @@ const Product = (props) => {
   const name = props.name;
   const initialPrice = props.price;
 
-  const [lame, setLame] = useState(name);
   const [isAdded, setAdded] = useState(false); // if the product has been added to cart
-  const [size, setSize] = useState(12);
+ /* const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
+  const [price, setPrice] = useState(initialPrice); */
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const [price, setPrice] = useState(initialPrice);
+ 
 
-  useEffect(() => {
-    // when the size changes recalc the total
-    calcPrice();
-  }, [size, setSize]);
-
-  const calcPrice = () => {
-    let temp;
-    if (size == 12) temp = 12.75;
-    else if (size == 16) temp = 15.75;
-    else if (size == 80) temp = 70.0;
-    setPrice(temp);
-  };
-
-  const addToCart = async (event) => {
+/*  const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
     props.addProduct(new ProductModel(name, size, grind, price));
     setTimeout(() => setAdded(false), 5000); // arbitrary number for now
-  };
+  }; */
 
   const toggleModal = () => {
     console.log(); // takes two clicks after state mutation in quick view .. bug
@@ -55,32 +42,26 @@ const Product = (props) => {
 
   // <ModalTrigger trigger={toggleModal => <SolidButton onPress={toggleModal} text={name}}> <QuickView>
   return (
-    <ListItem className="product" key={name + size + grind}>
+    <ListItem className="product" key={name }>
       <QuickView
+      addProduct={props.addProduct}
         setVisible={toggleModal}
         isVisible={isModalVisible}
-        name={lame}
-        setName={setLame}
-        size={size}
-        price={price}
-        setPrice={setPrice}
-        setSize={setSize}
-        initGrind={grind}
-        setGrind={setGrind}
-        addToCart={addToCart}
+        name={name}
+        initPrice={initialPrice}
         image={image}
       ></QuickView>
 
       <SolidButton onPress={toggleModal} text={name} />
       {/* this is really lazy rn, will change different styles for texts later */}
-      <Text h3 style={{ color: "green", fontWeight: "bold", fontSize: 20 }}>
+     {/*  <Text h3 style={{ color: "green", fontWeight: "bold", fontSize: 20 }}>
         ${price}
-      </Text>
+      </Text> */}
 
-      <SolidButton
+     {/*   <SolidButton
         onPress={addToCart}
         text={isAdded ? "ADDED" : "ADD TO CART"}
-      />
+      /> */}
     </ListItem>
   );
 };
