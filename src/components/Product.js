@@ -30,11 +30,6 @@ const Product = (props) => {
     calcPrice();
   }, [size, setSize]);
 
-  const changeSize = (event) => {
-    event.preventDefault();
-    setVisible(true);
-  };
-
   const calcPrice = () => {
     let temp;
     if (size == 12) temp = 12.75;
@@ -51,6 +46,7 @@ const Product = (props) => {
   };
 
   const toggleModal = () => {
+    console.log("toggled!");
     setModalVisible(!isModalVisible);
   };
 
@@ -65,7 +61,7 @@ const Product = (props) => {
         initGrind={grind}
         setGrind={setGrind}
         addToCart={addToCart}
-        /* could have image here */
+        image={image}
       ></QuickView>
       <SolidButton onPress={toggleModal} text={name} />
       {/* this is really lazy rn, will change different styles for texts later */}
