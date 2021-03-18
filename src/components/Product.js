@@ -20,6 +20,7 @@ const Product = (props) => {
   const name = props.name;
   const initialPrice = props.price;
 
+  const [lame, setLame] = useState(name);
   const [isAdded, setAdded] = useState(false); // if the product has been added to cart
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
@@ -28,6 +29,7 @@ const Product = (props) => {
   const [price, setPrice] = useState(initialPrice);
 
   useEffect(() => {
+    // when the size changes recalc the total
     calcPrice();
   }, [size, setSize]);
 
@@ -38,8 +40,6 @@ const Product = (props) => {
     else if (size == 80) temp = 70.0;
     setPrice(temp);
   };
-
- 
 
   const addToCart = async (event) => {
     event.preventDefault();
@@ -59,7 +59,8 @@ const Product = (props) => {
       <QuickView
         setVisible={toggleModal}
         isVisible={isModalVisible}
-        name={name}
+        name={lame}
+        setName={setLame}
         size={size}
         price={price}
         setPrice={setPrice}

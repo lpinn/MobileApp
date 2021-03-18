@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { Text, Image, Divider } from "react-native-elements";
-import { View, ActivityIndicator, StyleSheet, Modal } from "react-native";
-//import Modal from "react-native-modal";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
+import Modal from "react-native-modal";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
@@ -32,62 +31,23 @@ const grinds = [
 
 function QuickView(props) {
   const name = props.name;
+  const size = props.size;
   const setSize = props.setSize;
   const setPrice = props.setPrice;
 
   const [isSizeVisible, setSizeVisible] = useState(false);
   const [isGrindVisible, setGrindVisible] = useState(false);
+
+  useEffect(() => { // doesnt change anything, Modal still just crashes and takes 2 button clicks to retoggle
+    let temp;
+    if (size == 12) temp = 12.75;
+    else if (size == 16) temp = 15.75;
+    else if (size == 80) temp = 70.0;
+    setPrice(temp);
+  }, [size, setSize]);
+
   
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22,
-      }}
-    >
-      <Modal
-        animationType={"slide"}
-        transparent={false}
-        visible={props.isVisible}
-        onRequestClose={() => console.log("closed")}
-      >
-        <Text h3>
-          {name} {props.size} oz ${props.price}
-        </Text>
-        <DropDownPicker
-          style={{ paddingVertical: 10 }}
-          labelStyle={{
-            fontSize: 14,
-            textAlign: "left",
-            color: "red",
-          }}
-          selectedLabelStyle={{
-            color: "#39739d",
-          }}
-          items={sizes}
-          defaultValue={props.size}
-          containerStyle={{ height: 40 }}
-          style={{ backgroundColor: "#fafafa" }}
-          itemStyle={{
-            justifyContent: "flex-start",
-          }}
-          onChangeItem={(item) => {
-            console.log("changing,,, hmmmmmmm");
-            setSize(item.value);
-            setPrice(props.price);
-          }}
-          isVisible={isSizeVisible}
-          onOpen={() => setSizeVisible(true)}
-          onClose={() => setSizeVisible(false)}
-        />
-        <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
-        <SolidButton onPress={props.setVisible} text={"exit"} />
-      </Modal>
-    </View>
-  );
-  /*return (
     // the issue is with the Modal element.. where it goes away and is slow to repop up
     // something with mutating the products state makes it close away. but doesnt for add to cart which mutates catalog
     //https://www.npmjs.com/package/react-native-dropdown-picker#available-item-properties
@@ -109,6 +69,7 @@ function QuickView(props) {
           <Text h3>
             {name} {props.size} oz ${props.price}
           </Text>
+          <SolidButton onPress={() => props.setName(name+"hi")}></SolidButton> 
           <DropDownPicker
             style={{ paddingVertical: 10 }}
             containerStyle={{ width: 150, height: 70 }}
@@ -138,7 +99,7 @@ function QuickView(props) {
           />
           <Divider />
 
-          {/*    <DropDownPicker
+          <DropDownPicker
             items={grinds}
             defaultValue={props.initGrind}
             containerStyle={{ height: 40 }}
@@ -146,15 +107,18 @@ function QuickView(props) {
             itemStyle={{
               justifyContent: "flex-start",
             }}
-            onChangeItem={(item) => props.setGrind(item.value)} // 
-          /> }
+            onChangeItem={(item) => props.setGrind(item.value)} //
+            isVisible={isGrindVisible}
+            onOpen={() => setGrindVisible(true)}
+            onClose={() => setGrindVisible(false)}
+          />
 
           <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
           <SolidButton onPress={props.setVisible} text={"exit"} />
         </Modal>
-      </View> 
+      </View>
     </View>
-  ); */
+  );
 }
 
 export default QuickView;
