@@ -42,11 +42,10 @@ const Product = (props) => {
     event.preventDefault();
     setAdded(true);
     props.addProduct(new ProductModel(name, size, grind, price));
-    setTimeout(() => setAdded(false), 1000000); // arbitrary number for now
+    setTimeout(() => setAdded(false), 5000); // arbitrary number for now
   };
 
   const toggleModal = () => {
-    console.log("toggled!");
     setModalVisible(!isModalVisible);
   };
 
@@ -57,6 +56,8 @@ const Product = (props) => {
         isVisible={isModalVisible}
         name={name}
         size={size}
+        price={price}
+        setPrice={setPrice}
         setSize={setSize}
         initGrind={grind}
         setGrind={setGrind}

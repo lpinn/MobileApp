@@ -28,7 +28,7 @@ function Home(props) {
 
   const options = {
     headerTitle: "Building New Hope",
-    headerRight: () => (
+ /*   headerRight: () => (
       <SolidButton
         icon={<Icon name="cart" type="evilicon" size={30} />}
         onPress={
@@ -43,7 +43,7 @@ function Home(props) {
         color="red"
         title="NA"
       />
-    ),
+    ), */
   };
   React.useLayoutEffect(() => {
     navigation.setOptions(options);

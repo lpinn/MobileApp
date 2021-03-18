@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Text, Image, Divider } from "react-native-elements";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import Modal from "react-native-modal";
@@ -31,9 +31,11 @@ const grinds = [
 
 function QuickView(props) {
   const name = props.name;
-
   const setSize = props.setSize;
+  const setPrice = props.setPrice;
 
+  //const [size, setSize2] = useState(props.size);
+  
   /*
   onBackdropPress={props.setVisible}
   animationIn="zoomInUp"
@@ -41,6 +43,7 @@ function QuickView(props) {
   */
   return (
     // the issue is with the Modal element.. where it goes away and is slow to repop up
+    // something with mutating the products state makes it close away
 
     <View style={{ flex: 1 }}>
       <View>
@@ -50,6 +53,7 @@ function QuickView(props) {
           backdropOpacity={0.9}
           animationIn="zoomInUp"
           animationOut="slideOutRight"
+          onBackdropPrress={props.setVisible}
         >
           <Image
             source={props.image}
@@ -57,7 +61,7 @@ function QuickView(props) {
             PlaceholderContent={<ActivityIndicator />}
           />
           <Text h3>
-            {name} {props.size}
+            {name} {props.size} oz ${props.price}
           </Text>
           <DropDownPicker
             style = {styles.modalDrop}
@@ -68,11 +72,15 @@ function QuickView(props) {
             itemStyle={{
               justifyContent: "flex-start",
             }}
-            onChangeItem={(item) => setSize(item.value)}
+            onChangeItem={(item) => {
+              console.log("changing,,, hmmmmmmm")
+              setSize(item.value)
+              setPrice(props.price)
+            }}
           />
           <Divider />
 
-          <DropDownPicker
+      {/*    <DropDownPicker
             items={grinds}
             defaultValue={props.initGrind}
             containerStyle={{ height: 40 }}
@@ -80,8 +88,8 @@ function QuickView(props) {
             itemStyle={{
               justifyContent: "flex-start",
             }}
-            onChangeItem={(item) => props.setGrind(item.value)} // error when using label
-          />
+            onChangeItem={(item) => props.setGrind(item.value)} // 
+          /> */}  
 
           <SolidButton text={"Add to Cart"} onPress={props.addToCart} />
           <SolidButton onPress={props.setVisible} text={"exit"} />
