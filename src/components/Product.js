@@ -8,27 +8,24 @@ Too many hooks.
 */
 
 import React, { useState, useEffect } from "react";
-import ReactDOM, { render } from "react-dom";
 import { SolidButton } from "./Button";
 import { ListItem, Text } from "react-native-elements";
 import QuickView from "./QuickView";
 
-import ProductModel from "../utils/ProductModel";
+//import ProductModel from "../utils/ProductModel";
 
 const Product = (props) => {
   const image = require("../../assets/images/coffee.jpg");
   const name = props.name;
   const initialPrice = props.price;
 
-  const [isAdded, setAdded] = useState(false); // if the product has been added to cart
- /* const [size, setSize] = useState(12);
+ /*  const [isAdded, setAdded] = useState(false); // if the product has been added to cart
+  const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
   const [price, setPrice] = useState(initialPrice); */
   const [isModalVisible, setModalVisible] = useState(false);
 
- 
-
-/*  const addToCart = async (event) => {
+  /*  const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
     props.addProduct(new ProductModel(name, size, grind, price));
@@ -42,9 +39,9 @@ const Product = (props) => {
 
   // <ModalTrigger trigger={toggleModal => <SolidButton onPress={toggleModal} text={name}}> <QuickView>
   return (
-    <ListItem className="product" key={name }>
+    <ListItem className="product" key={name}>
       <QuickView
-      addProduct={props.addProduct}
+        addProduct={props.addProduct}
         setVisible={toggleModal}
         isVisible={isModalVisible}
         name={name}
@@ -53,12 +50,12 @@ const Product = (props) => {
       ></QuickView>
 
       <SolidButton onPress={toggleModal} text={name} />
-      {/* this is really lazy rn, will change different styles for texts later */}
-     {/*  <Text h3 style={{ color: "green", fontWeight: "bold", fontSize: 20 }}>
+      {/* this is really lazy rn, will change different styles for texts later  dont understand the invalid title warning */}
+      {/*  <Text h3 style={{ color: "green", fontWeight: "bold", fontSize: 20 }}>
         ${price}
       </Text> */}
 
-     {/*   <SolidButton
+      {/*   <SolidButton
         onPress={addToCart}
         text={isAdded ? "ADDED" : "ADD TO CART"}
       /> */}
@@ -66,13 +63,5 @@ const Product = (props) => {
   );
 };
 
-const ModalTrigger = (props) => {
-  return (
-    <>
-      {props.trigger}
-      {props.children}
-    </>
-  );
-};
 
 export default Product;

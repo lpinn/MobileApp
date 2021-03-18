@@ -66,7 +66,9 @@ const Cart = ({ navigation, route }) => {
         <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
       </Card>
     );
+    /* TODO: add a checkout and integration with PayPal API */
   }
+
 };
 
 export default Cart;

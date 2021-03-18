@@ -6,6 +6,11 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
 import ProductModel from "../utils/ProductModel";
+
+import schema from "../utils/schema";
+const grinds = schema.grinds;
+const sizes = schema.sizes;
+
 /* 
 
  A quick view for each product when clicked on
@@ -13,30 +18,13 @@ import ProductModel from "../utils/ProductModel";
  https://github.com/react-native-modal/react-native-modal/tree/master/example/src
  */
 
-/* 
-
- https://www.npmjs.com/package/react-native-dropdown-picker */
-const sizes = [
-  { label: "12 oz", value: 12, selected: true },
-  { label: "16 oz", value: 16 },
-  { label: "5 lbs", value: 80 },
-];
-
-const grinds = [
-  { label: "Whole bean", value: "WHOLE", selected: true },
-  { label: "Drip", value: "Drip" },
-  { label: "Coarse for French Press", value: "FRENCHPRESS" },
-  { label: "Coarse for Cold Brew", value: "COLDBREW" },
-  { label: "Espresso Grind", value: "ESPRESSO" },
-];
-
 function QuickView(props) {
   const name = props.name;
-  // const size = props.size;
-  // const price = props.price;
-  // const setSize = props.setSize;
-  //const setPrice = props.setPrice;
-
+  /* const size = props.size;
+   const price = props.price;
+   const setSize = props.setSize;
+   const setPrice = props.setPrice; */
+  const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
   const [price, setPrice] = useState(12.75);
@@ -56,12 +44,16 @@ function QuickView(props) {
     else if (size == 80) temp = 70.0;
     setPrice(temp);
   }, [size, setSize]);
-  console.log(props)
+
+  useEffect(() => {
+    setAdded(false);
+  }, [size, grind]);
+
   const addToCart = async (event) => {
     event.preventDefault();
-    //setAdded(true);
+    setAdded(true);
     props.addProduct(new ProductModel(name, size, grind, price));
-    //setTimeout(() => setAdded(false), 5000); // arbitrary number for now
+    setTimeout(() => setAdded(false), 5000); // arbitrary number for now
   };
 
   return (
@@ -129,7 +121,10 @@ function QuickView(props) {
             onClose={() => setGrindVisible(false)}
           />
 
-          <SolidButton text={"Add to Cart"} onPress={addToCart} />
+          <SolidButton
+            text={isAdded ? "ADDED" : "ADD TO CART"}
+            onPress={addToCart}
+          />
           <SolidButton onPress={props.setVisible} text={"exit"} />
         </Modal>
       </View>
