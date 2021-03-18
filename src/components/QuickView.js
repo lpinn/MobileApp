@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Text, Image, Divider } from "react-native-elements";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
 import Modal from "react-native-modal";
@@ -34,7 +35,13 @@ function QuickView(props) {
   const setSize = props.setSize;
   const setPrice = props.setPrice;
 
-  //const [size, setSize2] = useState(props.size);
+  const [qSize, setqSize] = useState(props.size);
+  const [qPrice, setqPrice] = useState(props.price);
+
+  useEffect( () => {
+    setqPrice(props.price);
+    setqSize(props.size)
+  }, [props.size, props.price])
   
   /*
   onBackdropPress={props.setVisible}
@@ -53,7 +60,7 @@ function QuickView(props) {
           backdropOpacity={0.9}
           animationIn="zoomInUp"
           animationOut="slideOutRight"
-          onBackdropPrress={props.setVisible}
+          onBackdropPress={props.setVisible}
         >
           <Image
             source={props.image}
@@ -61,7 +68,7 @@ function QuickView(props) {
             PlaceholderContent={<ActivityIndicator />}
           />
           <Text h3>
-            {name} {props.size} oz ${props.price}
+            {name} {qSize} oz ${qPrice}
           </Text>
           <DropDownPicker
             style = {styles.modalDrop}

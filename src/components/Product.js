@@ -8,8 +8,9 @@ Too many hooks.
 */
 
 import React, { useState, useEffect } from "react";
+import ReactDOM, { render } from "react-dom";
 import { SolidButton } from "./Button";
-import { ListItem, Text, Tooltip } from "react-native-elements";
+import { ListItem, Text } from "react-native-elements";
 import QuickView from "./QuickView";
 
 import ProductModel from "../utils/ProductModel";
@@ -38,6 +39,8 @@ const Product = (props) => {
     setPrice(temp);
   };
 
+ 
+
   const addToCart = async (event) => {
     event.preventDefault();
     setAdded(true);
@@ -46,9 +49,11 @@ const Product = (props) => {
   };
 
   const toggleModal = () => {
+    console.log(); // takes two clicks after state mutation in quick view .. bug
     setModalVisible(!isModalVisible);
   };
 
+  // <ModalTrigger trigger={toggleModal => <SolidButton onPress={toggleModal} text={name}}> <QuickView>
   return (
     <ListItem className="product" key={name + size + grind}>
       <QuickView
@@ -64,6 +69,7 @@ const Product = (props) => {
         addToCart={addToCart}
         image={image}
       ></QuickView>
+
       <SolidButton onPress={toggleModal} text={name} />
       {/* this is really lazy rn, will change different styles for texts later */}
       <Text h3 style={{ color: "green", fontWeight: "bold", fontSize: 20 }}>
@@ -77,4 +83,14 @@ const Product = (props) => {
     </ListItem>
   );
 };
+
+const ModalTrigger = (props) => {
+  return (
+    <>
+      {props.trigger}
+      {props.children}
+    </>
+  );
+};
+
 export default Product;
