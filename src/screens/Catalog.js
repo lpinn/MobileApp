@@ -40,7 +40,7 @@ const Catalog = (props) => {
    // console.log("current sum excluding the last one added", cartTotal);
   }, [totalProducts]);
 
-  const handleGoToCart = () => {
+  const handleGoToCart = () => {   
     //https://reactnavigation.org/docs/navigation-prop/
 
     navigation.navigate("Cart", {
@@ -80,13 +80,12 @@ const Catalog = (props) => {
     tempProducts[index].quantity--;
 
     if (tempProducts[index].quantity === 0) {
-      // when we put counter to 0, remove that product from the products list
       const id = tempProducts[index].id;
       tempProducts = tempProducts.filter((p) => p.id !== id);
-    } // the removed product will only be removed on the next cart open
+    } // the removed product will only be gone on the next cart open
 
     updateProducts(tempProducts);
-    navigation.setParams({
+    navigation.setParams({    // this is not functioning properly. 
       total: cartTotal,
       products: totalProducts,
     });
