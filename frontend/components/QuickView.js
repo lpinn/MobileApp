@@ -20,10 +20,7 @@ const sizes = coffee.sizes;
 
 function QuickView(props) {
   const name = props.name;
-  /* const size = props.size;
-   const price = props.price;
-   const setSize = props.setSize;
-   const setPrice = props.setPrice; */
+  
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
@@ -33,6 +30,7 @@ function QuickView(props) {
     sizeVisible: false,
     grindVisible: false,
   });
+
   const changeVisibility = (state) => {
     setDDVisible({
       sizeVisible: false,
@@ -40,15 +38,8 @@ function QuickView(props) {
       ...state, // over write it
     });
   };
-  // const [isSizeVisible, setSizeVisible] = useState(false);
-  //const [isGrindVisible, setGrindVisible] = useState(false);
-
-  // so it takes two more clicks for the modal to become visible again after crashing bc it was never properly set to false
-  // its almost as if there are ghost modals as it the still console logs when clicking even though nothing renders at first
-  // bc we set to false on first click after crashing.
 
   useEffect(() => {
-    // doesnt change anything, Modal still just crashes and takes 2 button clicks to retoggle
     let temp;
     if (size == 12) temp = 12.75;
     else if (size == 16) temp = 15.75;
@@ -57,7 +48,7 @@ function QuickView(props) {
   }, [size, setSize]);
 
   useEffect(() => {
-    setAdded(false);
+    setAdded(false); // when size or grind changes, signal addability
   }, [size, grind]);
 
   const addToCart = async (event) => {

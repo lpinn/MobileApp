@@ -14,15 +14,13 @@ const Products = (props) => {
     return (
       <>
       <Product
-        key={i}
+        key={product.name}
         name={product.name}
-        description={product.description}
+        //description={product.description}
         price={product.price}
-        size={product.size}
-        grind={product.grind}
         navigation={props.navigation}
         addProduct={props.addProduct}
-        products={props.products}  // products is the items so far added to cart
+        products={props.products}  // products is the items so far added to cart, passed down from Catalog
       />
       </>
     );

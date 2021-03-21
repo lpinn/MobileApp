@@ -2,7 +2,6 @@
     {
         "name": "Dark Roast",
         "description": "savory",
-        "size": "",
         "price": 12.75,
         "grind": "WholeBean",
         "image": ""
@@ -10,7 +9,6 @@
     {
         "name": "Expresso",
         "description": "For that extra punch",
-        "size": "",
         "price": 12.75,
         "grind": "WholeBean",  
         "image": ""
@@ -19,7 +17,6 @@
         
         "name": "Light Roast",
         "description": "Caramel and vanilla flavoring",
-        "size": "",
         "price": 12.75,
         "grind": "WholeBean",
         "image": ""
@@ -27,7 +24,6 @@
     {
         "name": "Medium Roast",
         "description": "A happy medium between light and dark",
-        "size": "",
         "price": 12.75,
         "grind": "WholeBean",
         "image": ""
@@ -35,7 +31,6 @@
     {
         "name": "Decaf",
         "description": "No caffiene ",
-        "size": "",
         "price": 12.75,
         "grind": "WholeBean",
         "image": ""

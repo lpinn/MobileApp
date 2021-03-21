@@ -22,7 +22,7 @@ export default function App() {
     const prepare = async () => {
       try {
         await new Promise(resolve => setTimeout(resolve, 2000)); // load in for 2 seconds
-        // load fonts/ assets
+        // TODO: load fonts/ assets
       } catch (e) {
         console.warn(e);
       } finally {
