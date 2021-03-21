@@ -120,7 +120,7 @@ function QuickView(props) {
             onOpen={() => changeVisibility({ sizeVisible: true })}
             onClose={() => changeVisibility({ sizeVisible: false })}
           />
-          <Divider />
+          <Divider/>
 
           <DropDownPicker
             items={grinds}

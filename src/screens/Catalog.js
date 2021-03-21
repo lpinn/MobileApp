@@ -32,7 +32,7 @@ const Catalog = (props) => {
   useEffect(() => {  // recalculate the total every time we mutate the products in cart
     setTotal(
       totalProducts.reduce((total, e) => {
-        //console.log(`total: ${total}, current price: ${e.price}`);
+        console.log(`total: ${total}, current price: ${e.price}`);
         return total + e.price * e.quantity;
       }, 0)
     );
@@ -42,7 +42,7 @@ const Catalog = (props) => {
 
   const handleGoToCart = () => {   
     //https://reactnavigation.org/docs/navigation-prop/
-
+    console.log(cartTotal)
     navigation.navigate("Cart", {
       products: totalProducts, //
       total: cartTotal,
@@ -90,15 +90,15 @@ const Catalog = (props) => {
       products: totalProducts,
     });
   };
+  
+  React.useLayoutEffect(() => { // 
+    navigation.setOptions(options);
+  }, [navigation, cartTotal]); // update it per cartTotal
 
-  const options = {  // the upper right corner cart button has some bugs with total updating
+  const options = {  
     headerTitle: "Catalog",
     headerRight: () => <CartButton onPress={handleGoToCart} />,
   };
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions(options);
-  }, [navigation, totalProducts]);
 
   return (
     <>
