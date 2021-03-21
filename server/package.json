@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server for braintree transaction",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Not supported yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "e"
+  },
+  "author": "alexw",
+  "license": "MIT",
+  "dependencies": {
+    "braintree": "^3.2.2",
+    "express": "^4.17.1"
+  }
+}
