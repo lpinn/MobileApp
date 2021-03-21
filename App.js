@@ -13,7 +13,8 @@ import Splash from "./src/screens/Splash";
 
 const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
 
-// https://reactnavigation.org/docs/navigating/ READ
+// https://reactnavigation.org/docs/tab-based-navigation
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   
@@ -35,7 +36,7 @@ export default function App() {
   if (!appIsReady) {
     return <Splash />;
   } 
-
+  //https://reactnavigation.org/docs/stack-navigator   transitions to add
   return (
     <>
       <SafeAreaProvider>

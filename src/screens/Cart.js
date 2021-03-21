@@ -64,6 +64,9 @@ const Cart = ({ navigation, route }) => {
         {cartItems}
         <Divider />
         <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
+        <Divider size={10}/>
+        
+
       </Card>
     );
     /* TODO: add a checkout and integration with PayPal API */

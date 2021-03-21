@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from 'react';
 import { StyleSheet, View } from 'react-native'
-
 import Product from "./Product";
 
 import list from '../utils/ProductList.json'
@@ -41,7 +40,7 @@ export default Products;
 
 const styles = StyleSheet.create({
   container: {
-      
+      // TODO: styling the products
       alignItems: 'center',
       justifyContent: 'center'
   }
