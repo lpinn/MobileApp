@@ -68,7 +68,13 @@ function Home(props) {
             ></Image>
           </ImageBackground>
           <Text style={styles.loremIpsum}>More than Just Coffee</Text>
-          <Anchor style={styles.aboutUs} href="https://www.buildingnewhope.org/about">About Us</Anchor> 
+        {/*   <TouchableOpacity
+            onPress={() => navigation.navigate("About Us")}
+            style={{alignSelf:"center"}}
+          > 
+            <Text style={styles.orderNow1}>About Us</Text>
+          </TouchableOpacity> */}
+          {/*  <Anchor style={styles.aboutUs} href="https://www.buildingnewhope.org/about">About Us</Anchor>  */}
           <TouchableOpacity
             onPress={() => navigation.navigate("Catalog")}
             style={styles.button}
