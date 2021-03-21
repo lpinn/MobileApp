@@ -21,7 +21,7 @@ export default function App() {
   useEffect(() => {
     const prepare = async () => {
       try {
-        await new Promise(resolve => setTimeout(resolve, 4000)); // load in for 2 seconds
+        await new Promise(resolve => setTimeout(resolve, 2000)); // load in for 2 seconds
         // load fonts/ assets
       } catch (e) {
         console.warn(e);

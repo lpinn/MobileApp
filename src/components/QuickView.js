@@ -5,11 +5,11 @@ import Modal from "react-native-modal";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
-import ProductModel from "../utils/ProductModel";
+import ProductModel from "../constants/ProductModel";
 
-import schema from "../utils/schema";
-const grinds = schema.grinds;
-const sizes = schema.sizes;
+import coffee from "../constants/coffee";
+const grinds = coffee.grinds;
+const sizes = coffee.sizes;
 
 /* 
 
@@ -29,8 +29,19 @@ function QuickView(props) {
   const [grind, setGrind] = useState("WHOLE");
   const [price, setPrice] = useState(12.75);
 
-  const [isSizeVisible, setSizeVisible] = useState(false);
-  const [isGrindVisible, setGrindVisible] = useState(false);
+  const [isDDVisible, setDDVisible] = useState({
+    sizeVisible: false,
+    grindVisible: false,
+  });
+  const changeVisibility = (state) => {
+    setDDVisible({
+      sizeVisible: false,
+      grindVisible: false,
+      ...state, // over write it
+    });
+  };
+  // const [isSizeVisible, setSizeVisible] = useState(false);
+  //const [isGrindVisible, setGrindVisible] = useState(false);
 
   // so it takes two more clicks for the modal to become visible again after crashing bc it was never properly set to false
   // its almost as if there are ghost modals as it the still console logs when clicking even though nothing renders at first
@@ -63,12 +74,15 @@ function QuickView(props) {
     <View style={{ flex: 1 }}>
       <View>
         <Modal
+          style={{ margin: 5 }}
           isVisible={props.isVisible}
           backdropColor="#B4B3DB"
           backdropOpacity={0.9}
           animationIn="zoomInUp"
-          animationOut="slideOutRight"
+          animationOut="fadeOutDownBig"
           onBackdropPress={props.setVisible}
+          onSwipeComplete={props.setVisible}
+          swipeDirection="left" /* can exit by swiping to the left */
         >
           <Image
             source={props.image}
@@ -88,6 +102,7 @@ function QuickView(props) {
               color: "red",
             }}
             selectedLabelStyle={{
+              fontWeight: "bold",
               color: "#39739d",
             }}
             items={sizes}
@@ -101,9 +116,9 @@ function QuickView(props) {
               console.log("changing,,, hmmmmmmm");
               setSize(item.value);
             }}
-            isVisible={isSizeVisible}
-            onOpen={() => setSizeVisible(true)}
-            onClose={() => setSizeVisible(false)}
+            isVisible={isDDVisible.sizeVisible}
+            onOpen={() => changeVisibility({ sizeVisible: true })}
+            onClose={() => changeVisibility({ sizeVisible: false })}
           />
           <Divider />
 
@@ -115,10 +130,14 @@ function QuickView(props) {
             itemStyle={{
               justifyContent: "flex-start",
             }}
+            selectedLabelStyle={{
+              fontWeight: "bold",
+              color: "#39739d",
+            }}
             onChangeItem={(item) => setGrind(item.value)} //
-            isVisible={isGrindVisible}
-            onOpen={() => setGrindVisible(true)}
-            onClose={() => setGrindVisible(false)}
+            isVisible={isDDVisible.grindVisible}
+            onOpen={() => changeVisibility({ grindVisible: true })}
+            onClose={() => changeVisibility({ grindVisible: true })}
           />
 
           <SolidButton
