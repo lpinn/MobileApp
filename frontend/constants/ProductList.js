@@ -39,7 +39,7 @@ export default [
         "description": "No caffiene ",
         "price": 12.75,
         "grind": "WholeBean",
-        "image": ""
+        "image": require('../../assets/images/decafbag.jpg')
     }
 
 ]

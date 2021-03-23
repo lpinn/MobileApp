@@ -5,11 +5,11 @@ import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 
 import findGrindDesc from "../utils/findGrindDesc"
+
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
 render the Empty Cart
  */
-
 const EmptyCart = ({ navigation }) => {
   return (
     <>

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Text, Image, Divider } from "react-native-elements";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
-import Modal from "react-native-modal";
+import { Text, Divider } from "react-native-elements";
+import { View, StyleSheet } from "react-native";
+import Modal from "react-native-modal"; // could also use Overlay from R-N-E
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
-import ProductModel from "../constants/ProductModel";
+import ProductImage from "./ProductImage";
 
+import ProductModel from "../constants/ProductModel";
 import coffee from "../constants/coffee";
-const grinds = coffee.grinds;
+const grinds = coffee.grinds; // for our drop down menus
 const sizes = coffee.sizes;
 
 /* 
@@ -26,25 +27,36 @@ function QuickView(props) {
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
   const [price, setPrice] = useState(12.75);
+  const [imageUrl, setImageUrl] = useState(props.image);
 
   const [isDDVisible, setDDVisible] = useState({
     sizeVisible: false,
-    grindVisible: false, 
+    grindVisible: false,
   });
 
   const changeVisibility = (state) => {
     setDDVisible({
-      sizeVisible: false,   // to hide our drop downs
+      sizeVisible: false, // to hide our drop downs
       grindVisible: false,
-      ...state, 
+      ...state,
     });
   };
 
   useEffect(() => {
     let temp;
-    if (size == 12) temp = 12.75;
-    else if (size == 16) temp = 15.75;
-    else if (size == 80) temp = 70.0;
+    if (size == 12) {
+      if (props.name !== "Decaf") // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
+        setImageUrl("../../assets/images/12ozbag.jpg");
+      temp = 12.75;
+    } else if (size == 16) {
+      temp = 15.75;
+      if (props.name !== "Decaf")
+        setImageUrl("../../assets/images/16ozbag.jpg");
+    } else if (size == 80) {
+      temp = 70.0;
+      if (props.name !== "Decaf")
+        setImageUrl("../../assets/images/5lbbag.jpg");
+    }
     setPrice(temp);
   }, [size, setSize]);
 
@@ -74,11 +86,7 @@ function QuickView(props) {
           onSwipeComplete={props.setVisible}
           swipeDirection="left" /* can exit by swiping to the left */
         >
-          <Image
-            source={props.image}
-            style={{ width: 200, height: 200 }}
-            PlaceholderContent={<ActivityIndicator />}
-          />
+          <ProductImage url={imageUrl} />
           <Text h3>
             {name} {size} oz ${price}
           </Text>
@@ -96,7 +104,7 @@ function QuickView(props) {
               color: "#39739d",
             }}
             items={sizes}
-            defaultValue={props.size}
+            defaultValue={size}
             containerStyle={{ height: 40 }}
             style={{ backgroundColor: "#fafafa" }}
             itemStyle={{
@@ -110,7 +118,7 @@ function QuickView(props) {
             onOpen={() => changeVisibility({ sizeVisible: true })}
             onClose={() => changeVisibility({ sizeVisible: false })}
           />
-          <Divider/>
+          <Divider />
 
           <DropDownPicker
             items={grinds}
