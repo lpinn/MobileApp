@@ -1,8 +1,8 @@
-const two = require('../../assets/images/2ozbag');
-const fivelb = require('../../assets/images/5lbbag');
-const twelve = require('../../assets/images/12ozbag');
-const sixteen = require('../../assets/images/16ozbag');
-
+const two = require('../../assets/images/2ozbag.jpg');
+const fivelb = require('../../assets/images/5lbbag.jpg');
+const twelve = require('../../assets/images/12ozbag.jpg');
+const sixteen = require('../../assets/images/16ozbag.jpg');
+const decaf = require('../../assets/images/decafbag.jpg')
 
 export default [
     {

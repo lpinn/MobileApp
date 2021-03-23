@@ -12,10 +12,9 @@ import { SolidButton } from "./Button";
 import { ListItem, Text } from "react-native-elements";
 import QuickView from "./QuickView";
 
-//import ProductModel from "../utils/ProductModel";
 
 const Product = (props) => {
-  const image = require("../../assets/images/coffee.jpg");
+  const image = require("../../assets/images/2ozbag.jpg");
   const name = props.name;
   const initialPrice = props.price;
 

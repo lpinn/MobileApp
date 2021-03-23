@@ -4,12 +4,11 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import Home from "./src/screens/Home";
-import Catalog from "./src/screens/Catalog";
-import About from "./src/screens/About";
-import ProductsPage from "./src/screens/ProductsPage";
-import Cart from "./src/screens/Cart";
-import Splash from "./src/screens/Splash";
+import Home from "./frontend/screens/Home";
+import Catalog from "./frontend/screens/Catalog";
+import About from "./frontend/screens/About";
+import Cart from "./frontend/screens/Cart";
+import Splash from "./frontend/screens/Splash";
 
 const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
 

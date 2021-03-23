@@ -20,7 +20,8 @@ const sizes = coffee.sizes;
 
 function QuickView(props) {
   const name = props.name;
-  
+  // TODO: add product description / details
+
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
@@ -28,14 +29,14 @@ function QuickView(props) {
 
   const [isDDVisible, setDDVisible] = useState({
     sizeVisible: false,
-    grindVisible: false,
+    grindVisible: false, 
   });
 
   const changeVisibility = (state) => {
     setDDVisible({
-      sizeVisible: false,
+      sizeVisible: false,   // to hide our drop downs
       grindVisible: false,
-      ...state, // over write it
+      ...state, 
     });
   };
 
@@ -59,8 +60,6 @@ function QuickView(props) {
   };
 
   return (
-    // the issue is with the Modal element.. where it goes away and is slow to repop up
-    // something with mutating the products state makes it close away. but doesnt for add to cart which mutates catalog
     //https://www.npmjs.com/package/react-native-dropdown-picker#available-item-properties
     <View style={{ flex: 1 }}>
       <View>
