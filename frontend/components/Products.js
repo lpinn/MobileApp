@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native'
 import Product from "./Product";
 
-import list from '../constants/ProductList.json' // TODO: Wix API collection GET request for dynamic products.
+import list from '../constants/ProductList.js' // TODO: Wix API collection GET request for dynamic products.
 
 const Products = (props) => {
   let productsData;

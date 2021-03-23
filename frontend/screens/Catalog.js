@@ -118,7 +118,7 @@ const Catalog = (props) => {
       
       {/* need to pretty up these buttons below, add margins / spacing */}
       <SolidButton
-        text="Go back"
+        text={"Go back"}
         onPress={() =>
           navigation.navigate("Home", {
             products: totalProducts,
