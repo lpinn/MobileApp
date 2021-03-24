@@ -4,7 +4,7 @@
 
 export default {
        grinds: [
-        { label: "Whole bean", value: "WHOLE", selected: true },
+        { label: "Whole bean", value: "WHOLE", selected: true, },
         { label: "Drip", value: "Drip" },
         { label: "Coarse for French Press", value: "FRENCHPRESS" },
         { label: "Coarse for Cold Brew", value: "COLDBREW" },

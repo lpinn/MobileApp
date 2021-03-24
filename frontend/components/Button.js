@@ -36,7 +36,10 @@ const CartButton = ({ onPress }) => {
   );
 };
 
-export { SolidButton, CartButton };
+const CheckOutButton = () => {  // TODO
+
+}
+export { SolidButton, CartButton, CheckOutButton };
 
 const styles = StyleSheet.create({
   button: {

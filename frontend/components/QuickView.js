@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Text, Image, Divider } from "react-native-elements";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
-import Modal from "react-native-modal";
+import { Text, Divider } from "react-native-elements";
+import { View, StyleSheet } from "react-native";
+import Modal from "react-native-modal"; // could also use Overlay from R-N-E
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { SolidButton } from "./Button";
-import ProductModel from "../utils/ProductModel";
+import ProductImage from "./ProductImage";
 
-import schema from "../utils/schema";
-const grinds = schema.grinds;
-const sizes = schema.sizes;
+import ProductModel from "../constants/ProductModel";
+import coffee from "../constants/coffee";
+const grinds = coffee.grinds; // for our drop down menus
+const sizes = coffee.sizes;
 
 /* 
 
@@ -20,33 +21,47 @@ const sizes = schema.sizes;
 
 function QuickView(props) {
   const name = props.name;
-  /* const size = props.size;
-   const price = props.price;
-   const setSize = props.setSize;
-   const setPrice = props.setPrice; */
+  // TODO: add product description / details
+
   const [isAdded, setAdded] = useState(false);
   const [size, setSize] = useState(12);
   const [grind, setGrind] = useState("WHOLE");
   const [price, setPrice] = useState(12.75);
+  const [imageUrl, setImageUrl] = useState(props.image);
 
-  const [isSizeVisible, setSizeVisible] = useState(false);
-  const [isGrindVisible, setGrindVisible] = useState(false);
+  const [isDDVisible, setDDVisible] = useState({
+    sizeVisible: false,
+    grindVisible: false,
+  });
 
-  // so it takes two more clicks for the modal to become visible again after crashing bc it was never properly set to false
-  // its almost as if there are ghost modals as it the still console logs when clicking even though nothing renders at first
-  // bc we set to false on first click after crashing.
+  const changeVisibility = (state) => {
+    setDDVisible({
+      sizeVisible: false, // to hide our drop downs
+      grindVisible: false,
+      ...state,
+    });
+  };
 
   useEffect(() => {
-    // doesnt change anything, Modal still just crashes and takes 2 button clicks to retoggle
     let temp;
-    if (size == 12) temp = 12.75;
-    else if (size == 16) temp = 15.75;
-    else if (size == 80) temp = 70.0;
+    if (size == 12) {
+      if (props.name !== "Decaf") // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
+        setImageUrl("../../assets/images/12ozbag.jpg");
+      temp = 12.75;
+    } else if (size == 16) {
+      temp = 15.75;
+      if (props.name !== "Decaf")
+        setImageUrl("../../assets/images/16ozbag.jpg");
+    } else if (size == 80) {
+      temp = 70.0;
+      if (props.name !== "Decaf")
+        setImageUrl("../../assets/images/5lbbag.jpg");
+    }
     setPrice(temp);
   }, [size, setSize]);
 
   useEffect(() => {
-    setAdded(false);
+    setAdded(false); // when size or grind changes, signal addability
   }, [size, grind]);
 
   const addToCart = async (event) => {
@@ -57,24 +72,21 @@ function QuickView(props) {
   };
 
   return (
-    // the issue is with the Modal element.. where it goes away and is slow to repop up
-    // something with mutating the products state makes it close away. but doesnt for add to cart which mutates catalog
     //https://www.npmjs.com/package/react-native-dropdown-picker#available-item-properties
     <View style={{ flex: 1 }}>
       <View>
         <Modal
+          style={{ margin: 5 }}
           isVisible={props.isVisible}
           backdropColor="#B4B3DB"
           backdropOpacity={0.9}
           animationIn="zoomInUp"
-          animationOut="slideOutRight"
+          animationOut="fadeOutDownBig"
           onBackdropPress={props.setVisible}
+          onSwipeComplete={props.setVisible}
+          swipeDirection="left" /* can exit by swiping to the left */
         >
-          <Image
-            source={props.image}
-            style={{ width: 200, height: 200 }}
-            PlaceholderContent={<ActivityIndicator />}
-          />
+          <ProductImage url={imageUrl} />
           <Text h3>
             {name} {size} oz ${price}
           </Text>
@@ -88,10 +100,11 @@ function QuickView(props) {
               color: "red",
             }}
             selectedLabelStyle={{
+              fontWeight: "bold",
               color: "#39739d",
             }}
             items={sizes}
-            defaultValue={props.size}
+            defaultValue={size}
             containerStyle={{ height: 40 }}
             style={{ backgroundColor: "#fafafa" }}
             itemStyle={{
@@ -101,9 +114,9 @@ function QuickView(props) {
               console.log("changing,,, hmmmmmmm");
               setSize(item.value);
             }}
-            isVisible={isSizeVisible}
-            onOpen={() => setSizeVisible(true)}
-            onClose={() => setSizeVisible(false)}
+            isVisible={isDDVisible.sizeVisible}
+            onOpen={() => changeVisibility({ sizeVisible: true })}
+            onClose={() => changeVisibility({ sizeVisible: false })}
           />
           <Divider />
 
@@ -115,10 +128,14 @@ function QuickView(props) {
             itemStyle={{
               justifyContent: "flex-start",
             }}
+            selectedLabelStyle={{
+              fontWeight: "bold",
+              color: "#39739d",
+            }}
             onChangeItem={(item) => setGrind(item.value)} //
-            isVisible={isGrindVisible}
-            onOpen={() => setGrindVisible(true)}
-            onClose={() => setGrindVisible(false)}
+            isVisible={isDDVisible.grindVisible}
+            onOpen={() => changeVisibility({ grindVisible: true })}
+            onClose={() => changeVisibility({ grindVisible: true })}
           />
 
           <SolidButton

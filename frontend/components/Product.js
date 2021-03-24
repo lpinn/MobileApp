@@ -12,25 +12,18 @@ import { SolidButton } from "./Button";
 import { ListItem, Text } from "react-native-elements";
 import QuickView from "./QuickView";
 
-//import ProductModel from "../utils/ProductModel";
-
 const Product = (props) => {
-  const image = require("../../assets/images/coffee.jpg");
+  let image;
+  if (props.image) 
+    image = props.image;
+  else 
+    image = "../../assets/images/2ozbag.jpg";
+
+  //const image = props.image ?? ("../../assets/images/2ozbag.jpg"); // why isnt default case working
   const name = props.name;
   const initialPrice = props.price;
 
- /*  const [isAdded, setAdded] = useState(false); // if the product has been added to cart
-  const [size, setSize] = useState(12);
-  const [grind, setGrind] = useState("WHOLE");
-  const [price, setPrice] = useState(initialPrice); */
   const [isModalVisible, setModalVisible] = useState(false);
-
-  /*  const addToCart = async (event) => {
-    event.preventDefault();
-    setAdded(true);
-    props.addProduct(new ProductModel(name, size, grind, price));
-    setTimeout(() => setAdded(false), 5000); // arbitrary number for now
-  }; */
 
   const toggleModal = () => {
     console.log(); // takes two clicks after state mutation in quick view .. bug
@@ -50,10 +43,7 @@ const Product = (props) => {
       ></QuickView>
 
       <SolidButton onPress={toggleModal} text={name} />
-      {/* this is really lazy rn, will change different styles for texts later  dont understand the invalid title warning */}
-      {/*  <Text h3 style={{ color: "green", fontWeight: "bold", fontSize: 20 }}>
-        ${price}
-      </Text> */}
+      {/* TODO: add hover and style the button, signal its a quickview */}
 
       {/*   <SolidButton
         onPress={addToCart}
@@ -62,6 +52,5 @@ const Product = (props) => {
     </ListItem>
   );
 };
-
 
 export default Product;

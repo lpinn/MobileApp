@@ -56,19 +56,25 @@ function Home(props) {
           <Icon name="menu" style={styles.icon}></Icon>
          
           <ImageBackground
-            source={require("../../assets/images/patryk-gauza-vs0tzSHVcac-unsplash.jpg")}
+            source={require("../../assets/images/longbeans.jpg")}
             resizeMode="contain"
             style={styles.image}
             imageStyle={styles.image_imageStyle}
           >
             <Image
-              source={require("../../assets/Logo_Copy.png")}
+              source={require("../../assets/transparentlogo.png")}
               resizeMode="contain"
               style={styles.image4}
             ></Image>
           </ImageBackground>
           <Text style={styles.loremIpsum}>More than Just Coffee</Text>
-          <Anchor style={styles.aboutUs} href="https://www.buildingnewhope.org/about">About Us</Anchor> 
+        {/*   <TouchableOpacity
+            onPress={() => navigation.navigate("About Us")}
+            style={{alignSelf:"center"}}
+          > 
+            <Text style={styles.orderNow1}>About Us</Text>
+          </TouchableOpacity> */}
+          {/*  <Anchor style={styles.aboutUs} href="https://www.buildingnewhope.org/about">About Us</Anchor>  */}
           <TouchableOpacity
             onPress={() => navigation.navigate("Catalog")}
             style={styles.button}
@@ -77,7 +83,7 @@ function Home(props) {
           </TouchableOpacity>
         </View>
         <Image
-          source={require("../../assets/images/coffee.jpg")}
+          source={require("../../assets/images/12ozbag.jpg")}
           resizeMode="contain"
           style={styles.image3}
         ></Image>

@@ -4,24 +4,24 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import Home from "./src/screens/Home";
-import Catalog from "./src/screens/Catalog";
-import About from "./src/screens/About";
-import ProductsPage from "./src/screens/ProductsPage";
-import Cart from "./src/screens/Cart";
-import Splash from "./src/screens/Splash";
+import Home from "./frontend/screens/Home";
+import Catalog from "./frontend/screens/Catalog";
+import About from "./frontend/screens/About";
+import Cart from "./frontend/screens/Cart";
+import Splash from "./frontend/screens/Splash";
 
 const Stack = createStackNavigator(); // https://reactnavigation.org/docs/hello-react-navigation
 
-// https://reactnavigation.org/docs/navigating/ READ
+// https://reactnavigation.org/docs/tab-based-navigation
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   
   useEffect(() => {
     const prepare = async () => {
       try {
-        await new Promise(resolve => setTimeout(resolve, 4000)); // load in for 2 seconds
-        // load fonts/ assets
+        await new Promise(resolve => setTimeout(resolve, 2000)); // load in for 2 seconds
+        // TODO: load fonts/ assets
       } catch (e) {
         console.warn(e);
       } finally {
@@ -35,7 +35,7 @@ export default function App() {
   if (!appIsReady) {
     return <Splash />;
   } 
-
+  //https://reactnavigation.org/docs/stack-navigator   transitions to add
   return (
     <>
       <SafeAreaProvider>
