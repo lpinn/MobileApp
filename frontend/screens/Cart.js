@@ -6,6 +6,7 @@ import Divider from "react-native-btr/src/Components/Separator";
 
 import findGrindDesc from "../utils/findGrindDesc";
 
+import { getToken } from '../services/payments'
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
 render the Empty Cart
@@ -68,7 +69,7 @@ const Cart = ({ navigation, route }) => {
           <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
           <Divider size={10} />
         </Card>
-        <CheckOutButton onPress={() => console.log("fetch req")} />
+        <CheckOutButton onPress={getToken} />
       </>
     );
     /* TODO: add a checkout and integration with PayPal A PI */

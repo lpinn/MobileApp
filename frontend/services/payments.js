@@ -1,11 +1,18 @@
-import { requestOneTimePayment, requestBillingAgreement } from 'react-native-paypal';
+//import { requestOneTimePayment, requestBillingAgreement } from 'react-native-paypal';
 import axios from 'axios';
 
-const getToken = () => {
-    axios.get()
+
+
+const getToken = async () => {
+    try {
+    const res = await axios.get('/token');
+    return res.data;
+  } catch (err) {
+    return console.log(err);
+  }
 }
 
-const pay = (amount) => {
+/* const pay = async (amount) => {
     const {
         nonce,
         payerId,
@@ -26,10 +33,10 @@ const pay = (amount) => {
       }
     );
 }
-
+*/
 
 export {
     getToken,
-    pay,
+  //  pay,
     
 }
