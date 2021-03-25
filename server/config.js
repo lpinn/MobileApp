@@ -1,5 +1,9 @@
 const braintree = require("braintree");
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const config = {
   environment: braintree.Environment.Sandbox, // or braintree.Environment.Production
   merchantId: process.env.MERCHANT_ID, 
