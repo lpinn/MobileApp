@@ -46,16 +46,16 @@ function QuickView(props) {
     let temp;
     if (size == 12) {
       if (props.name !== "Decaf") // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
-        setImageUrl("../../assets/images/12ozbag.jpg");
+        setImageUrl(require("../../assets/images/12ozbag.jpg"));
       temp = 12.75;
     } else if (size == 16) {
       temp = 15.75;
       if (props.name !== "Decaf")
-        setImageUrl("../../assets/images/16ozbag.jpg");
+        setImageUrl(require("../../assets/images/16ozbag.jpg"));
     } else if (size == 80) {
       temp = 70.0;
       if (props.name !== "Decaf")
-        setImageUrl("../../assets/images/5lbbag.jpg");
+        setImageUrl(require("../../assets/images/5lbbag.jpg"));
     }
     setPrice(temp);
   }, [size, setSize]);
