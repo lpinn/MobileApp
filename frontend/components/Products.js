@@ -10,7 +10,7 @@ const Products = (props) => {
   // put state in cart component
 
   productsData = list.map((product, i) => {
-    console.log(product)
+    //console.log(product)
     return (
       <>
       <Product

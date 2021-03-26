@@ -5,7 +5,9 @@ import axios from 'axios';
 
 const getToken = async () => {
     try {
-    const res = await axios.get('/token');
+    const res = await axios.get('/token'); // need IP address of the network the phone is on.
+    // Should i just put my Node server on heroku so i dont have to deal w/ this issue
+    console.log(res)
     return res.data;
   } catch (err) {
     return console.log(err);

@@ -40,7 +40,8 @@ const Cart = ({ navigation, route }) => {
     }
   }, []);
 
-  let cartItems = items.map((i) => {
+  let cartItems = items.filter(i => i.quantity != 0).map((i) => { // filter so that it disappears - 
+                            // bugs with the Counter - resets the remaining products counter to 0 only if it was added after the one removed
     return (
       <>
         <Text style={{ fontWeight: "bold" }} key={i.id}>
