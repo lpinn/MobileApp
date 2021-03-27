@@ -17,7 +17,8 @@ const Product = (props) => {
   if (props.image) 
     image = props.image;
   else 
-    image = "../../assets/images/2ozbag.jpg";
+    image = require("../../assets/images/2ozbag.jpg"); // have to use the require here bc it only works w/ static values
+
 
   //const image = props.image ?? ("../../assets/images/2ozbag.jpg"); // why isnt default case working
   const name = props.name;

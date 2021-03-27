@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
-import { SolidButton } from "../components/Button";
+
+import { SolidButton, CheckOutButton } from "../components/Button";
 import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 
-import findGrindDesc from "../utils/findGrindDesc"
+import findGrindDesc from "../utils/findGrindDesc";
+
+import { getToken } from '../services/payments'
 
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
@@ -33,7 +36,8 @@ const Cart = ({ navigation, route }) => {
     };
 
     console.log(route.params);
-    if (route.params) {  // passed params w/ react navigation
+    if (route.params) {
+      // passed params w/ react navigation
       fetchData();
     }
   }, []);
@@ -42,9 +46,9 @@ const Cart = ({ navigation, route }) => {
     return (
       <>
         <Text style={{ fontWeight: "bold" }} key={i.id}>
-          {i.name} ${i.price} {i.size} oz  {findGrindDesc(i.grind)}
+          {i.name} ${i.price} {i.size} oz {findGrindDesc(i.grind)}
         </Text>
-        <Counter  // each item will have its seperate Counter for adding more / subtracting
+        <Counter // each item will have its seperate Counter for adding more / subtracting
           item={i}
           increment={route.params.increment}
           decrement={route.params.decrement}
@@ -59,19 +63,20 @@ const Cart = ({ navigation, route }) => {
     return <EmptyCart navigation={navigation} />;
   } else {
     return (
-      <Card>
-        <Card.Title>CART</Card.Title>
-        {cartItems}
-        <Divider />
-        <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
-        <Divider size={10}/>
-        
 
-      </Card>
+      <>
+        <Card>
+          <Card.Title>CART</Card.Title>
+          {cartItems}
+          <Divider />
+          <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
+          <Divider size={10} />
+        </Card>
+        <CheckOutButton onPress={getToken} />
+      </>
     );
-    /* TODO: add a checkout and integration with PayPal API */
+    /* TODO: add a checkout and integration with PayPal A PI */
   }
-
 };
 
 export default Cart;

@@ -6,8 +6,8 @@ import React from "react";
 /* 
 Component for when we want to link to something outside our app
 Pass in a href 
+TODO: Add social medias with https://evil-icons.io/
 */
-
 export default function Anchor(props) {
   const handlePress = () => {
     Linking.openURL(props.href);
