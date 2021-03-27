@@ -6,25 +6,39 @@ TODO refactor state
 Too many hooks.
 
 */
+import {
+  StyleSheet,
+  View,
+  Image,
+  Button,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 
 import React, { useState, useEffect } from "react";
 import { SolidButton } from "./Button";
-import { ListItem, Text } from "react-native-elements";
+import { ListItem, Text, Tooltip } from "react-native-elements";
 import QuickView from "./QuickView";
+
+//import ProductModel from "../utils/ProductModel";
 
 const Product = (props) => {
   let image;
   if (props.image) 
     image = props.image;
   else 
-    image = require("../../assets/images/2ozbag.jpg"); // have to use the require here bc it only works w/ static values
+    image = require("../../assets/images/coffee.jpg"); // have to use the require here bc it only works w/ static values
 
 
-  //const image = props.image ?? ("../../assets/images/2ozbag.jpg"); // why isnt default case working
+  //const image = props.image ?? ("../../assets/images/coffee.jpg"); // why isnt default case working
   const name = props.name;
   const initialPrice = props.price;
+  
+  const [isAdded, setAdded] = useState(false); // if the product has been added to cart  
 
   const [isModalVisible, setModalVisible] = useState(false);
+  
+  const [price, setPrice] = useState(initialPrice);
 
   const toggleModal = () => {
     console.log(); // takes two clicks after state mutation in quick view .. bug
@@ -32,8 +46,9 @@ const Product = (props) => {
   };
 
   // <ModalTrigger trigger={toggleModal => <SolidButton onPress={toggleModal} text={name}}> <QuickView>
-  return (
+  return (    
     <ListItem className="product" key={name}>
+	<View>	
       <QuickView
         addProduct={props.addProduct}
         setVisible={toggleModal}
@@ -42,16 +57,83 @@ const Product = (props) => {
         initPrice={initialPrice}
         image={image}
       ></QuickView>
+	  
+		<TouchableOpacity style={styles.productTile} onPress={toggleModal}>		
+			<ImageBackground	
+					source={image}
+					resizeMode="cover"
+					style={styles.image1}
+			>
+					<View style={styles.rectFiller}></View>
+					<View style={styles.rect}>
+					<Text style={styles.productName}>{name}</Text>
+					</View>
+			</ImageBackground>
+		</TouchableOpacity>
 
-      <SolidButton onPress={toggleModal} text={name} />
-      {/* TODO: add hover and style the button, signal its a quickview */}
+		{/* Suggestion: Program to show the cheapest price for that product. From a user-centered perspective, it would be great to show prices:*/}
+		<Text style={styles.priceStyle}>
+			From ${price}
+		</Text>
 
-      {/*   <SolidButton
-        onPress={addToCart}
-        text={isAdded ? "ADDED" : "ADD TO CART"}
-      /> */}
+		<Button
+			onPress={toggleModal}
+			title={isAdded ? 'ADDED' : 'ADD TO CART'}
+			color="rgba(237,167,47,1)"
+		/>
+	</View>	  
     </ListItem>
   );
 };
+
+//************************ STYLES START **************************
+
+const styles = StyleSheet.create({
+	
+  priceStyle: {
+	color: "dimgrey",
+	fontWeight: "normal",
+	fontSize: 15.1,
+  },
+  
+  productTile: {
+    width: 130,
+    height: 130,
+    backgroundColor: "rgba(230, 230, 230,1)",
+    elevation: 18,
+    borderRadius: 5,
+    overflow: "hidden",
+    alignSelf: "flex-end",
+	marginLeft: '-1.5%',
+	marginBottom: '1%',
+  },
+  
+  image1: {
+    flex: 1,
+    marginBottom: -1,
+    marginTop: 1,
+  },
+    
+  rectFiller: {
+    flex: 1,
+  },
+  
+  rect: {
+    height: 27,
+    backgroundColor: "rgba(21,19,19,0.5)",
+    marginBottom: 1,
+  },  
+  
+  productName: {
+    color: "rgba(247,252,253,1)",
+    fontSize: 15,
+    marginTop: 7,
+    alignSelf: "center",
+	textTransform: 'uppercase',
+  },
+
+});
+//************************** STYLES END **************************
+
 
 export default Product;

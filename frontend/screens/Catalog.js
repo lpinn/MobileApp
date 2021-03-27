@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import { View, Text, Image } from "react-native";
+import { StyleSheet, View, ScrollView, Button } from "react-native";
 import { Card, Text } from "react-native-elements";
 
 import { SolidButton, CartButton } from "../components/Button";
@@ -21,11 +21,10 @@ TODO
 https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 */
 
-const about = "New Hope Coffee is grown by the farmers of the El Porvenir Cooperative located in León, Nicaragua.  The certified organically grown, bird-friendly, arabica beans are harvested, patio-sun dried, and hand-selected by the farmers.  The green beans are roasted to order by 19 Coffee Company, a specialty micro-roaster in Pittsburgh, PA.  The coffee has a smooth body, bright acidity, with chocolate, tropical fruit, and earthy notes."
+//const about = "New Hope Coffee is grown by the farmers of the El Porvenir Cooperative located in León, Nicaragua.  The certified organically grown, bird-friendly, arabica beans are harvested, patio-sun dried, and hand-selected by the farmers.  The green beans are roasted to order by 19 Coffee Company, a specialty micro-roaster in Pittsburgh, PA.  The coffee has a smooth body, bright acidity, with chocolate, tropical fruit, and earthy notes."
 
 const Catalog = (props) => {
   const navigation = props.navigation;
-
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
@@ -40,7 +39,7 @@ const Catalog = (props) => {
    // console.log("current sum excluding the last one added", cartTotal);
   }, [totalProducts]);
 
-  const handleGoToCart = () => {   
+  const handleGoToCart = () => {
     //https://reactnavigation.org/docs/navigation-prop/
     console.log(cartTotal)
     navigation.navigate("Cart", {
@@ -85,12 +84,12 @@ const Catalog = (props) => {
     } // the removed product will only be gone on the next cart open
 
     updateProducts(tempProducts);
-    navigation.setParams({    // this is not functioning properly. 
+    navigation.setParams({    // this is not functioning properly.
       total: cartTotal,
       products: totalProducts,
     });
   };
-  
+
   React.useLayoutEffect(() => { // 
     navigation.setOptions(options);
   }, [navigation, cartTotal]); // update it per cartTotal
@@ -102,35 +101,69 @@ const Catalog = (props) => {
 
   return (
     <>
-      <Card>
-      <Text style = {{color: "green", alignContent: "center", fontWeight: "200"}}>
-        {about}
-      </Text>
-        <Card.Title>Buy a coffee</Card.Title>
+      <ScrollView>
+	  <Card>
+        <Card.Title>Buy Coffee</Card.Title>
         <Card.Divider />
-        <Products
-          key={1} // actually still whining here "need unique key"
-          navigation={navigation}
-          addProduct={handleAddProduct}
-          products={totalProducts}
-        />
-      </Card>
-      
-      {/* need to pretty up these buttons below, add margins / spacing */}
-      <SolidButton
-        text={"Go back"}
-        onPress={() =>
-          navigation.navigate("Home", {
-            products: totalProducts,
-          })
-        }
-      />
 
-      <CartButton onPress={handleGoToCart} />
-      <SolidButton text="Reset Cart" onPress={() => updateProducts([])} />
+			<View style={styles.productsContainer}>
+				<Products
+					key={1} // actually still whining here "need unique key"
+					navigation={navigation}
+					addProduct={handleAddProduct}
+					products={totalProducts}
+				/>
+			</View>
+	
+			<View style={styles.resetCartButtonParent}>		
+				<View style={styles.resetCartButton}>			
+					<Button
+						title={'Reset cart'}
+						onPress={() => updateProducts([])}
+						color="firebrick"
+					/>
+				</View>
+			</View>
+		
+		
+{/* **** I don't think we need an Exit and Cart buttons here. Users can use the navigation bar for that. ****
+	    <Button
+			title={'Exit'}
+			onPress={() =>
+				navigation.navigate("Home", {
+				products: totalProducts,
+			})}
+			color="rgba(237,167,47,1)"
+		/>   
+		<CartButton onPress={handleGoToCart} />
+*/}	    
+      </Card>
+	  </ScrollView>
+
     </>
   );
 };
 
+//************************ STYLES START **************************
+
+const styles = StyleSheet.create({
+	productsContainer: {
+		flexDirection: "column",
+		marginLeft: '-4%',
+		marginRight: '-4%',
+	},
+    resetCartButtonParent: {
+		width: "100%",
+		//justifyContent: "center",
+		//alignItems: "center",
+		marginTop: '10%',
+	},
+    resetCartButton: {
+		width: "35%",
+		margin: '3%',
+		marginBottom: '5%',
+	},  
+});
+//************************** STYLES END **************************
 
 export default Catalog;

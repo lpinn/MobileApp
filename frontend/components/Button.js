@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Text } from "react-native-elements";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity, ImageBackground } from "react-native";
 
 import { Icon } from "react-native-elements";
 
@@ -26,30 +26,22 @@ const SolidButton = (props) => {
 };
 
 const CartButton = ({ onPress }) => {
-  return (
-    <Button
-      icon={<Icon name="cart" type="evilicon" size={30} />}
-      onPress={onPress}
-      color="red"
-      title="Cart"
-    />
+  return ( 
+		<TouchableOpacity
+			style={styles.cart}
+			onPress={onPress}
+		
+		> 
+			<ImageBackground
+				resizeMode="cover"
+				style={styles.image1}
+				source={require("../../assets/images/shopping-cart.png")}
+			></ImageBackground>
+		</TouchableOpacity>  
   );
 };
 
-const CheckOutButton = (props) => {
-  // TODO
-  return (
-    <Button
-      icon={<Icon name="ei-credit-card" type="evilicon" size={30} />}
-      onPress={props.onPress}
-      color="green"
-      title="Check Out"
-    />
-  );
-};
-
-
-export { SolidButton, CartButton, CheckOutButton };
+export { SolidButton, CartButton };
 
 const styles = StyleSheet.create({
   button: {
@@ -57,13 +49,23 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 2,
-    backgroundColor: "rgb(255,128,0)",
+    backgroundColor: "rgba(237,167,47,1)",
   },
-  buttonText: {
+  
+  /*buttonText: {
     color: "white",
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 16,
     textAlign: "center",
-  },
+  },*/
+  
+	image1: {
+		flex: 1,
+	},
+  
+	cart: {
+		width: 40,
+		height: 40,
+	},
 });
