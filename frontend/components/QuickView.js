@@ -50,12 +50,8 @@ function QuickView(props) {
       temp = 12.75;
     } else if (size == 16) {
       temp = 15.75;
-      if (props.name !== "Decaf")
-        setImageUrl(require("../../assets/images/16ozbag.jpg"));
     } else if (size == 80) {
       temp = 70.0;
-      if (props.name !== "Decaf")
-        setImageUrl(require("../../assets/images/5lbbag.jpg"));
     }
     setPrice(temp);
   }, [size, setSize]);

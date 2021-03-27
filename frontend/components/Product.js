@@ -19,6 +19,7 @@ const Product = (props) => {
   else 
     image = require("../../assets/images/2ozbag.jpg"); // have to use the require here bc it only works w/ static values
 
+
   //const image = props.image ?? ("../../assets/images/2ozbag.jpg"); // why isnt default case working
   const name = props.name;
   const initialPrice = props.price;
