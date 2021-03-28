@@ -45,12 +45,15 @@ function QuickView(props) {
   useEffect(() => {
     let temp;
     if (size == 12) {
-      if (props.name !== "Decaf") // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
+      if (props.name !== "Decaf")
+        // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
         setImageUrl(require("../../assets/images/12ozbag.jpg"));
       temp = 12.75;
     } else if (size == 16) {
+      setImageUrl(require("../../assets/images/16ozbag.jpg"));
       temp = 15.75;
     } else if (size == 80) {
+      setImageUrl(require("../../assets/images/5lbbag.jpg"));
       temp = 70.0;
     }
     setPrice(temp);
@@ -72,7 +75,7 @@ function QuickView(props) {
     <View style={{ flex: 1 }}>
       <View>
         <Modal
-          style={{ margin: 30}}
+          style={{ margin: 30 }}
           isVisible={props.isVisible}
           backdropColor="#e8dbc3"
           backdropOpacity={0.95}
@@ -80,18 +83,16 @@ function QuickView(props) {
           animationOut="fadeOutDownBig"
           onBackdropPress={props.setVisible}
           onSwipeComplete={props.setVisible}
-          swipeDirection="left" /* can exit by swiping to the left */
+          swipeDirection="right" 
         >
-		 <View style={styles.backButton}>
-         <SolidButton onPress={props.setVisible} text={"< BACK"}/>
-		 </View>         
-		 
-		 <Text style={styles.productName}>
-            {name}            
-          </Text>
-          <ProductImage url={imageUrl} />
+          <View style={styles.backButton}>
+            <SolidButton onPress={props.setVisible} text={"< BACK"} />
+          </View>
+
+          <Text style={styles.productName}>{name}</Text>
+          <ProductImage image={imageUrl} />
           <Text style={styles.productDetails}>
-			${price}                   {size} oz
+            ${price} {size} oz
           </Text>
 
           <DropDownPicker
@@ -114,7 +115,7 @@ function QuickView(props) {
               justifyContent: "flex-start",
             }}
             onChangeItem={(item) => {
-              console.log("changing,,, hmmmmmmm");
+              //   console.log("changing,,, hmmmmmmm");
               setSize(item.value);
             }}
             isVisible={isDDVisible.sizeVisible}
@@ -140,14 +141,14 @@ function QuickView(props) {
             onOpen={() => changeVisibility({ grindVisible: true })}
             onClose={() => changeVisibility({ grindVisible: true })}
           />
-		<View style={styles.cartButtonParent}>		 
-		 <View style={styles.cartButton}>
-			<SolidButton
-				text={isAdded ? "ADDED" : "ADD TO CART"}
-				onPress={addToCart}
-			/>
-		 </View>
-		</View>
+          <View style={styles.cartButtonParent}>
+            <View style={styles.cartButton}>
+              <SolidButton
+                text={isAdded ? "ADDED" : "ADD TO CART"}
+                onPress={addToCart}
+              />
+            </View>
+          </View>
         </Modal>
       </View>
     </View>
@@ -168,28 +169,27 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   productName: {
-	color: "black",
-	fontWeight: "normal",
-	fontSize: 28,  
-	marginBottom: '1%',
-  },  
+    color: "black",
+    fontWeight: "normal",
+    fontSize: 28,
+    marginBottom: "1%",
+  },
   productDetails: {
-	color: "black",
-	fontWeight: "normal",
-	fontSize: 20,
-	marginBottom: '8%',	
+    color: "black",
+    fontWeight: "normal",
+    fontSize: 20,
+    marginBottom: "8%",
   },
   cartButton: {
-	width: "50%",
+    width: "50%",
   },
   cartButtonParent: {
-	justifyContent: "center",
-	alignItems: "center",	  
-	width: "100%",
-	marginTop: '7%',	
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginTop: "7%",
   },
   backButton: {
-	width: "20%",
+    width: "20%",
   },
-
 });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, Card } from "react-native-elements";
-import { SolidButton } from "../components/Button";
+import { SolidButton, CheckOutButton } from "../components/Button";
 import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 
@@ -65,6 +65,7 @@ const Cart = ({ navigation, route }) => {
         {cartItems}
         <Divider />
         <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
+        <CheckOutButton /> 
       </Card>
     );
   }
