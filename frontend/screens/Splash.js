@@ -12,37 +12,37 @@ import {
 export default function Splash() {
   return (
     <>
-      <View style={styles.container}>
+      <View style={styles.containerParent}>
+	  <View style={styles.container}>
         <ImageBackground
           source={require("../../assets/images/colorlogo.png")}
+		  style={styles.logo}
           //imageStyle={{ resizeMode: "stretch" }}
-          style={{ width: "100%", height: "100%", alignSelf: "center"} }
         >
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text
-              style={{
-                height: 50,
-                color: "#1562b0",
-                fontSize: 20,
-                fontWeight: "bold",
-              }}
-            >
-              Hey!
-            </Text>
-            <ActivityIndicator size="large" color="#1562b0" />
-          </View>
         </ImageBackground>
       </View>
+	  </View>
     </>
   );
 }
 const styles = StyleSheet.create({
-  container: {
+  containerParent: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
   },
+  
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
+  },  
+  
+  logo: {
+	width: 170,
+    height: 170,  
+
+  },
+  
 });

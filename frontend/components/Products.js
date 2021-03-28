@@ -36,10 +36,14 @@ const Products = (props) => {
 
 export default Products;
 
+
 const styles = StyleSheet.create({
+	
   container: {
-      // TODO: styling the products
-      alignItems: 'center',
-      justifyContent: 'center'
+		flexWrap: "wrap",
+		flexDirection: "row",
+		alignItems: 'center',
+		justifyContent: 'center'
   }
-}); 
+  
+});

@@ -43,12 +43,12 @@ export default function App() {
           <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-              headerTintColor: "white",
-              headerStyle: { backgroundColor: "rgb(237,167,47)" },
+              headerTintColor: "black",
+              headerStyle: { backgroundColor: "white" },
             }}
           >
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="About Us" component={About} />
+            <Stack.Screen name="About Us" component={About} />			
             <Stack.Screen name="Catalog" component={Catalog} />
             <Stack.Screen name="Cart" component={Cart} />
           </Stack.Navigator>
