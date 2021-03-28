@@ -72,19 +72,26 @@ function QuickView(props) {
     <View style={{ flex: 1 }}>
       <View>
         <Modal
-          style={{ margin: 5 }}
+          style={{ margin: 30}}
           isVisible={props.isVisible}
-          backdropColor="#B4B3DB"
-          backdropOpacity={0.9}
+          backdropColor="#e8dbc3"
+          backdropOpacity={0.95}
           animationIn="zoomInUp"
           animationOut="fadeOutDownBig"
           onBackdropPress={props.setVisible}
           onSwipeComplete={props.setVisible}
           swipeDirection="left" /* can exit by swiping to the left */
         >
+		 <View style={styles.backButton}>
+         <SolidButton onPress={props.setVisible} text={"< BACK"}/>
+		 </View>         
+		 
+		 <Text style={styles.productName}>
+            {name}            
+          </Text>
           <ProductImage url={imageUrl} />
-          <Text h3>
-            {name} {size} oz ${price}
+          <Text style={styles.productDetails}>
+			${price}                   {size} oz
           </Text>
 
           <DropDownPicker
@@ -133,12 +140,14 @@ function QuickView(props) {
             onOpen={() => changeVisibility({ grindVisible: true })}
             onClose={() => changeVisibility({ grindVisible: true })}
           />
-
-          <SolidButton
-            text={isAdded ? "ADDED" : "ADD TO CART"}
-            onPress={addToCart}
-          />
-          <SolidButton onPress={props.setVisible} text={"exit"} />
+		<View style={styles.cartButtonParent}>		 
+		 <View style={styles.cartButton}>
+			<SolidButton
+				text={isAdded ? "ADDED" : "ADD TO CART"}
+				onPress={addToCart}
+			/>
+		 </View>
+		</View>
         </Modal>
       </View>
     </View>
@@ -158,4 +167,29 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
   },
+  productName: {
+	color: "black",
+	fontWeight: "normal",
+	fontSize: 28,  
+	marginBottom: '1%',
+  },  
+  productDetails: {
+	color: "black",
+	fontWeight: "normal",
+	fontSize: 20,
+	marginBottom: '8%',	
+  },
+  cartButton: {
+	width: "50%",
+  },
+  cartButtonParent: {
+	justifyContent: "center",
+	alignItems: "center",	  
+	width: "100%",
+	marginTop: '7%',	
+  },
+  backButton: {
+	width: "20%",
+  },
+
 });
