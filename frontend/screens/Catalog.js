@@ -11,7 +11,7 @@ import Products from "../components/Products";
 This module renders all the items available and lets the user navigate to the Cart.
 
 We will hold a lot of the app's state here. Holds the items to be passed to the cart as well as the 
-calculated total.
+calculated total. We could put this into the Home page just so all the stuff is accesible in there, but there might be trade offs in terms of performance.
  Every single add to Cart causes a rerender in the Catalog.
 */
 
@@ -65,7 +65,7 @@ const Catalog = (props) => {
 
   const incrementProduct = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
-    let tempProducts = [...totalProducts];
+    let tempProducts = [...totalProducts]; // copies the array
     tempProducts[index].quantity++;
     updateProducts(tempProducts);
     navigation.setParams({

@@ -1,11 +1,11 @@
 //import { requestOneTimePayment, requestBillingAgreement } from 'react-native-paypal';
 import axios from 'axios';
-
+import URL from './environment'
 
 
 const getToken = async () => {
     try {
-    const res = await axios.get('/token'); // need IP address of the network the phone is on.
+    const res = await axios.get('/token'); // need IP address of the network the phone is on. MyResNet does not give me acccess to other devices :/
     // Should i just put my Node server on heroku so i dont have to deal w/ this issue
     console.log(res)
     return res.data;

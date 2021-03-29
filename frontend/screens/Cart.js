@@ -4,7 +4,8 @@ import { SolidButton, CheckOutButton } from "../components/Button";
 import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 
-import findGrindDesc from "../utils/findGrindDesc"
+import findGrindDesc from "../utils/findGrindDesc";
+import { getToken } from "../services/payments";
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
 render the Empty Cart
@@ -33,28 +34,32 @@ const Cart = ({ navigation, route }) => {
     };
 
     console.log(route.params);
-    if (route.params) {  // passed params w/ react navigation
+    if (route.params) {
+      // passed params w/ react navigation
       fetchData();
     }
   }, []);
 
-  let cartItems = items.filter(i => i.quantity != 0).map((i) => { // filter so that it disappears - 
-                            // bugs with the Counter - resets the remaining products counter to 0 only if it was added after the one removed
-    return (
-      <>
-        <Text style={{ fontWeight: "bold" }} key={i.id}>
-          {i.name} ${i.price} {i.size} oz  {findGrindDesc(i.grind)}
-        </Text>
-        <Counter  // each item will have its seperate Counter for adding more / subtracting
-          item={i}
-          increment={route.params.increment}
-          decrement={route.params.decrement}
-          updateTotal={updateTotal}
-          total={total}
-        />
-      </>
-    );
-  });
+  let cartItems = items
+    .filter((i) => i.quantity != 0)
+    .map((i) => {
+      // filter so that it disappears -
+      // bugs with the Counter - resets the remaining products counter to 0 only if it was added after the one removed
+      return (
+        <>
+          <Text style={{ fontWeight: "bold" }} key={i.id}>
+            {i.name} ${i.price} {i.size} oz {findGrindDesc(i.grind)}
+          </Text>
+          <Counter // each item will have its seperate Counter for adding more / subtracting
+            item={i}
+            increment={route.params.increment}
+            decrement={route.params.decrement}
+            updateTotal={updateTotal}
+            total={total}
+          />
+        </>
+      );
+    });
 
   if (!items || items.length == 0) {
     return <EmptyCart navigation={navigation} />;
@@ -65,7 +70,7 @@ const Cart = ({ navigation, route }) => {
         {cartItems}
         <Divider />
         <Text style={{ fontWeight: "bold" }}>TOTAL ${total}</Text>
-        <CheckOutButton /> 
+        <CheckOutButton onPress={getToken} />
       </Card>
     );
   }
