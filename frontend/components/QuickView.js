@@ -3,8 +3,9 @@ import { Text, Divider } from "react-native-elements";
 import { View, StyleSheet } from "react-native";
 import Modal from "react-native-modal"; // could also use Overlay from R-N-E
 import DropDownPicker from "react-native-dropdown-picker";
+import Counter from './Counter';
 
-import { SolidButton } from "./Button";
+import { SolidButton } from "./Button"
 import ProductImage from "./ProductImage";
 
 import ProductModel from "../constants/ProductModel";
@@ -144,7 +145,7 @@ function QuickView(props) {
           <View style={styles.cartButtonParent}>
             <View style={styles.cartButton}>
               <SolidButton
-                text={isAdded ? "ADDED" : "ADD TO CART"}
+                text={isAdded ? "ADDED" : "Add Item"}
                 onPress={addToCart}
               />
             </View>

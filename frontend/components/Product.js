@@ -66,7 +66,7 @@ const Product = (props) => {
 
         <Button
           onPress={toggleModal}
-          title={"ADD TO CART"}
+          title={"View More"}
           color="rgba(237,167,47,1)"
         />
       </View>
