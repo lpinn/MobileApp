@@ -1,27 +1,18 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Alert,
-  ImageBackground,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, ImageBackground } from "react-native";
 
 export default function Splash() {
   return (
     <>
       <View style={styles.containerParent}>
-	  <View style={styles.container}>
-        <ImageBackground
-          source={require("../../assets/images/colorlogo.png")}
-		  style={styles.logo}
-          //imageStyle={{ resizeMode: "stretch" }}
-        >
-        </ImageBackground>
+        <View style={styles.container}>
+          <ImageBackground
+            source={require("../../assets/images/colorlogo.png")}
+            style={styles.logo}
+            //imageStyle={{ resizeMode: "stretch" }}
+          ></ImageBackground>
+        </View>
       </View>
-	  </View>
     </>
   );
 }
@@ -32,17 +23,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F5FCFF",
   },
-  
+
   container: {
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
-  },  
-  
-  logo: {
-	width: 170,
-    height: 170,  
-
   },
-  
+
+  logo: {
+    width: 170,
+    height: 170,
+  },
 });

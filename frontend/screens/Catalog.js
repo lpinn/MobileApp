@@ -4,7 +4,6 @@ import { Card, Text } from "react-native-elements";
 
 import { SolidButton, CartButton } from "../components/Button";
 
-
 import Products from "../components/Products";
 
 /* 
@@ -15,12 +14,10 @@ calculated total. We could put this into the Home page just so all the stuff is 
  Every single add to Cart causes a rerender in the Catalog.
 */
 
-
 /* 
 TODO 
 https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 */
-
 
 const Catalog = (props) => {
   const navigation = props.navigation;
@@ -28,7 +25,8 @@ const Catalog = (props) => {
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
-  useEffect(() => {  // recalculate the total every time we mutate the products in cart
+  useEffect(() => {
+    // recalculate the total every time we mutate the products in cart
     setTotal(
       totalProducts.reduce((total, e) => {
         console.log(`total: ${total}, current price: ${e.price}`);
@@ -36,12 +34,12 @@ const Catalog = (props) => {
       }, 0)
     );
 
-   // console.log("current sum excluding the last one added", cartTotal);
+    // console.log("current sum excluding the last one added", cartTotal);
   }, [totalProducts]);
 
   const handleGoToCart = () => {
     //https://reactnavigation.org/docs/navigation-prop/
-    console.log(cartTotal)
+    console.log(cartTotal);
     navigation.navigate("Cart", {
       products: totalProducts, //
       total: cartTotal,
@@ -84,17 +82,19 @@ const Catalog = (props) => {
     } // the removed product will only be gone on the next cart open
 
     updateProducts(tempProducts);
-    navigation.setParams({    // this is not functioning properly.
+    navigation.setParams({
+      // this is not functioning properly.
       total: cartTotal,
       products: totalProducts,
     });
   };
 
-  React.useLayoutEffect(() => { // 
+  React.useLayoutEffect(() => {
+    //
     navigation.setOptions(options);
   }, [navigation, cartTotal]); // update it per cartTotal
 
-  const options = {  
+  const options = {
     headerTitle: "Catalog",
     headerRight: () => <CartButton onPress={handleGoToCart} />,
   };
@@ -102,31 +102,30 @@ const Catalog = (props) => {
   return (
     <>
       <ScrollView>
-	  <Card>
-        <Card.Title>Buy Coffee</Card.Title>
-        <Card.Divider />
+        <Card>
+          <Card.Title>Buy Coffee</Card.Title>
+          <Card.Divider />
 
-			<View style={styles.productsContainer}>
-				<Products
-					key={1} // actually still whining here "need unique key"
-					navigation={navigation}
-					addProduct={handleAddProduct}
-					products={totalProducts}
-				/>
-			</View>
-	
-			<View style={styles.resetCartButtonParent}>		
-				<View style={styles.resetCartButton}>			
-					<Button
-						title={'Reset cart'}
-						onPress={() => updateProducts([])}
-						color="firebrick"
-					/>
-				</View>
-			</View>  
-      </Card>
-	  </ScrollView>
+          <View style={styles.productsContainer}>
+            <Products
+              key={1} // actually still whining here "need unique key"
+              navigation={navigation}
+              addProduct={handleAddProduct}
+              products={totalProducts}
+            />
+          </View>
 
+          <View style={styles.resetCartButtonParent}>
+            <View style={styles.resetCartButton}>
+              <Button
+                title={"Reset cart"}
+                onPress={() => updateProducts([])}
+                color="firebrick"
+              />
+            </View>
+          </View>
+        </Card>
+      </ScrollView>
     </>
   );
 };
@@ -134,22 +133,22 @@ const Catalog = (props) => {
 //************************ STYLES START **************************
 
 const styles = StyleSheet.create({
-	productsContainer: {
-		flexDirection: "column",
-		marginLeft: '-4%',
-		marginRight: '-4%',
-	},
-    resetCartButtonParent: {
-		width: "100%",
-		//justifyContent: "center",
-		//alignItems: "center",
-		marginTop: '10%',
-	},
-    resetCartButton: {
-		width: "35%",
-		margin: '3%',
-		marginBottom: '5%',
-	},  
+  productsContainer: {
+    flexDirection: "column",
+    marginLeft: "-4%",
+    marginRight: "-4%",
+  },
+  resetCartButtonParent: {
+    width: "100%",
+    //justifyContent: "center",
+    //alignItems: "center",
+    marginTop: "10%",
+  },
+  resetCartButton: {
+    width: "35%",
+    margin: "3%",
+    marginBottom: "5%",
+  },
 });
 //************************** STYLES END **************************
 

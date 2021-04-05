@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button, Text, Card } from "react-native-elements";
 import { View, StyleSheet, ScrollView} from "react-native";
-import { SolidButton } from "../components/Button";
+import { CheckOutButton } from "../components/Button";
 import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 

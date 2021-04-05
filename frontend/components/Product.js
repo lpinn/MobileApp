@@ -8,7 +8,7 @@ import {
   Button,
   ImageBackground,
   TouchableOpacity,
-  Linking
+  Linking,
 } from "react-native";
 
 import React, { useState, useEffect } from "react";
@@ -33,42 +33,60 @@ const Product = (props) => {
     setModalVisible(!isModalVisible);
   };
 
-  // <ModalTrigger trigger={toggleModal => <SolidButton onPress={toggleModal} text={name}}> <QuickView>
   return (
     <ListItem className="product" key={name}>
+      <View>
+        <QuickView
+          addProduct={props.addProduct}
+          setVisible={toggleModal}
+          isVisible={isModalVisible}
+          name={name}
+          initPrice={initialPrice}
+          image={image}
+        ></QuickView>
 
-	<View>	
-      <QuickView
-        addProduct={props.addProduct}
-        setVisible={toggleModal}
-        isVisible={isModalVisible}
-        name={name}
-        initPrice={initialPrice}
-        image={image}
-      ></QuickView>
-	  
-		<TouchableOpacity style={styles.productTile} onPress={name=="Subscribe" ? () => Linking.openURL('https://www.buildingnewhope.org/product-page/subscribe') : toggleModal}>		
-			<ImageBackground	
-					source={image}
-					resizeMode="cover"
-					style={styles.image1}
-			>
-					<View style={styles.rectFiller}></View>
-					<View style={styles.rect}>
-					<Text style={styles.productName}>{name}</Text>
-					</View>
-			</ImageBackground>
-		</TouchableOpacity>
+        <TouchableOpacity
+          style={styles.productTile}
+          onPress={
+            name == "Subscribe"
+              ? () =>
+                  Linking.openURL(
+                    "https://www.buildingnewhope.org/product-page/subscribe"
+                  )
+              : toggleModal
+          }
+        >
+          <ImageBackground
+            source={image}
+            resizeMode="cover"
+            style={styles.image1}
+          >
+            <View style={styles.rectFiller}></View>
+            <View style={styles.rect}>
+              <Text style={styles.productName}>{name}</Text>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
 
-		{/* Suggestion: Program to show the cheapest price for that product. From a user-centered perspective, it would be great to show prices:*/}	
-		{name=="Subscribe" ? <Text style={styles.priceStyle}>(Opens Browser)</Text> : <Text style={styles.priceStyle}>From ${initialPrice}</Text>}
+        {name == "Subscribe" ? (
+          <Text style={styles.priceStyle}>(Opens Browser)</Text>
+        ) : (
+          <Text style={styles.priceStyle}>From ${initialPrice}</Text>
+        )}
 
-		<Button
-			onPress={name=="Subscribe" ? () => Linking.openURL('https://www.buildingnewhope.org/product-page/subscribe') : toggleModal}
-			title={name=="Subscribe" ? 'Go' : 'See more'}	
-			color="rgba(237,167,47,1)"
-		/>
-	</View>	  
+        <Button
+          onPress={
+            name == "Subscribe"
+              ? () =>
+                  Linking.openURL(
+                    "https://www.buildingnewhope.org/product-page/subscribe"
+                  )
+              : toggleModal
+          }
+          title={name == "Subscribe" ? "Go" : "See more"}
+          color="rgba(237,167,47,1)"
+        />
+      </View>
     </ListItem>
   );
 };
@@ -77,9 +95,9 @@ const Product = (props) => {
 
 const styles = StyleSheet.create({
   priceStyle: {
-	color: "dimgrey",
-	fontWeight: "normal",
-	fontSize: 14.9,
+    color: "dimgrey",
+    fontWeight: "normal",
+    fontSize: 14.9,
   },
 
   productTile: {

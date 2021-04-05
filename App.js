@@ -5,17 +5,26 @@ import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./frontend/navigation/TabNavigator";
 
 import Splash from "./frontend/screens/Splash";
+import {
+  useFonts,
+  Poppins_400Regular,
+  Philosopher_400Regular
+} from "./assets/fonts/google-fonts/dev";
+
+// import AppLoading from "expo-app-loading"; // dont think we need this, use splash instead.
 
 // https://reactnavigation.org/docs/tab-based-navigation
-
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
     const prepare = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // load in for 2 seconds
-        // TODO: load fonts/ assets
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // load in for 2 seconds
+        let [fontsLoaded] =  useFonts({
+          Poppins_400Regular,
+          Philosopher_400Regular
+        });
       } catch (e) {
         console.warn(e);
       } finally {
@@ -28,7 +37,7 @@ export default function App() {
   if (!appIsReady) {
     return <Splash />;
   }
-  //TODO: https://reactnavigation.org/docs/stack-navigator  - Transitions 
+  //TODO: https://reactnavigation.org/docs/stack-navigator  - Transitions
   return (
     <>
       <SafeAreaProvider>
