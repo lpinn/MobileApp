@@ -15,12 +15,8 @@ export default function Anchor(props) {
   };
   const styles = props.style;
   return (
-    <Text style = {styles} h3 {...props} onPress={handlePress}>
+    <Text style={styles} h3 {...props} onPress={handlePress}>
       {props.children}
     </Text>
   );
 }
-
-
-
-
