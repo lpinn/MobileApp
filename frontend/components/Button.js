@@ -41,6 +41,7 @@ const CartButton = ({ onPress }) => {
   );
 };
 
+
 const CheckOutButton = (props) => {
   // TODO
   return (
@@ -54,6 +55,7 @@ const CheckOutButton = (props) => {
 };
 
 export { SolidButton, CartButton, CheckOutButton };
+
 
 const styles = StyleSheet.create({
   button: {

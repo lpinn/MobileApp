@@ -5,8 +5,8 @@ import { ActivityIndicator } from "react-native";
 export default (props) => {
   return (
     <Image
-      source={(props.image)} // require does not have dynamic urls
-      style={{ width: 200, height: 200 }}
+      source={(props.url)} // require does not have dynamic urls
+      style={{ width: 170, height: 170, borderWidth: 0.3, borderColor: '#2e323b', }}
       PlaceholderContent={<ActivityIndicator />}
     />
   );
