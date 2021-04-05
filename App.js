@@ -5,13 +5,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./frontend/navigation/TabNavigator";
 
 import Splash from "./frontend/screens/Splash";
-import {
-  useFonts,
+import {  
   Poppins_400Regular,
-  Philosopher_400Regular
+  Philosopher_400Regular,
 } from "./assets/fonts/google-fonts/dev";
-
-// import AppLoading from "expo-app-loading"; // dont think we need this, use splash instead.
+import { loadAsync } from "expo-font";
 
 // https://reactnavigation.org/docs/tab-based-navigation
 export default function App() {
@@ -21,10 +19,9 @@ export default function App() {
     const prepare = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // load in for 2 seconds
-        let [fontsLoaded] =  useFonts({
-          Poppins_400Regular,
-          Philosopher_400Regular
-        });
+        loadAsync({ Poppins_400Regular, Philosopher_400Regular }).then(() =>
+          console.log("fonts loaded")
+        );
       } catch (e) {
         console.warn(e);
       } finally {
@@ -33,7 +30,7 @@ export default function App() {
     };
     prepare();
   }, []); // do it only once
-
+  
   if (!appIsReady) {
     return <Splash />;
   }
