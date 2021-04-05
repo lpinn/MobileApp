@@ -62,7 +62,7 @@ const Cart = ({ navigation, route }) => {
 							{findGrindDesc(i.grind)}
 						</Text>
 						<Text style={styles.productDetailsText2} key={i.id}>
-							{i.size} oz     ${i.price} 
+							{i.size} oz     ${i.price}
 						</Text>			
 					</View>
 					
