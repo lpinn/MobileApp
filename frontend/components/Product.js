@@ -1,8 +1,5 @@
 /*
 We will render a Product component for each object in the ProductsList.json manifest. 
-
-TODO: refactor state 
-
 */
 import {
   StyleSheet,
@@ -64,11 +61,11 @@ const Product = (props) => {
 		</TouchableOpacity>
 
 		{/* Suggestion: Program to show the cheapest price for that product. From a user-centered perspective, it would be great to show prices:*/}	
-		{name=="Subscribe" ? <Text style={styles.priceStyle}>(Opens Browser)</Text> : <Text style={styles.priceStyle}>From ${price}</Text>}
+		{name=="Subscribe" ? <Text style={styles.priceStyle}>(Opens Browser)</Text> : <Text style={styles.priceStyle}>From ${initialPrice}</Text>}
 
 		<Button
 			onPress={name=="Subscribe" ? () => Linking.openURL('https://www.buildingnewhope.org/product-page/subscribe') : toggleModal}
-			title={name=="Subscribe" ? 'Go' : isAdded ? 'ADDED' : 'ADD TO CART'}	
+			title={name=="Subscribe" ? 'Go' : 'See more'}	
 			color="rgba(237,167,47,1)"
 		/>
 	</View>	  
