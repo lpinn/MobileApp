@@ -41,7 +41,7 @@ const CartButton = ({ onPress }) => {
   );
 };
 
-export { SolidButton, CartButton };
+export { SolidButton, CartButton};
 
 const styles = StyleSheet.create({
   button: {

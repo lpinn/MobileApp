@@ -10,7 +10,7 @@ export default [
         "description": "savory",
         "price": 12.75,
         "grind": "WholeBean",
-        "image": "",
+        "image": require("../../assets/images/coffee.jpg")
     },
     {
         "name": "Expresso",

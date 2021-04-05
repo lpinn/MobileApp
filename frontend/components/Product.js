@@ -13,6 +13,7 @@ import {
   Button,
   ImageBackground,
   TouchableOpacity,
+  Linking
 } from "react-native";
 
 import React, { useState, useEffect } from "react";
@@ -58,7 +59,7 @@ const Product = (props) => {
         image={image}
       ></QuickView>
 	  
-		<TouchableOpacity style={styles.productTile} onPress={toggleModal}>		
+		<TouchableOpacity style={styles.productTile} onPress={name=="Subscribe" ? () => Linking.openURL('https://www.buildingnewhope.org/product-page/subscribe') : toggleModal}>		
 			<ImageBackground	
 					source={image}
 					resizeMode="cover"
@@ -71,14 +72,12 @@ const Product = (props) => {
 			</ImageBackground>
 		</TouchableOpacity>
 
-		{/* Suggestion: Program to show the cheapest price for that product. From a user-centered perspective, it would be great to show prices:*/}
-		<Text style={styles.priceStyle}>
-			From ${price}
-		</Text>
+		{/* Suggestion: Program to show the cheapest price for that product. From a user-centered perspective, it would be great to show prices:*/}	
+		{name=="Subscribe" ? <Text style={styles.priceStyle}>(Opens Browser)</Text> : <Text style={styles.priceStyle}>From ${price}</Text>}
 
 		<Button
-			onPress={toggleModal}
-			title={isAdded ? 'ADDED' : 'ADD TO CART'}
+			onPress={name=="Subscribe" ? () => Linking.openURL('https://www.buildingnewhope.org/product-page/subscribe') : toggleModal}
+			title={name=="Subscribe" ? 'Go' : isAdded ? 'ADDED' : 'ADD TO CART'}	
 			color="rgba(237,167,47,1)"
 		/>
 	</View>	  
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
   priceStyle: {
 	color: "dimgrey",
 	fontWeight: "normal",
-	fontSize: 15.1,
+	fontSize: 14.9,
   },
   
   productTile: {
