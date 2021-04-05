@@ -3,6 +3,7 @@
 export default {
     colors: {
         textPrimary: "rgb(255,128,0)",
+        textSecondary: "",
         textBlack: "black", // could also use an off black
         button:  "rgba(237,167,47,1)",
     },

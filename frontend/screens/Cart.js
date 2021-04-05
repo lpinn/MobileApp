@@ -98,6 +98,7 @@ const Cart = ({ navigation, route }) => {
               </Text>
             </View>
             <CheckOutButton onPress={getToken} />
+            {/* TODO: checkout flow event handler */}
           </View>
         </Card>
       </ScrollView>

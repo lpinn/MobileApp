@@ -21,7 +21,7 @@ const SolidButton = (props) => {
       <Button
         size={30}
         icon={props.icon}
-        buttonStyle={styles.button}
+        buttonStyle={styles.solidButton}
         title={<Text style={styles.buttonText}> {props.text} </Text>}
         onPress={props.onPress}
       />
@@ -31,10 +31,10 @@ const SolidButton = (props) => {
 
 const CartButton = ({ onPress }) => {
   return (
-    <TouchableOpacity style={styles.cart} onPress={onPress}>
+    <TouchableOpacity style={styles.cartButton} onPress={onPress}>
       <ImageBackground
         resizeMode="cover"
-        style={styles.image1}
+        style={styles.image}
         source={require("../../assets/images/shopping-cart.png")}
       ></ImageBackground>
     </TouchableOpacity>
@@ -45,10 +45,10 @@ const CheckOutButton = (props) => {
   // TODO
   return (
     <Button
-      icon={<Icon name="ei-credit-card" type="evilicon" size={30} />}
+      icon={<Icon name="credit-card" type="evilicon" size={30} />}
       onPress={props.onPress}
-      color="green"
-      title="Check Out"
+      title={<Text style={styles.buttonText}> Check Out </Text>}
+      buttonStyle={styles.checkoutButton}
     />
   );
 };
@@ -56,28 +56,32 @@ const CheckOutButton = (props) => {
 export { SolidButton, CartButton, CheckOutButton };
 
 const styles = StyleSheet.create({
-  button: {
+  solidButton: {
     height: 40,
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 2,
     backgroundColor: theme.colors.button,
   },
-
-  /*buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    fontSize: 16,
-    textAlign: "center",
-  },*/
-
-  image1: {
+  checkoutButton: {
+    height: 50,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 2,
+    backgroundColor: theme.colors.button,
+  },
+  cartButton: {
+    height: 40,
+    width: 40,
+  },
+  image: {
     flex: 1,
   },
-
-  cart: {
-    width: 40,
-    height: 40,
+  buttonText: {
+    //color: theme.colors.,
+    //fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: theme.fontSizes.body,
+    textAlign: "center",
   },
 });
