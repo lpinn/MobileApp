@@ -29,7 +29,6 @@ const Catalog = (props) => {
     // recalculate the total every time we mutate the products in cart
     setTotal(
       totalProducts.reduce((total, e) => {
-        console.log(`total: ${total}, current price: ${e.price}`);
         return total + e.price * e.quantity;
       }, 0)
     );
@@ -90,7 +89,6 @@ const Catalog = (props) => {
   };
 
   React.useLayoutEffect(() => {
-    //
     navigation.setOptions(options);
   }, [navigation, cartTotal]); // update it per cartTotal
 

@@ -12,6 +12,8 @@ import coffee from "../constants/coffee";
 const grinds = coffee.grinds; // for our drop down menus
 const sizes = coffee.sizes;
 
+import theme from "../constants/theme";
+
 /* 
 
  A quick view for each product when clicked on
@@ -44,11 +46,9 @@ function QuickView(props) {
   };
 
   useEffect(() => {
-    let temp;
-    if (size == 12) {
-      if (props.name !== "Decaf")
-        // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
-        setImageUrl(require("../../assets/images/12ozbag.jpg"));
+    let temp = price;
+    if (size == 12 && props.name !== "Decaf") {
+      setImageUrl(require("../../assets/images/12ozbag.jpg"));
       temp = 12.75;
     } else if (size == 16) {
       setImageUrl(require("../../assets/images/16ozbag.jpg"));
@@ -218,24 +218,24 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   productName: {
-    fontFamily: "Philosopher_400Regular",
-    color: "black",
+    fontFamily: theme.fonts.secondary,
+    color: theme.colors.textBlack,
     fontWeight: "normal",
     fontSize: 24,
     marginBottom: "2.5%",
   },
   productDetails: {
-    fontFamily: "Philosopher_400Regular",
-    color: "black",
+    fontFamily: theme.fonts.secondary,
+    color: theme.colors.textBlack,
     fontWeight: "normal",
     fontSize: 18,
     marginBottom: "8%",
   },
   productDetails2: {
-    fontFamily: "Philosopher_400Regular",
-    color: "black",
+    fontFamily: theme.fonts.secondary,
+    color: theme.colors.textBlack,
     fontWeight: "normal",
-    fontSize: 19,
+    fontSize: 20,
     marginBottom: "8%",
   },
   cartButton: {

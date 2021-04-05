@@ -8,11 +8,11 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import theme from "../constants/theme";
 
 function Home(props) {
   const navigation = props.navigation;
   const options = {
-    // the upper right corner cart button has some bugs with total updating
     headerTitle: "Building New Hope",
   };
 
@@ -80,14 +80,14 @@ const styles = StyleSheet.create({
 
   text1: {
     color: "rgba(255,255,255,1)",
-    fontSize: 19,
-    fontFamily: "Poppins_400Regular",
+    fontSize: 20,
+    fontFamily: theme.fonts.main,
     backgroundColor: "rgba(66, 64, 56, 0.3)",
   },
 
   button: {
     marginTop: "24%",
-    backgroundColor: "rgba(237,167,47,1)",
+    backgroundColor: theme.colors.button,
     height: 45,
     width: 150,
     justifyContent: "center",
@@ -98,9 +98,9 @@ const styles = StyleSheet.create({
 
   orderNow1: {
     color: "rgba(253,253,253,1)",
-    fontFamily: "Poppins_400Regular",
+    fontFamily: theme.fonts.main,
     marginTop: "3%",
-    fontSize: 16,
+    fontSize: theme.fontSizes.subHeading,
   },
 });
 

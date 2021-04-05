@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./frontend/navigation/TabNavigator";
 
 import Splash from "./frontend/screens/Splash";
-import {  
+import {
   Poppins_400Regular,
   Philosopher_400Regular,
 } from "./assets/fonts/google-fonts/dev";
@@ -30,7 +30,7 @@ export default function App() {
     };
     prepare();
   }, []); // do it only once
-  
+
   if (!appIsReady) {
     return <Splash />;
   }
