@@ -10,7 +10,7 @@ import {
   useFonts,
   Philosopher_400Regular,
 } from '../../assets/fonts/google-fonts/dev';
-import AppLoading from 'expo-app-loading';
+//import AppLoading from 'expo-app-loading';
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
 render the Empty Cart
@@ -62,7 +62,7 @@ const Cart = ({ navigation, route }) => {
 							{findGrindDesc(i.grind)}
 						</Text>
 						<Text style={styles.productDetailsText2} key={i.id}>
-							{i.size} oz     ${i.price} //It would be great if this price updated when the counter updates. :)
+							{i.size} oz     ${i.price} 
 						</Text>			
 					</View>
 					
