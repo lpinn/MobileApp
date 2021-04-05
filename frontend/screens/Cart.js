@@ -62,7 +62,7 @@ const Cart = ({ navigation, route }) => {
 							{findGrindDesc(i.grind)}
 						</Text>
 						<Text style={styles.productDetailsText2} key={i.id}>
-							{i.size} oz     ${i.price} //It would be great if this price updated when the counter updates. :)
+							{i.size} oz     ${i.price}
 						</Text>			
 					</View>
 					
