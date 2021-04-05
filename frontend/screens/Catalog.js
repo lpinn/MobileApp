@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView, Button } from "react-native";
-import { Card, Text } from "react-native-elements";
+import { Card } from "react-native-elements";
 
-import { SolidButton, CartButton } from "../components/Button";
+import { CartButton } from "../components/Button";
 
 import Products from "../components/Products";
-
+import ShoppingCartStorage from "../utils/ShoppingCartStorage";
+import useProducts from "../utils/useProducts";
 /* 
 This module renders all the items available and lets the user navigate to the Cart.
 
 We will hold a lot of the app's state here. Holds the items to be passed to the cart as well as the 
 calculated total. We could put this into the Home page just so all the stuff is accesible in there, but there might be trade offs in terms of performance.
- Every single add to Cart causes a rerender in the Catalog.
-*/
+Every single add to Cart causes a rerender in the Catalog.
 
-/* 
-TODO 
+ TODO: TODO 
 https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 */
 
 const Catalog = (props) => {
   const navigation = props.navigation;
-
+  const { products } = useProducts([]); // local storage products that have persisted, how can i get them as inital prod
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
+ /* useEffect(() => { doesnt work
+    updateProducts(products);
+    console.log('total prod', totalProducts)
+  },[]) */
+  
   useEffect(() => {
     // recalculate the total every time we mutate the products in cart
     setTotal(
@@ -47,7 +51,7 @@ const Catalog = (props) => {
     });
   };
 
-  const handleAddProduct = (selected) => {
+  const handleAddProduct = async (selected) => {
     if (
       totalProducts.some(
         (p) => p.id === selected.id && p.size === selected.size
@@ -58,6 +62,7 @@ const Catalog = (props) => {
       // the size, type, or grind is new
       updateProducts(totalProducts.concat(selected));
     }
+    await ShoppingCartStorage.addProduct(selected);
   };
 
   const incrementProduct = (selected) => {
@@ -65,6 +70,7 @@ const Catalog = (props) => {
     let tempProducts = [...totalProducts]; // copies the array
     tempProducts[index].quantity++;
     updateProducts(tempProducts);
+
     navigation.setParams({
       total: cartTotal,
     });
@@ -86,6 +92,11 @@ const Catalog = (props) => {
       total: cartTotal,
       products: totalProducts,
     });
+  };
+
+  const resetProducts = async () => {
+    await ShoppingCartStorage.clearProducts();
+    updateProducts([]);
   };
 
   React.useLayoutEffect(() => {
@@ -117,7 +128,7 @@ const Catalog = (props) => {
             <View style={styles.resetCartButton}>
               <Button
                 title={"Reset cart"}
-                onPress={() => updateProducts([])}
+                onPress={resetProducts}
                 color="firebrick"
               />
             </View>

@@ -5,12 +5,13 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import { CheckOutButton } from "../components/Button";
 import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
-import { SolidButton } from '../components/Button'
+import { SolidButton } from "../components/Button";
 
 import findGrindDesc from "../utils/findGrindDesc";
+import ShoppingCartStorage from "../utils/ShoppingCartStorage";
 import { getToken } from "../services/payments";
 
-import theme from '../constants/theme'
+import theme from "../constants/theme";
 
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
@@ -35,16 +36,22 @@ const Cart = ({ navigation, route }) => {
   const [items, setItems] = useState([]);
   const [total, updateTotal] = useState(route.params.total);
 
+  const fetchLocal = async () => {
+    // this works but dont have functionality w/ local to update quantity
+    const currentProducts = await ShoppingCartStorage.getProducts();
+    setItems(currentProducts);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       let { products } = route.params;
       setItems(products);
     };
     console.log(route.params);
-    if (route.params) {
+    if (route.params)
       // passed params w/ react navigation
       fetchData();
-    }
+    else fetchLocal();
   }, []);
 
   let cartItems = items
