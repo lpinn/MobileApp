@@ -3,8 +3,9 @@ import { Text, Divider, } from "react-native-elements";
 import { View, StyleSheet} from "react-native";
 import Modal from "react-native-modal"; // could also use Overlay from R-N-E
 import DropDownPicker from "react-native-dropdown-picker";
+import Counter from './Counter';
 
-import { SolidButton } from "./Button";
+import { SolidButton } from "./Button"
 import ProductImage from "./ProductImage";
 
 import ProductModel from "../constants/ProductModel";
@@ -53,12 +54,15 @@ function QuickView(props) {
   useEffect(() => {
     let temp;
     if (size == 12) {
-      if (props.name !== "Decaf") // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
+      if (props.name !== "Decaf")
+        // this is pretty ugly rn but works if we want to keep the unique pic of Decaf
         setImageUrl(require("../../assets/images/12ozbag.jpg"));
       temp = 12.75;
     } else if (size == 16) {
+      setImageUrl(require("../../assets/images/16ozbag.jpg"));
       temp = 15.75;
     } else if (size == 80) {
+      setImageUrl(require("../../assets/images/5lbbag.jpg"));
       temp = 70.0;
     }
     setPrice(temp);
@@ -85,7 +89,6 @@ function QuickView(props) {
     //https://www.npmjs.com/package/react-native-dropdown-picker#available-item-properties
 	<View>
       <View>
-	  
         <Modal
           style={styles.parentContainer}
           isVisible={props.isVisible}
@@ -95,8 +98,9 @@ function QuickView(props) {
           animationOut="fadeOutDownBig"
           //onBackdropPress={props.setVisible}
           onSwipeComplete={props.setVisible}
-          swipeDirection="left" /* can exit by swiping to the left */
+          swipeDirection="right" 
         >
+   
 			<View style={styles.backButton}>
 				<SolidButton onPress={props.setVisible} text={"< BACK"}/>
 			</View>  
@@ -183,6 +187,7 @@ function QuickView(props) {
 					/>
 				</View>
 			</View>	
+
         </Modal>
 		
       </View>

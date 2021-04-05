@@ -10,14 +10,15 @@ const Products = (props) => {
   // put state in cart component
 
   productsData = list.map((product, i) => {
-    console.log(product)
+    //console.log(product)
     return (
       <>
       <Product
-        key={product.name}
+        key={product.name}  // Varying product features
         name={product.name}
         image={product.image}
-        price={product.price}
+        price={product.price}   
+
         navigation={props.navigation}
         addProduct={props.addProduct}
         products={props.products}  // products is the items so far added to cart, passed down from Catalog

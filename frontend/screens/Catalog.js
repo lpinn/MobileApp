@@ -11,7 +11,7 @@ import Products from "../components/Products";
 This module renders all the items available and lets the user navigate to the Cart.
 
 We will hold a lot of the app's state here. Holds the items to be passed to the cart as well as the 
-calculated total.
+calculated total. We could put this into the Home page just so all the stuff is accesible in there, but there might be trade offs in terms of performance.
  Every single add to Cart causes a rerender in the Catalog.
 */
 
@@ -21,10 +21,10 @@ TODO
 https://reactnavigation.org/docs/troubleshooting#i-get-the-warning-non-serializable-values-were-found-in-the-navigation-state
 */
 
-//const about = "New Hope Coffee is grown by the farmers of the El Porvenir Cooperative located in León, Nicaragua.  The certified organically grown, bird-friendly, arabica beans are harvested, patio-sun dried, and hand-selected by the farmers.  The green beans are roasted to order by 19 Coffee Company, a specialty micro-roaster in Pittsburgh, PA.  The coffee has a smooth body, bright acidity, with chocolate, tropical fruit, and earthy notes."
 
 const Catalog = (props) => {
   const navigation = props.navigation;
+
   const [totalProducts, updateProducts] = useState([]);
   const [cartTotal, setTotal] = useState(0);
 
@@ -65,7 +65,7 @@ const Catalog = (props) => {
 
   const incrementProduct = (selected) => {
     let index = totalProducts.findIndex((i) => i.id === selected.id);
-    let tempProducts = [...totalProducts];
+    let tempProducts = [...totalProducts]; // copies the array
     tempProducts[index].quantity++;
     updateProducts(tempProducts);
     navigation.setParams({
@@ -123,20 +123,7 @@ const Catalog = (props) => {
 						color="firebrick"
 					/>
 				</View>
-			</View>
-		
-		
-{/* **** I don't think we need an Exit and Cart buttons here. Users can use the navigation bar for that. ****
-	    <Button
-			title={'Exit'}
-			onPress={() =>
-				navigation.navigate("Home", {
-				products: totalProducts,
-			})}
-			color="rgba(237,167,47,1)"
-		/>   
-		<CartButton onPress={handleGoToCart} />
-*/}	    
+			</View>  
       </Card>
 	  </ScrollView>
 

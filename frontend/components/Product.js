@@ -1,9 +1,7 @@
 /*
 We will render a Product component for each object in the ProductsList.json manifest. 
-Holds a lot of state for the different options for each item i.e grind/size.
 
-TODO refactor state
-Too many hooks.
+TODO: refactor state 
 
 */
 import {
@@ -25,30 +23,23 @@ import QuickView from "./QuickView";
 
 const Product = (props) => {
   let image;
-  if (props.image) 
-    image = props.image;
-  else 
-    image = require("../../assets/images/coffee.jpg"); // have to use the require here bc it only works w/ static values
-
+  if (props.image) image = props.image;
+  else image = require("../../assets/images/coffee.jpg"); // have to use the require here bc it only works w/ static values
 
   //const image = props.image ?? ("../../assets/images/coffee.jpg"); // why isnt default case working
   const name = props.name;
   const initialPrice = props.price;
-  
-  const [isAdded, setAdded] = useState(false); // if the product has been added to cart  
 
   const [isModalVisible, setModalVisible] = useState(false);
-  
-  const [price, setPrice] = useState(initialPrice);
 
   const toggleModal = () => {
-    console.log(); // takes two clicks after state mutation in quick view .. bug
     setModalVisible(!isModalVisible);
   };
 
   // <ModalTrigger trigger={toggleModal => <SolidButton onPress={toggleModal} text={name}}> <QuickView>
-  return (    
+  return (
     <ListItem className="product" key={name}>
+
 	<View>	
       <QuickView
         addProduct={props.addProduct}
@@ -88,13 +79,12 @@ const Product = (props) => {
 //************************ STYLES START **************************
 
 const styles = StyleSheet.create({
-	
   priceStyle: {
 	color: "dimgrey",
 	fontWeight: "normal",
 	fontSize: 14.9,
   },
-  
+
   productTile: {
     width: 130,
     height: 130,
@@ -103,36 +93,34 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: "hidden",
     alignSelf: "flex-end",
-	marginLeft: '-1.5%',
-	marginBottom: '1%',
+    marginLeft: "-1.5%",
+    marginBottom: "1%",
   },
-  
+
   image1: {
     flex: 1,
     marginBottom: -1,
     marginTop: 1,
   },
-    
+
   rectFiller: {
     flex: 1,
   },
-  
+
   rect: {
     height: 27,
     backgroundColor: "rgba(21,19,19,0.5)",
     marginBottom: 1,
-  },  
-  
+  },
+
   productName: {
     color: "rgba(247,252,253,1)",
     fontSize: 15,
     marginTop: 7,
     alignSelf: "center",
-	textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
-
 });
 //************************** STYLES END **************************
-
 
 export default Product;

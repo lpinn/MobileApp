@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
+
 import { Button, Text, Card } from "react-native-elements";
 import { View, StyleSheet, ScrollView} from "react-native";
 import { SolidButton } from "../components/Button";
 import Counter from "../components/Counter";
 import Divider from "react-native-btr/src/Components/Separator";
 
-import findGrindDesc from "../utils/findGrindDesc"
 import {
   useFonts,
   Philosopher_400Regular,
 } from '../../assets/fonts/google-fonts/dev';
 //import AppLoading from 'expo-app-loading';
+
+import findGrindDesc from "../utils/findGrindDesc"
+import { getToken } from "../services/payments";
+
 /* 
 This is a seperate screen for the cart to be displayed. If not React Navigation parameters were passed we will
 render the Empty Cart
@@ -40,7 +44,6 @@ const Cart = ({ navigation, route }) => {
 		  let { products } = route.params;
 		  setItems(products);
 		};
-
 		console.log(route.params);
 		if (route.params) {  // passed params w/ react navigation
 		  fetchData();
@@ -50,7 +53,11 @@ const Cart = ({ navigation, route }) => {
 	let [fontsLoaded] = useFonts({
 		Philosopher_400Regular,
 	});   
-	let cartItems = items.map((i) => {
+	let cartItems = items
+    .filter((i) => i.quantity != 0)
+    .map((i) => {
+      // filter so that it disappears -
+      // bugs with the Counter - resets the remaining products counter to 0 only if it was added after the one removedmap((i) => {
 		return (
 			<View style={styles.productContainerParent}>
 				<View style={styles.productContainer}>
@@ -94,6 +101,7 @@ const Cart = ({ navigation, route }) => {
 						<Divider />
 						<Text style={{ fontWeight: "bold", marginTop: '5%' }}>TOTAL   ${total}</Text>
 					</View>
+        <CheckOutButton onPress={getToken} />
 				</View>
 			</Card>
 		</ScrollView>  
