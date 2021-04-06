@@ -36,12 +36,6 @@ const Cart = ({ navigation, route }) => {
   const [items, setItems] = useState([]);
   const [total, updateTotal] = useState(route.params.total);
 
-  const fetchLocal = async () => {
-    // this works but dont have functionality w/ local to update quantity
-    const currentProducts = await ShoppingCartStorage.getProducts();
-    setItems(currentProducts);
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       let { products } = route.params;
@@ -49,9 +43,9 @@ const Cart = ({ navigation, route }) => {
     };
     console.log(route.params);
     if (route.params)
-      // passed params w/ react navigation
+      // passed params w/ react navigation. Currently the only was to navigate to cart is through Catalog so params will always be passed
+      // In the future there should be support for w/o params using localstorage or other context options
       fetchData();
-    else fetchLocal();
   }, []);
 
   let cartItems = items
@@ -60,16 +54,16 @@ const Cart = ({ navigation, route }) => {
       // filter so that it disappears -
       // bugs with the Counter - resets the remaining products counter to 0 only if it was added after the one removedmap((i) => {
       return (
-        <View style={styles.productContainerParent}>
+        <View key={i.id} style={styles.productContainerParent}>
           <View style={styles.productContainer}>
             <View style={styles.productDetails}>
-              <Text style={styles.productDetailsText} key={i.id}>
+              <Text style={styles.productDetailsText} >
                 {i.name}
               </Text>
-              <Text style={styles.productDetailsText2} key={i.id}>
+              <Text style={styles.productDetailsText2}>
                 {findGrindDesc(i.grind)}
               </Text>
-              <Text style={styles.productDetailsText2} key={i.id}>
+              <Text style={styles.productDetailsText2}>
                 {i.size} oz ${i.price}
               </Text>
             </View>

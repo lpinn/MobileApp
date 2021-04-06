@@ -19,9 +19,10 @@ export default function App() {
     const prepare = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // load in for 2 seconds
-        loadAsync({ Poppins_400Regular, Philosopher_400Regular }).then(() =>
+        await loadAsync({ Poppins_400Regular, Philosopher_400Regular }).then(() =>
           console.log("fonts loaded")
         );
+        //TODO: could fetch products from Wix API
       } catch (e) {
         console.warn(e);
       } finally {

@@ -22,7 +22,8 @@ const SolidButton = (props) => {
         size={30}
         icon={props.icon}
         buttonStyle={styles.solidButton}
-        title={<Text style={styles.buttonText}> {props.text} </Text>}
+        title={props.text}
+        titleStyle={styles.buttonText}
         onPress={props.onPress}
       />
     </View>
@@ -47,7 +48,8 @@ const CheckOutButton = (props) => {
     <Button
       icon={<Icon name="credit-card" type="evilicon" size={30} />}
       onPress={props.onPress}
-      title={<Text style={styles.buttonText}> Check Out </Text>}
+      title='Check Out'
+      titleStyle={styles.buttonText}
       buttonStyle={styles.checkoutButton}
     />
   );
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonText: {
-    //color: theme.colors.,
+    color: theme.colors.textBlack,
     //fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: theme.fontSizes.body,

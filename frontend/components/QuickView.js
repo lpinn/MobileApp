@@ -87,7 +87,7 @@ function QuickView(props) {
           swipeDirection="right"
         >
           <View style={styles.backButton}>
-            <SolidButton onPress={props.setVisible} text={"< BACK"} />
+            <SolidButton onPress={props.setVisible} text="< BACK" />
           </View>
 
           <View style={styles.imageAndDetails}>
