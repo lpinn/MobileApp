@@ -12,7 +12,6 @@ const Products = (props) => {
   productsData = list.map((product, i) => {
     //console.log(product)
     return (
-      <>
       <Product
         key={product.name}  // Varying product features
         name={product.name}
@@ -23,7 +22,6 @@ const Products = (props) => {
         addProduct={props.addProduct}
         products={props.products}  // products is the items so far added to cart, passed down from Catalog
       />
-      </>
     );
   });
 
