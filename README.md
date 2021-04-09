@@ -1,5 +1,6 @@
 # Building New Hope
 
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 
 # What is this?
 A project for the nonprofit Building New Hope, see there website [here](https://www.buildingnewhope.org/). This is a React Native app using Expo to allow for customers to order coffee on their phones in a streamlined manner!
